@@ -1,0 +1,2 @@
+DEPRECATION WARNING: Using `bin/rake routes` is deprecated and will be removed in Rails 6.1. Use `bin/rails routes` instead.
+ (called from <main> at /Users/nikita/budget-app/budget/bin/rake:9)
