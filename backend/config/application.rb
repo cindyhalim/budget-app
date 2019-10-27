@@ -34,10 +34,13 @@ module Budget
     # Skip views, helpers and assets when generating a new resource.
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-         origins '*'
-         resource '*', :headers => :any, :methods => [:get, :post, :options]
+        origins 'http://localhost:8080'
+        resource '*', :headers => :any, :methods => [:get, :post, :options, :put, :delete]
        end
-     end
+    end
+
+    config.session_store :cookie_store, key: "_backend", domain: "localhost:3000"
+
     config.api_only = true
   end
 end
