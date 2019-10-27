@@ -39,8 +39,9 @@ module Budget
        end
     end
 
-    config.session_store :cookie_store, key: "_backend", domain: "localhost:3000"
-
+    config.session_store :cookie_store, key: "_backend"
+    config.middleware.use ActionDispatch::Cookies 
+    config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
     config.api_only = true
   end
 end
