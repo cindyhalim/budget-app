@@ -1,6 +1,13 @@
 class PingController < ApplicationController
   
   def index
-    render json: {test: "testing"}
+    @result = Transaction.all
+    @result
+    render json: { transactions: @result}
   end
+
+
+  
+
+  
 end

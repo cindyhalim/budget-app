@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2019_10_24_223044) do
     t.decimal "amount"
     t.string "category"
     t.string "location"
+    t.datetime "transaction_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_transactions_on_user_id"

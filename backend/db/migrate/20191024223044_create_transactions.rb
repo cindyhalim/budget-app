@@ -5,6 +5,7 @@ class CreateTransactions < ActiveRecord::Migration[6.0]
       t.decimal :amount
       t.string :category
       t.string :location
+      t.datetime :transaction_date
       t.timestamps
     end
   end
