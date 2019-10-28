@@ -4,11 +4,13 @@ import Highcharts from "highcharts";
 import "./App.css";
 import axios from "axios";
 
+import { Progress } from "semantic-ui-react";
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 function App() {
   const [state, setState] = useState("test");
   const [total, setTotal] = useState(0);
+  const [goal, setGoal] = useState(0);
 
   useEffect(() => {
     axios.get("http://localhost:3000/ping").then(res => {
@@ -17,6 +19,7 @@ function App() {
       let pieChart = chartDataPoints(categories, totalMonthExpense);
       setState(pieChart);
       setTotal(totalMonthExpense);
+      setGoal(parseInt(res.data.goals["0"].amount));
     });
   }, []);
 
@@ -29,7 +32,7 @@ function App() {
       title: {
         verticalAlign: "middle",
         floating: true,
-        text: `This month ${total}`,
+        text: `Month ${total}`,
         style: {
           fontSize: "15px"
         }
@@ -50,6 +53,86 @@ function App() {
       ]
     });
   }, [state, total]);
+
+  useEffect(() => {
+    let percent = (total / goal) * 100;
+    Highcharts.chart({
+      title: {
+        text: "Highcharts Progress Bar",
+        align: "left",
+        margin: 0
+      },
+      chart: {
+        renderTo: "progress-bar",
+        type: "bar",
+        height: 70
+      },
+      credits: false,
+      tooltip: false,
+      legend: false,
+      navigation: {
+        buttonOptions: {
+          enabled: false
+        }
+      },
+      xAxis: {
+        visible: false
+      },
+      yAxis: {
+        visible: false,
+        min: 0,
+        max: 100
+      },
+      series: [
+        {
+          data: [100],
+          grouping: false,
+          animation: false,
+          enableMouseTracking: false,
+          showInLegend: false,
+          color: "lightgreen",
+          pointWidth: 25,
+          borderWidth: 0,
+          borderRadiusTopLeft: "4px",
+          borderRadiusTopRight: "4px",
+          borderRadiusBottomLeft: "4px",
+          borderRadiusBottomRight: "4px",
+          dataLabels: {
+            className: "highlight",
+            format: `${total}/${goal}`,
+            enabled: true,
+            align: "right",
+            style: {
+              color: "white",
+              textOutline: false
+            }
+          }
+        },
+        {
+          enableMouseTracking: false,
+          data: [percent],
+          borderRadiusBottomLeft: "4px",
+          borderRadiusBottomRight: "4px",
+          color: "green",
+          borderWidth: 0,
+          pointWidth: 25,
+          animation: {
+            duration: 250
+          },
+          dataLabels: {
+            enabled: true,
+            inside: true,
+            align: "left",
+            format: "{point.y}%",
+            style: {
+              color: "white",
+              textOutline: false
+            }
+          }
+        }
+      ]
+    });
+  });
 
   function getCategoryTotal(transactions) {
     let categories = {};
@@ -81,38 +164,13 @@ function App() {
     return result;
   }
 
-  // const options = {
-  //   // exportEnabled: true,
-  //   // animationEnabled: true,
-  //   title: {
-  //     text: "Where ma money at?"
-  //   },
-  //   data: [
-  //     {
-  //       type: "pie",
-  //       startAngle: 75,
-  //       toolTipContent: "<b>{label}</b>: {y}%",
-  //       showInLegend: "true",
-  //       legendText: "{label}",
-  //       indexLabelFontSize: 16,
-  //       indexLabel: "{label} - {y}%",
-  //       dataPoints: state
-  //     }
-  //   ]
-  // };
-
   return (
     <div className="App">
       <div>
         <h1>My Expenses </h1>
+        <div id="progress-bar"></div>
         <div id="Expenses-graph"></div>
-        {
-          /* <CanvasJSChart
-          options={options}
-          /* onRef={ref => this.chart = ref} */
-          // /> */
-        }
-        {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
+        {/* <CanvasJSChart options={options} /> */}
       </div>
     </div>
   );

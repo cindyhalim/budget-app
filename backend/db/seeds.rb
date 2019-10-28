@@ -27,5 +27,11 @@ user1.transactions.create({amount: 35, category: "Food and Drink", location: "To
 user1.transactions.create({amount: 5, category: "Food and Drink", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
 user1.transactions.create({amount: 15, category: "Food and Drink", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
 
+user1.transactions.create({amount: 15, category: "Shopping", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
+user1.transactions.create({amount: 25, category: "Shopping", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
+user1.transactions.create({amount: 75, category: "Shopping", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
+user1.transactions.create({amount: 15, category: "Shopping", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
+
+user1.goals.create({end_date: "2019-11-26T22:05:55.552Z", goal_type: "saving", amount: 1000, name: "japan"})
 
 
