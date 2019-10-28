@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import "./App.css";
 import axios from "axios";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory
+} from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -15,7 +20,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/login">
+        <Route path="/login" render={({ history }) => <Login />}>
           <Login />
         </Route>
         <Route path="/register">

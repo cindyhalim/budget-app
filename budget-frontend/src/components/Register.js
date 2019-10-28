@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import SwipeableViews from "react-swipeable-views";
+import UserRegister from "./register/UserRegister";
+import BudgetRegister from "./register/BudgetRegister";
+import PlaidRegister from "./register/PlaidRegister";
+import ConfirmRegister from "./register/ConfirmRegister";
 
 export default function Register(props) {
   const [newUser, setNewUser] = useState({
-    user_name: "",
+    userName: "",
     email: "",
     password: "",
     password_confirmation: ""
   });
+
+  const [budget, setBudget] = useState(0);
 
   const handleChange = event => {
     event.persist();
@@ -20,61 +27,46 @@ export default function Register(props) {
         "http://localhost:3000/registrations",
         {
           user: {
-            name: newUser.user_name,
+            name: newUser.userName,
             email: newUser.email,
             password: newUser.password,
             password_confirmation: newUser.password_confirmation
           }
         },
-        { withCredentials: false }
+        { withCredentials: true }
       )
       .then(res => {
-        console.log("registration response", res);
+        const userID = res.data.user[0].id;
+        axios
+          .post(
+            "http://localhost:3000/",
+            {
+              goal: {
+                user_id: userID,
+                type: "budget",
+                amount: parseInt(budget),
+                name: "budget"
+              }
+            },
+            { withCredentials: true }
+          )
+          .then(res => {
+            console.log(res);
+          });
       })
       .catch(err => {
         console.log("registration error", err);
       });
 
-    event.preventDefault();
+    // event.preventDefault();
   };
 
   return (
-    <div>
-      <form onSubmit={event => handleSubmit(event)}>
-        <input
-          type="text"
-          name="user_name"
-          placeholder="Name"
-          value={newUser.user_name}
-          onChange={event => handleChange(event)}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={newUser.email}
-          onChange={event => handleChange(event)}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={newUser.password}
-          onChange={event => handleChange(event)}
-          required
-        />
-        <input
-          type="password"
-          name="password_confirmation"
-          placeholder="Confirm Password"
-          value={newUser.password_confirmation}
-          onChange={event => handleChange(event)}
-          required
-        />
-        <button type="submit">Register</button>
-      </form>
-    </div>
+    <SwipeableViews>
+      <UserRegister onChange={handleChange} />
+      <BudgetRegister onChange={event => setBudget(event.target.value)} />
+      <PlaidRegister />
+      <ConfirmRegister submit={handleSubmit} />
+    </SwipeableViews>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { BrowserRouter as Redirect } from "react-router-dom";
+import { BrowserRouter as Redirect, useHistory } from "react-router-dom";
 
 export default function Login(props) {
   const [user, setUser] = useState({
@@ -18,22 +18,25 @@ export default function Login(props) {
       .post(
         "http://localhost:3000/sessions",
         {
-          user: {
-            email: user.email,
-            password: user.password
-          }
+          user: { email: user.email, password: user.password }
         },
-        { withCredentials: false }
+        { withCredentials: true }
       )
       .then(res => {
-        console.log("registration response", res);
+        return res;
       })
       .catch(err => {
-        console.log("registration error", err);
+        console.log("login error", err);
       });
 
     event.preventDefault();
   };
+  let history = useHistory();
+  const handleClick = () => {
+    history.push("/");
+  };
+
+  //props.router
 
   return (
     <div>
@@ -57,7 +60,9 @@ export default function Login(props) {
           onChange={event => handleChange(event)}
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit" onClick={handleClick}>
+          Login
+        </button>
       </form>
     </div>
   );
