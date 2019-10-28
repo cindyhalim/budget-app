@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 export default function Register(props) {
@@ -9,15 +9,12 @@ export default function Register(props) {
     password_confirmation: ""
   });
 
-  useEffect(() => {}, []);
-
   const handleChange = event => {
     event.persist();
     setNewUser(prev => ({ ...prev, [event.target.name]: event.target.value }));
   };
 
   const handleSubmit = event => {
-    console.log("here", newUser);
     axios
       .post(
         "http://localhost:3000/registrations",
