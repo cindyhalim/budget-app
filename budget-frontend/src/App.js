@@ -11,13 +11,21 @@ function App() {
   const [state, setState] = useState("test");
   const [total, setTotal] = useState(0);
   const [goal, setGoal] = useState(0);
+  const [originalData, setData] = useState([]);
 
   useEffect(() => {
     axios.get("http://localhost:3000/ping").then(res => {
       let categories = getCategoryTotal(res.data.transactions);
       let totalMonthExpense = getTotal(categories);
       let pieChart = chartDataPoints(categories, totalMonthExpense);
+      console.log(
+        new Date(res.data.transactions[0].transaction_date).toLocaleString(
+          "default",
+          { month: "long" }
+        )
+      );
       setState(pieChart);
+      setData(res.data.transactions);
       setTotal(totalMonthExpense);
       setGoal(parseInt(res.data.goals["0"].amount));
     });
@@ -163,6 +171,22 @@ function App() {
     }
     return result;
   }
+  function getChartbyMonth(month) {
+    console.log("month:", month);
+    let filteredTransactions = originalData.filter(
+      transaction =>
+        new Date(transaction.transaction_date).toLocaleString("default", {
+          month: "long"
+        }) === month
+    );
+
+    console.log(filteredTransactions);
+    let categories = getCategoryTotal(filteredTransactions);
+    let totalMonthExpense = getTotal(categories);
+    let pieChart = chartDataPoints(categories, totalMonthExpense);
+    setState(pieChart);
+    setTotal(totalMonthExpense);
+  }
 
   return (
     <div className="App">
@@ -172,6 +196,14 @@ function App() {
         <div id="Expenses-graph"></div>
         {/* <CanvasJSChart options={options} /> */}
       </div>
+      <select
+        name=""
+        id="select"
+        onChange={e => getChartbyMonth(e.target.value)}
+      >
+        <option value="September">September</option>
+        <option value="October">October</option>
+      </select>
     </div>
   );
 }
