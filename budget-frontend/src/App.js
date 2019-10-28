@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "./App.css";
 import axios from "axios";
-import NavButton from "./components/NavButton";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   const [state, setState] = useState("test");
@@ -10,11 +13,19 @@ function App() {
     .then(res => setState(() => res.data.test));
 
   return (
-    <div className="App">
-      <NavButton>Back</NavButton>
-      <p>{state}</p>
-      <NavButton>Next</NavButton>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
