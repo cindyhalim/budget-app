@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 export default function Analytics() {
   return (
     <div>
-      Anal
+      Analytics
       <Navbar></Navbar>
     </div>
   );
