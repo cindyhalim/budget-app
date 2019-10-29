@@ -1,34 +1,76 @@
 import React, { useState } from "react";
-import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory
-} from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Main from "./components/Main";
 
 function App() {
-  const [state, setState] = useState("test");
-  axios
-    .get("http://localhost:3000/ping")
-    .then(res => setState(() => res.data.test));
+  const [logInStatus, setLogInStatus] = useState({
+    status: "not_logged_in",
+    user: {}
+  });
+
+  const handleLogin = data => {
+    setLogInStatus({
+      status: "logged_in",
+      user: data.data.user[0]
+    });
+  };
+
+  const handleLogout = data => {
+    if (!data.logged_in) {
+      setLogInStatus({
+        status: "not_logged_in",
+        user: {}
+      });
+    }
+  };
+
+  const checkLogInStatus = () => {
+    axios
+      .get("http://localhost:3000/logged_in", { withCredentials: true })
+      .then(res => {
+        console.log(res);
+        if (res.data.logged_in && logInStatus.status === "not_logged_in") {
+          console.log("here");
+          handleLogin(res);
+        }
+
+        if (!res.data.logged_in && logInStatus === "logged_in") {
+          setLogInStatus({
+            status: "not_logged_in",
+            user: {}
+          });
+        }
+      })
+      .catch(err => console.log("check log in error", err));
+  };
 
   return (
     <Router>
       <Switch>
-        <Route path="/login" render={({ history }) => <Login />}>
-          <Login />
-        </Route>
-        <Route path="/register">
-          <Register />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
+        <Route
+          path="/login"
+          render={props => <Login {...props} handleLogin={handleLogin} />}
+        />
+        <Route
+          path="/register"
+          render={props => <Register {...props} handleLogin={handleLogin} />}
+        />
+        <Route
+          path="/main"
+          render={props => (
+            <Main
+              {...props}
+              checkLogInStatus={checkLogInStatus}
+              handleLogout={handleLogout}
+              logInStatus={logInStatus}
+            />
+          )}
+        />
+        <Route path="/" render={() => <Home />} />
       </Switch>
     </Router>
   );

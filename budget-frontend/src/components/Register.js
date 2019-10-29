@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
 import UserRegister from "./register/UserRegister";
 import BudgetRegister from "./register/BudgetRegister";
@@ -13,8 +14,8 @@ export default function Register(props) {
     password: "",
     password_confirmation: ""
   });
-
   const [budget, setBudget] = useState(0);
+  const history = useHistory();
 
   const handleChange = event => {
     event.persist();
@@ -36,29 +37,29 @@ export default function Register(props) {
         { withCredentials: true }
       )
       .then(res => {
+        props.handleLogin(res);
         const userID = res.data.user[0].id;
         axios
           .post(
-            "http://localhost:3000/",
+            "http://localhost:3000/goals",
             {
               goal: {
                 user_id: userID,
-                type: "budget",
+                goal_type: "budget",
                 amount: parseInt(budget),
-                name: "budget"
+                name: "budget",
+                end_date: "null"
               }
             },
             { withCredentials: true }
           )
           .then(res => {
-            console.log(res);
+            history.push("/main");
           });
       })
       .catch(err => {
         console.log("registration error", err);
       });
-
-    // event.preventDefault();
   };
 
   return (

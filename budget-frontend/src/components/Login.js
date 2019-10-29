@@ -7,6 +7,7 @@ export default function Login(props) {
     email: "",
     password: ""
   });
+  const history = useHistory();
 
   const handleChange = event => {
     event.persist();
@@ -23,7 +24,10 @@ export default function Login(props) {
         { withCredentials: true }
       )
       .then(res => {
-        return res;
+        if (res.data.logged_in) {
+          props.handleLogin(res);
+          history.push("/main");
+        }
       })
       .catch(err => {
         console.log("login error", err);
@@ -31,12 +35,6 @@ export default function Login(props) {
 
     event.preventDefault();
   };
-  let history = useHistory();
-  const handleClick = () => {
-    history.push("/");
-  };
-
-  //props.router
 
   return (
     <div>
@@ -47,7 +45,6 @@ export default function Login(props) {
           type="email"
           name="email"
           placeholder="Email"
-          value={user.email}
           onChange={event => handleChange(event)}
           required
         />
@@ -56,13 +53,10 @@ export default function Login(props) {
           type="password"
           name="password"
           placeholder="Password"
-          value={user.password}
           onChange={event => handleChange(event)}
           required
         />
-        <button type="submit" onClick={handleClick}>
-          Login
-        </button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
