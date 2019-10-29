@@ -212,7 +212,7 @@ function App() {
         }
       ]
     });
-  }, [currentExpenseByCategory]);
+  }, [currentExpenseByCategory, selectedMonth]);
 
   function getCategoryTotal(transactions) {
     let categories = {};
@@ -244,8 +244,6 @@ function App() {
     return result;
   }
   function getChartbyMonth(month) {
-    console.log("month:", month);
-    console.log("originaldata:", originalData);
     let filteredTransactions = originalData.filter(
       transaction =>
         new Date(transaction.transaction_date).toLocaleString("default", {
