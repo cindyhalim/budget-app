@@ -38,13 +38,11 @@ export default function Register(props) {
       )
       .then(res => {
         props.handleLogin(res);
-        const userID = res.data.user[0].id;
         axios
           .post(
             "http://localhost:3000/goals",
             {
               goal: {
-                user_id: userID,
                 goal_type: "budget",
                 amount: parseInt(budget),
                 name: "budget",
