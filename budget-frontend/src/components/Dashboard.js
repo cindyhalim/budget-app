@@ -1,8 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import Navbar from "./Navbar";
 
-export default function Onboarding(props) {
+export default function Dashboard(props) {
   props.checkLogInStatus();
   const history = useHistory();
   const logOutClick = () => {
@@ -16,9 +17,10 @@ export default function Onboarding(props) {
   };
   return (
     <div>
-      <h1>Welcome to Main</h1>
+      <h1>Welcome to Dashboard</h1>
       <p>Logged in: {props.logInStatus.status}</p>
       <p onClick={() => logOutClick()}>Logout</p>
+      <Navbar />
     </div>
   );
 }

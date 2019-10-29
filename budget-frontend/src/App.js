@@ -4,7 +4,9 @@ import axios from "axios";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Main from "./components/Main";
+import Dashboard from "./components/Dashboard";
+import Onboarding from "./components/Onboarding";
+import Analytics from "./components/Analytics";
 
 function App() {
   const [logInStatus, setLogInStatus] = useState({
@@ -53,16 +55,18 @@ function App() {
       <Switch>
         <Route
           path="/login"
-          render={props => <Login {...props} handleLogin={handleLogin} />}
+          render={props => (
+            <Login handleLogin={handleLogin} logInStatus={logInStatus} />
+          )}
         />
         <Route
           path="/register"
           render={props => <Register {...props} handleLogin={handleLogin} />}
         />
         <Route
-          path="/main"
+          path="/dashboard"
           render={props => (
-            <Main
+            <Dashboard
               {...props}
               checkLogInStatus={checkLogInStatus}
               handleLogout={handleLogout}
@@ -70,6 +74,8 @@ function App() {
             />
           )}
         />
+        <Route path="/onboarding" render={() => <Onboarding />} />
+        <Route path="/analytics" render={() => <Analytics />} />
         <Route path="/" render={() => <Home />} />
       </Switch>
     </Router>

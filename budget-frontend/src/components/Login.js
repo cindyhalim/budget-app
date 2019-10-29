@@ -8,7 +8,7 @@ export default function Login(props) {
     password: ""
   });
   const history = useHistory();
-
+  console.log("log in stattus", props.logInStatus);
   const handleChange = event => {
     event.persist();
     setUser(prev => ({ ...prev, [event.target.name]: event.target.value }));
@@ -26,7 +26,7 @@ export default function Login(props) {
       .then(res => {
         if (res.data.logged_in) {
           props.handleLogin(res);
-          history.push("/main");
+          history.push("/dashboard");
         }
       })
       .catch(err => {

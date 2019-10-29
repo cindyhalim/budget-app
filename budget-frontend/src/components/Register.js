@@ -54,7 +54,7 @@ export default function Register(props) {
             { withCredentials: true }
           )
           .then(res => {
-            history.push("/main");
+            history.push("/onboarding");
           });
       })
       .catch(err => {
