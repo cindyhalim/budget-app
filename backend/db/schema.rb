@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2019_10_24_223044) do
 
   create_table "goals", force: :cascade do |t|
     t.datetime "end_date"
-    t.string "type"
+    t.string "goal_type"
     t.decimal "amount"
     t.string "name"
     t.integer "user_id"
