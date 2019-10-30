@@ -1,0 +1,2 @@
+class ImageRecognitionController < ApplicationController
+end
