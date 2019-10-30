@@ -21,6 +21,8 @@ export default function Dashboard(props) {
       <h1>Welcome to Dashboard</h1>
       <p>Logged in: {props.logInStatus.status}</p>
       <p onClick={() => logOutClick()}>Logout</p>
+
+      <h3>Saving Goals:</h3>
       <CreateGoal />
       <Navbar />
     </div>
