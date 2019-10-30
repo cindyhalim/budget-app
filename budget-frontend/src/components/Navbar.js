@@ -7,7 +7,8 @@ import {
   Select,
   InputLabel,
   MenuItem,
-  Button
+  Button,
+  DialogActions
 } from "@material-ui/core";
 import PieChartIcon from "@material-ui/icons/PieChart";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -17,18 +18,20 @@ import HomeIcon from "@material-ui/icons/Home";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import Input from "@material-ui/core/Input";
 import { create } from "jss";
 import Axios from "axios";
 
 export default function Navbar() {
+  const numberInput = React.createRef();
   const [openStatus, setOpenStatus] = useState({
     list: false,
     transaction: false
   });
   const [transactionData, setTransactionData] = useState({
-    amount: 0,
+    amount: "",
     location: "",
     category: ""
   });
@@ -85,18 +88,23 @@ export default function Navbar() {
         open={openStatus.transaction}
       >
         <DialogTitle id="simple-dialog-title">New Transaction</DialogTitle>
-        <TextField margin="dense" label="Amount" type="number" />
-        <TextField margin="dense" label="Location" type="Text" />
-        <InputLabel>Category</InputLabel>
-        <Select>
-          <MenuItem value="Shopping">Shopping</MenuItem>
-          <MenuItem value="Food">Food</MenuItem>
-        </Select>
-        <Button
-          onClick={() => setOpenStatus({ ...openStatus, transaction: false })}
-        >
-          Add
-        </Button>
+        <DialogContent>
+          <TextField ref={numberInput} label="Amount" type="number" />
+          <br />
+          <TextField margin="dense" label="Location" type="Text" />
+          <InputLabel>Category</InputLabel>
+          <Select>
+            <MenuItem value="Shopping">Shopping</MenuItem>
+            <MenuItem value="Food">Food</MenuItem>
+          </Select>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => setOpenStatus({ ...openStatus, transaction: false })}
+          >
+            Add
+          </Button>
+        </DialogActions>
       </Dialog>
     );
   }
