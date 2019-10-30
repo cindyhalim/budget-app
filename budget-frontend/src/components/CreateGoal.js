@@ -1,5 +1,5 @@
 import "date-fns";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card, CardContent, TextField } from "@material-ui/core";
 import DateFnsUtils from "@date-io/date-fns";
@@ -8,29 +8,28 @@ import {
   MuiPickersUtilsProvider
 } from "@material-ui/pickers";
 
-export default function CreateGoal() {
+export default function CreateGoal(props) {
   const [active, setActive] = useState(false);
-  const [newGoal, setNewGoal] = useState({
-    name: "",
-    amount: "",
-    start_date: new Date(Date.now()),
-    end_date: new Date(Date.now()),
-    error: ""
-  });
   const clearFields = () => {
-    setNewGoal({
-      name: "",
-      amount: "",
-      start_date: new Date(Date.now()),
-      end_date: new Date(Date.now()),
-      error: ""
+    props.setNewGoal({
+      ...props.newGoal,
+      createGoal: {
+        name: "",
+        amount: "",
+        start_date: new Date(Date.now()),
+        end_date: new Date(Date.now()),
+        error: ""
+      }
     });
   };
   const onSave = () => {
-    if (!newGoal.name || !newGoal.amount) {
-      setNewGoal({
-        ...newGoal,
-        error: "Please enter all fields."
+    if (!props.newGoal.createGoal.name || !props.newGoal.createGoal.amount) {
+      props.setNewGoal({
+        ...props.newGoal,
+        createGoal: {
+          ...props.newGoal.createGoal,
+          error: "Please enter all fields."
+        }
       });
     } else {
       axios
@@ -39,14 +38,26 @@ export default function CreateGoal() {
           {
             goal: {
               goal_type: "saving",
-              amount: parseInt(newGoal.amount),
-              name: newGoal.name,
-              start_date: newGoal.start_date,
-              end_date: newGoal.end_date
+              amount: parseInt(props.newGoal.createGoal.amount),
+              name: props.newGoal.createGoal.name,
+              start_date: props.newGoal.createGoal.start_date,
+              end_date: props.newGoal.createGoal.end_date
             }
           },
           { withCredentials: true }
         )
+        .then(() => {
+          props.setNewGoal({
+            ...props.newGoal,
+            goals: props.newGoal.goals.unshift({
+              goal_type: "saving",
+              amount: parseInt(props.newGoal.createGoal.amount),
+              name: props.newGoal.createGoal.name,
+              start_date: props.newGoal.createGoal.start_date,
+              end_date: props.newGoal.createGoal.end_date
+            })
+          });
+        })
         .then(() => {
           setActive(!active);
           clearFields();
@@ -73,28 +84,40 @@ export default function CreateGoal() {
             X
           </button>
           <TextField
-            helperText={newGoal.error}
-            value={newGoal.name}
+            helperText={props.newGoal.createGoal.error}
+            value={props.newGoal.createGoal.name}
             label="Name"
             name="name"
             maxLength="20"
             type="text"
             onChange={event =>
-              setNewGoal({ ...newGoal, name: event.target.value })
+              props.setNewGoal({
+                ...props.newGoal,
+                createGoal: {
+                  ...props.newGoal.createGoal,
+                  name: event.target.value
+                }
+              })
             }
             margin="normal"
             required
           />
           <br />
           <TextField
-            helperText={newGoal.error}
-            value={newGoal.amount}
+            helperText={props.newGoal.error}
+            value={props.newGoal.createGoal.amount}
             label="Amount"
             name="amount"
             type="number"
             margin="normal"
             onChange={event =>
-              setNewGoal({ ...newGoal, amount: event.target.value })
+              props.setNewGoal({
+                ...props.newGoal,
+                createGoal: {
+                  ...props.newGoal.createGoal,
+                  amount: event.target.value
+                }
+              })
             }
             required
           />
@@ -107,9 +130,15 @@ export default function CreateGoal() {
               margin="normal"
               label="Start Date"
               minDate={Date.now()}
-              value={newGoal.start_date}
+              value={props.newGoal.createGoal.start_date}
               onChange={value => {
-                setNewGoal({ ...newGoal, start_date: value });
+                props.setNewGoal({
+                  ...props.newGoal,
+                  createGoal: {
+                    ...props.newGoal.createGoal,
+                    start_date: value
+                  }
+                });
               }}
               KeyboardButtonProps={{
                 "aria-label": "change date"
@@ -122,10 +151,16 @@ export default function CreateGoal() {
               format="MM/dd/yyyy"
               margin="normal"
               label="End Date"
-              minDate={newGoal.start_date}
-              value={newGoal.end_date}
+              minDate={props.newGoal.createGoal.start_date}
+              value={props.newGoal.createGoal.end_date}
               onChange={value => {
-                setNewGoal({ ...newGoal, end_date: value });
+                props.setNewGoal({
+                  ...props.newGoal,
+                  createGoal: {
+                    ...props.newGoal.createGoal,
+                    end_date: value
+                  }
+                });
               }}
               KeyboardButtonProps={{
                 "aria-label": "change date"
