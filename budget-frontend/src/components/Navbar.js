@@ -1,4 +1,4 @@
-import React, { useState, createRef } from "react";
+import React, { useState, createRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 import PieChartIcon from "@material-ui/icons/PieChart";
@@ -12,10 +12,16 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import Input from "@material-ui/core/Input";
 import { create } from "jss";
+import Axios from "axios";
 
 export default function Navbar() {
   const [openStatus, setOpenStatus] = useState(false);
   let fileInputRef = React.createRef();
+  const [selectedFile, setSelectedFile] = useState("");
+
+  useEffect(() => {
+    Axios.post("http://localhost:3000/image", { image: selectedFile });
+  }, [selectedFile]);
   // const history = useHistory();
   function OptionsDialog() {
     return (
@@ -36,6 +42,7 @@ export default function Navbar() {
               accept="image/*"
               style={{ display: "none" }}
               ref={fileInputRef}
+              onChange={e => setSelectedFile(e.target.files[0])}
             ></input>
           </ListItem>
           <ListItem>
