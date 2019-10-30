@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, createRef } from "react";
 import { Link } from "react-router-dom";
 import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 import PieChartIcon from "@material-ui/icons/PieChart";
@@ -10,9 +10,12 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
+import Input from "@material-ui/core/Input";
+import { create } from "jss";
 
 export default function Navbar() {
   const [openStatus, setOpenStatus] = useState(false);
+  let fileInputRef = React.createRef();
   // const history = useHistory();
   function OptionsDialog() {
     return (
@@ -23,8 +26,17 @@ export default function Navbar() {
       >
         <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
         <List>
-          <ListItem>
-            <input type="file"></input>
+          <ListItem
+            onFilesAdded={data => console.log(data)}
+            onClick={() => fileInputRef.current.click()}
+          >
+            TakePicture
+            <input
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              ref={fileInputRef}
+            ></input>
           </ListItem>
           <ListItem>
             <Link to="/new-transaction">Enter Manually</Link>
