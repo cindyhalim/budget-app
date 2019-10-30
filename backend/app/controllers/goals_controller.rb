@@ -1,7 +1,7 @@
 class GoalsController < ApplicationController
   def index
     user = User.find_by(id: session[:user_id])
-    @goals = user.goals.where('goal_type = "saving" AND end_date >= ?', DateTime.now) 
+    @goals = user.goals.where('goal_type = "saving" AND end_date >= ?', DateTime.now.to_date) 
     @sorted_goals = @goals.order('created_at DESC')
     render json: {
       goals: @sorted_goals
@@ -20,5 +20,12 @@ class GoalsController < ApplicationController
     else 
       render json: { status: 500 }
     end
+  end
+
+  def edit
+  end
+
+  def destroy
+    Goal.find(params["id"]).destroy
   end
 end

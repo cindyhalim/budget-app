@@ -17,7 +17,7 @@ export default function CreateGoal(props) {
         name: "",
         amount: "",
         start_date: new Date(Date.now()),
-        end_date: new Date(Date.now()),
+        end_date: new Date(Date.now()).getTime() + 86400000,
         error: ""
       }
     });
@@ -50,6 +50,7 @@ export default function CreateGoal(props) {
           props.setNewGoal({
             ...props.newGoal,
             goals: props.newGoal.goals.unshift({
+              id: props.newGoal.goals.length + 2,
               goal_type: "saving",
               amount: parseInt(props.newGoal.createGoal.amount),
               name: props.newGoal.createGoal.name,
@@ -121,7 +122,6 @@ export default function CreateGoal(props) {
             }
             required
           />
-
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
               disableToolbar
@@ -143,6 +143,7 @@ export default function CreateGoal(props) {
               KeyboardButtonProps={{
                 "aria-label": "change date"
               }}
+              helperText={props.newGoal.error}
               required
             />
             <KeyboardDatePicker
@@ -165,6 +166,7 @@ export default function CreateGoal(props) {
               KeyboardButtonProps={{
                 "aria-label": "change date"
               }}
+              helperText={props.newGoal.error}
               required
             />
           </MuiPickersUtilsProvider>
