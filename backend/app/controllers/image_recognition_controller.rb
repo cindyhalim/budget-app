@@ -5,7 +5,7 @@ class ImageRecognitionController < ApplicationController
     @uploader = PicUploader.new
     @uploader.store!(params[:image])
     image_annotator = Google::Cloud::Vision::ImageAnnotator.new
-    file_name = "/Users/nikita/budget-app/backend/public/uploads/#{params[:id]}.jpg"
+    file_name = "/Users/nikita/budget-app/backend/public/uploads/#{params[:image].original_filename}"
     response = image_annotator.text_detection image: file_name
     pp response
     # render json: {result: response.to_json}
