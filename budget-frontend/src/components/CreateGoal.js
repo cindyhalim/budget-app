@@ -151,7 +151,7 @@ export default function CreateGoal(props) {
               format="MM/dd/yyyy"
               margin="normal"
               label="End Date"
-              minDate={props.newGoal.createGoal.start_date}
+              minDate={props.newGoal.createGoal.start_date.getTime() + 86400000}
               value={props.newGoal.createGoal.end_date}
               onChange={value => {
                 props.setNewGoal({

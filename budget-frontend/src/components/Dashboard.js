@@ -11,7 +11,7 @@ export default function Dashboard(props) {
       name: "",
       amount: "",
       start_date: new Date(Date.now()),
-      end_date: new Date(Date.now()),
+      end_date: new Date(Date.now()).getTime() + 86400000,
       error: ""
     },
     goals: []
