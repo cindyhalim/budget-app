@@ -29,10 +29,12 @@ export default function Navbar() {
       </Link>
 
       <BottomNavigationAction label="Recents" icon={<AddCircleOutlineIcon />} />
-      <Link to="analytics">
-        <BottomNavigationAction label="Recents" icon={<PieChartIcon />} />
+      <Link to="/analytics">
+        <BottomNavigationAction label="Analytics" icon={<PieChartIcon />} />
       </Link>
-      <BottomNavigationAction label="Recents" icon={<AccountCircleIcon />} />
+      <Link to="/profile">
+        <BottomNavigationAction label="Profile" icon={<AccountCircleIcon />} />
+      </Link>
     </BottomNavigation>
   );
 }
