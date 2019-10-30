@@ -36,9 +36,7 @@ function App() {
     axios
       .get("http://localhost:3000/logged_in", { withCredentials: true })
       .then(res => {
-        console.log(res);
         if (res.data.logged_in && logInStatus.status === "not_logged_in") {
-          console.log("here");
           handleLogin(res);
         }
 
