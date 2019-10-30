@@ -6,9 +6,33 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import HomeIcon from "@material-ui/icons/Home";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Dialog from "@material-ui/core/Dialog";
 
 export default function Navbar() {
+  const [openStatus, setOpenStatus] = useState(false);
   // const history = useHistory();
+  function OptionsDialog() {
+    return (
+      <Dialog
+        onClose={() => setOpenStatus(false)}
+        aria-labelledby="simple-dialog-title"
+        open={openStatus}
+      >
+        <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
+        <List>
+          <ListItem>
+            <input type="file"></input>
+          </ListItem>
+          <ListItem>
+            <Link to="/new-transaction">Enter Manually</Link>
+          </ListItem>
+        </List>
+      </Dialog>
+    );
+  }
   return (
     <BottomNavigation
       style={{
@@ -28,7 +52,12 @@ export default function Navbar() {
         />
       </Link>
 
-      <BottomNavigationAction label="Recents" icon={<AddCircleOutlineIcon />} />
+      <BottomNavigationAction
+        label="Add Paymnet"
+        onClick={() => setOpenStatus(true)}
+        icon={<AddCircleOutlineIcon />}
+      />
+      <OptionsDialog />
       <Link to="/analytics">
         <BottomNavigationAction label="Analytics" icon={<PieChartIcon />} />
       </Link>
