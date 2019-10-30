@@ -46,6 +46,7 @@ export default function Register(props) {
                 goal_type: "budget",
                 amount: parseInt(budget),
                 name: "budget",
+                start_date: new Date(Date.now()),
                 end_date: "null"
               }
             },
