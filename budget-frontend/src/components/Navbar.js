@@ -20,6 +20,12 @@ export default function Navbar() {
   let fileInputRef = React.createRef();
   let pressSubmitRef = React.createRef();
 
+  let formData = new FormData();
+  formData.append("image", selectedFile);
+  Axios.post("http://localhost:3000/image_recognition", formData).then(res =>
+    console.log(res)
+  );
+
   function OptionsDialog() {
     return (
       <Dialog
@@ -33,26 +39,15 @@ export default function Navbar() {
             onFilesAdded={data => console.log(data)}
             onClick={() => fileInputRef.current.click()}
           >
-            TakePicture
-            <form
-              action="http://localhost:3000/image_recognition"
-              method="POST"
-              encType="multipart/form-data"
-            >
-              <input
-                type="file"
-                name="image"
-                accept="image/*"
-                style={{ display: "none" }}
-                ref={fileInputRef}
-                onChange={e => pressSubmitRef.current.click()}
-              ></input>
-              <input
-                type="submit"
-                ref={pressSubmitRef}
-                style={{ display: "none" }}
-              ></input>
-            </form>
+            Take Picture
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              style={{ display: "none" }}
+              ref={fileInputRef}
+              onChange={e => setSelectedFile(e.target.files[0])}
+            ></input>
           </ListItem>
           <ListItem>
             <Link to="/new-transaction">Enter Manually</Link>
