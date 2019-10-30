@@ -20,7 +20,10 @@ export default function Navbar() {
   const [selectedFile, setSelectedFile] = useState("");
 
   useEffect(() => {
-    Axios.post("http://localhost:3000/image", { image: selectedFile });
+    console.log(selectedFile);
+    Axios.post("http://localhost:3000/image_recognition", {
+      image: selectedFile
+    });
   }, [selectedFile]);
   // const history = useHistory();
   function OptionsDialog() {
@@ -42,7 +45,7 @@ export default function Navbar() {
               accept="image/*"
               style={{ display: "none" }}
               ref={fileInputRef}
-              onChange={e => setSelectedFile(e.target.files[0])}
+              onChange={e => setSelectedFile(e.target.files[0].name)}
             ></input>
           </ListItem>
           <ListItem>
