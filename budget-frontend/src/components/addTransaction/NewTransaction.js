@@ -58,8 +58,9 @@ export default function NewTransaction(props) {
         <DialogActions>
           <Button
             onClick={() => {
+              props.changeNavbarStatus();
               props.onChangeOpenStatus({ transaction: false, list: false });
-              // triggerNewTransactionPost();
+              triggerNewTransactionPost();
             }}
           >
             Add

@@ -96,6 +96,7 @@ export default function AddTransactionOption(props) {
             category: data.target.value
           })
         }
+        changeNavbarStatus={() => props.changeOpenStatus(false)}
       ></NewTransaction>
     </div>
   );
