@@ -6,7 +6,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import HomeIcon from "@material-ui/icons/Home";
-import AddTransactionOption from "./AddTransactionOption";
+import AddTransactionOption from "./addTransaction/AddTransactionOption";
 
 export default function Navbar() {
   const [openAddTransaction, setOpenAddTransaction] = useState(false);
