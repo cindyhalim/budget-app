@@ -11,13 +11,19 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import Axios from "axios";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker
+} from "@material-ui/pickers";
 
 export default function NewTransaction(props) {
   function triggerNewTransactionPost() {
     Axios.post("http://localhost:300/new-transaction", {
       amount: props.transactionData.amount,
       location: props.transactionData.location,
-      category: props.transactionData.location
+      category: props.transactionData.location,
+      transaction_date: props.transactionData.transaction_date
     });
   }
   return (
@@ -46,7 +52,23 @@ export default function NewTransaction(props) {
             value={props.transactionData.location}
             onChange={props.onInputLocation}
           />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              inputProps={{ readOnly: true }}
+              format="MM/dd/yyyy"
+              margin="normal"
+              label="Date picker inline"
+              value={props.transactionData.transaction_date}
+              minDate={new Date(Date.now())}
+              onChange={props.onInputDate}
+              KeyboardButtonProps={{
+                "aria-label": "change date"
+              }}
+            />
+          </MuiPickersUtilsProvider>
           <InputLabel>Category</InputLabel>
+
           <Select
             value={props.transactionData.category}
             onChange={props.onInputCategory}

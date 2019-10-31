@@ -15,7 +15,8 @@ export default function AddTransactionOption(props) {
   const [transactionData, setTransactionData] = useState({
     amount: "",
     location: "",
-    category: ""
+    category: "",
+    transaction_date: new Date(Date.now())
   });
   const [selectedFile, setSelectedFile] = useState("");
   let fileInputRef = React.createRef();
@@ -34,7 +35,8 @@ export default function AddTransactionOption(props) {
           ...transactionData,
           amount: 5.88,
           location: "McDonald's",
-          category: "Food"
+          category: "Food",
+          transaction_date: new Date(Date.now())
         });
         setOpenStatus({ ...openStatus, list: false, transaction: true });
       }
@@ -94,6 +96,12 @@ export default function AddTransactionOption(props) {
           setTransactionData({
             ...transactionData,
             category: data.target.value
+          })
+        }
+        onInputDate={data =>
+          setTransactionData({
+            ...transactionData,
+            transaction_date: data
           })
         }
         changeNavbarStatus={() => props.changeOpenStatus(false)}
