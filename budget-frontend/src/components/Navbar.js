@@ -1,4 +1,4 @@
-import React, { useState, createRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   BottomNavigation,
@@ -20,8 +20,6 @@ import ListItem from "@material-ui/core/ListItem";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
-import Input from "@material-ui/core/Input";
-import { create } from "jss";
 import Axios from "axios";
 
 export default function Navbar() {
@@ -39,16 +37,34 @@ export default function Navbar() {
   let fileInputRef = React.createRef();
 
   useEffect(() => {
+    setOpenStatus({ ...openStatus, list: false });
     let formData = new FormData();
     formData.append("image", selectedFile);
-    Axios.post("http://localhost:3000/image_recognition", formData).then(res =>
-      console.log(res)
+    Axios.post("http://localhost:3000/image_recognition", formData).then(
+      res => {
+        setTransactionData({
+          ...transactionData,
+          amount: 5.88,
+          location: "McDonald's",
+          category: "Food"
+        });
+        setOpenStatus({ ...openStatus, list: false, transaction: true });
+      }
     );
   }, [selectedFile]);
+
+  function triggerNewTransactionPost() {
+    Axios.post("http://localhost:300/new-transaction", {
+      amount: transactionData.amount,
+      location: transactionData.location,
+      category: transactionData.location
+    });
+  }
 
   function OptionsDialog() {
     return (
       <Dialog
+        autoFocus="true"
         onClose={() => setOpenStatus({ ...openStatus, list: false })}
         aria-labelledby="simple-dialog-title"
         open={openStatus.list}
@@ -78,36 +94,6 @@ export default function Navbar() {
     );
   }
 
-  function EnterNewTransaction() {
-    return (
-      <Dialog
-        onClose={() =>
-          setOpenStatus({ ...openStatus, transaction: false, list: true })
-        }
-        aria-labelledby="simple-dialog-title"
-        open={openStatus.transaction}
-      >
-        <DialogTitle id="simple-dialog-title">New Transaction</DialogTitle>
-        <DialogContent>
-          <TextField ref={numberInput} label="Amount" type="number" />
-          <br />
-          <TextField margin="dense" label="Location" type="Text" />
-          <InputLabel>Category</InputLabel>
-          <Select>
-            <MenuItem value="Shopping">Shopping</MenuItem>
-            <MenuItem value="Food">Food</MenuItem>
-          </Select>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={() => setOpenStatus({ ...openStatus, transaction: false })}
-          >
-            Add
-          </Button>
-        </DialogActions>
-      </Dialog>
-    );
-  }
   return (
     <BottomNavigation
       style={{
@@ -133,7 +119,65 @@ export default function Navbar() {
         icon={<AddCircleOutlineIcon />}
       />
       <OptionsDialog />
-      <EnterNewTransaction></EnterNewTransaction>
+      {/* ------------------------------ Dialog for NEW TRANSACTION -------------------------- */}
+      <Dialog
+        onClose={() =>
+          setOpenStatus({ ...openStatus, transaction: false, list: true })
+        }
+        aria-labelledby="simple-dialog-title"
+        open={openStatus.transaction}
+      >
+        <DialogTitle id="simple-dialog-title">New Transaction</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            ref={numberInput}
+            label="Amount"
+            type="number"
+            value={transactionData.amount}
+            onChange={e =>
+              setTransactionData({ ...transactionData, amount: e.target.value })
+            }
+          />
+          <br />
+          <TextField
+            margin="dense"
+            label="Location"
+            type="Text"
+            value={transactionData.location}
+            onChange={e =>
+              setTransactionData({
+                ...transactionData,
+                location: e.target.value
+              })
+            }
+          />
+          <InputLabel>Category</InputLabel>
+          <Select
+            value={transactionData.category}
+            onChange={e =>
+              setTransactionData({
+                ...transactionData,
+                category: e.target.value
+              })
+            }
+          >
+            <MenuItem value="Shopping">Shopping</MenuItem>
+            <MenuItem value="Food">Food</MenuItem>
+          </Select>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => {
+              setOpenStatus({ ...openStatus, transaction: false });
+              triggerNewTransactionPost();
+            }}
+          >
+            Add
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {/* -----------------------------------------------------------------------------------------------*/}
       <Link to="/analytics">
         <BottomNavigationAction label="Analytics" icon={<PieChartIcon />} />
       </Link>

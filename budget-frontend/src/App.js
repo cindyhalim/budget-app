@@ -77,7 +77,6 @@ function App() {
         <Route path="/onboarding" render={() => <Onboarding />} />
         <Route path="/analytics" render={() => <Analytics />} />
         <Route path="/profile" render={() => <Profile />} />
-        <Route path="/new-transaction" render={() => <NewTransaction />} />
         <Route path="/" render={() => <Home />} />
       </Switch>
     </Router>
