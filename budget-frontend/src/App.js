@@ -8,7 +8,6 @@ import Dashboard from "./components/Dashboard";
 import Onboarding from "./components/Onboarding";
 import Analytics from "./components/Analytics";
 import Profile from "./components/Profile";
-import NewTransaction from "./components/NewTransaction";
 
 function App() {
   const [logInStatus, setLogInStatus] = useState({
