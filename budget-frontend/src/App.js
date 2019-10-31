@@ -8,6 +8,7 @@ import Dashboard from "./components/Dashboard";
 import Onboarding from "./components/Onboarding";
 import Analytics from "./components/Analytics";
 import Profile from "./components/Profile";
+import Leaderboard from "./components/Leaderboard";
 
 function App() {
   const [logInStatus, setLogInStatus] = useState({
@@ -76,6 +77,7 @@ function App() {
         <Route path="/onboarding" render={() => <Onboarding />} />
         <Route path="/analytics" render={() => <Analytics />} />
         <Route path="/profile" render={() => <Profile />} />
+        <Route path="/leaderboard" render={() => <Leaderboard />} />
         <Route path="/" render={() => <Home />} />
       </Switch>
     </Router>

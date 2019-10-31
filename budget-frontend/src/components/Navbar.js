@@ -21,9 +21,9 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import Axios from "axios";
+import NewTransaction from "./NewTransaction";
 
 export default function Navbar() {
-  const numberInput = React.createRef();
   const [openStatus, setOpenStatus] = useState({
     list: false,
     transaction: false
@@ -52,14 +52,6 @@ export default function Navbar() {
       }
     );
   }, [selectedFile]);
-
-  function triggerNewTransactionPost() {
-    Axios.post("http://localhost:300/new-transaction", {
-      amount: transactionData.amount,
-      location: transactionData.location,
-      category: transactionData.location
-    });
-  }
 
   function OptionsDialog() {
     return (
@@ -119,65 +111,34 @@ export default function Navbar() {
         icon={<AddCircleOutlineIcon />}
       />
       <OptionsDialog />
-      {/* ------------------------------ Dialog for NEW TRANSACTION -------------------------- */}
-      <Dialog
-        onClose={() =>
-          setOpenStatus({ ...openStatus, transaction: false, list: true })
+
+      <NewTransaction
+        onChangeOpenStatus={data =>
+          setOpenStatus({
+            ...openStatus,
+            list: data.list,
+            transaction: data.transaction
+          })
         }
-        aria-labelledby="simple-dialog-title"
-        open={openStatus.transaction}
-      >
-        <DialogTitle id="simple-dialog-title">New Transaction</DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            ref={numberInput}
-            label="Amount"
-            type="number"
-            value={transactionData.amount}
-            onChange={e =>
-              setTransactionData({ ...transactionData, amount: e.target.value })
-            }
-          />
-          <br />
-          <TextField
-            margin="dense"
-            label="Location"
-            type="Text"
-            value={transactionData.location}
-            onChange={e =>
-              setTransactionData({
-                ...transactionData,
-                location: e.target.value
-              })
-            }
-          />
-          <InputLabel>Category</InputLabel>
-          <Select
-            value={transactionData.category}
-            onChange={e =>
-              setTransactionData({
-                ...transactionData,
-                category: e.target.value
-              })
-            }
-          >
-            <MenuItem value="Shopping">Shopping</MenuItem>
-            <MenuItem value="Food">Food</MenuItem>
-          </Select>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={() => {
-              setOpenStatus({ ...openStatus, transaction: false });
-              triggerNewTransactionPost();
-            }}
-          >
-            Add
-          </Button>
-        </DialogActions>
-      </Dialog>
-      {/* -----------------------------------------------------------------------------------------------*/}
+        openStatus={openStatus}
+        transactionData={transactionData}
+        onInputAmount={data =>
+          setTransactionData({ ...transactionData, amount: data.target.value })
+        }
+        onInputLocation={data =>
+          setTransactionData({
+            ...transactionData,
+            location: data.target.value
+          })
+        }
+        onInputCategory={data =>
+          setTransactionData({
+            ...transactionData,
+            category: data.target.value
+          })
+        }
+      ></NewTransaction>
+
       <Link to="/analytics">
         <BottomNavigationAction label="Analytics" icon={<PieChartIcon />} />
       </Link>
