@@ -1,90 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  TextField,
-  Select,
-  InputLabel,
-  MenuItem,
-  Button,
-  DialogActions
-} from "@material-ui/core";
+import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 import PieChartIcon from "@material-ui/icons/PieChart";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import HomeIcon from "@material-ui/icons/Home";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogTitle";
-import Dialog from "@material-ui/core/Dialog";
-import Axios from "axios";
-import NewTransaction from "./NewTransaction";
+import AddTransactionOption from "./AddTransactionOption";
 
 export default function Navbar() {
-  const [openStatus, setOpenStatus] = useState({
-    list: false,
-    transaction: false
-  });
-  const [transactionData, setTransactionData] = useState({
-    amount: "",
-    location: "",
-    category: ""
-  });
-  const [selectedFile, setSelectedFile] = useState("");
-  let fileInputRef = React.createRef();
-
-  useEffect(() => {
-    setOpenStatus({ ...openStatus, list: false });
-    let formData = new FormData();
-    formData.append("image", selectedFile);
-    Axios.post("http://localhost:3000/image_recognition", formData).then(
-      res => {
-        setTransactionData({
-          ...transactionData,
-          amount: 5.88,
-          location: "McDonald's",
-          category: "Food"
-        });
-        setOpenStatus({ ...openStatus, list: false, transaction: true });
-      }
-    );
-  }, [selectedFile]);
-
-  function OptionsDialog() {
-    return (
-      <Dialog
-        autoFocus="true"
-        onClose={() => setOpenStatus({ ...openStatus, list: false })}
-        aria-labelledby="simple-dialog-title"
-        open={openStatus.list}
-      >
-        <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
-        <List>
-          <ListItem onClick={() => fileInputRef.current.click()}>
-            Take Picture
-            <input
-              type="file"
-              name="image"
-              accept="image/*"
-              style={{ display: "none" }}
-              ref={fileInputRef}
-              onChange={e => setSelectedFile(e.target.files[0])}
-            ></input>
-          </ListItem>
-          <ListItem
-            onClick={() =>
-              setOpenStatus({ ...openStatus, transaction: true, list: false })
-            }
-          >
-            Enter Manually
-          </ListItem>
-        </List>
-      </Dialog>
-    );
-  }
+  const [openAddTransaction, setOpenAddTransaction] = useState(false);
 
   return (
     <BottomNavigation
@@ -107,37 +32,13 @@ export default function Navbar() {
 
       <BottomNavigationAction
         label="Add Paymnet"
-        onClick={() => setOpenStatus({ ...openStatus, list: true })}
+        onClick={() => setOpenAddTransaction(true)}
         icon={<AddCircleOutlineIcon />}
       />
-      <OptionsDialog />
-
-      <NewTransaction
-        onChangeOpenStatus={data =>
-          setOpenStatus({
-            ...openStatus,
-            list: data.list,
-            transaction: data.transaction
-          })
-        }
-        openStatus={openStatus}
-        transactionData={transactionData}
-        onInputAmount={data =>
-          setTransactionData({ ...transactionData, amount: data.target.value })
-        }
-        onInputLocation={data =>
-          setTransactionData({
-            ...transactionData,
-            location: data.target.value
-          })
-        }
-        onInputCategory={data =>
-          setTransactionData({
-            ...transactionData,
-            category: data.target.value
-          })
-        }
-      ></NewTransaction>
+      <AddTransactionOption
+        openAddTransaction={openAddTransaction}
+        changeOpenStatus={data => setOpenAddTransaction(data)}
+      />
 
       <Link to="/analytics">
         <BottomNavigationAction label="Analytics" icon={<PieChartIcon />} />
