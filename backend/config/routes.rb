@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :ping, only: [:index]
   resources :sessions, only: [:create]
   resources :registrations, only: [:create]
-  resources :goals, only: [:create, :index, :edit, :destroy]
+  resources :goals, only: [:create, :index, :update, :destroy]
   delete :logout, to: "sessions#logout"
   get :logged_in, to: "sessions#logged_in"
 end

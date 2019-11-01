@@ -1,177 +1,66 @@
-import "date-fns";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { Card, CardContent, TextField } from "@material-ui/core";
-import DateFnsUtils from "@date-io/date-fns";
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider
-} from "@material-ui/pickers";
+import { Card, CardContent } from "@material-ui/core";
+import GoalForm from "./GoalForm";
 
 export default function CreateGoal(props) {
   const [active, setActive] = useState(false);
-  const clearFields = () => {
-    props.setNewGoal({
-      ...props.newGoal,
-      createGoal: {
-        name: "",
-        amount: "",
-        start_date: new Date(Date.now()),
-        end_date: new Date(Date.now()).getTime() + 86400000,
-        error: ""
-      }
-    });
-  };
-  const onSave = () => {
-    if (!props.newGoal.createGoal.name || !props.newGoal.createGoal.amount) {
-      props.setNewGoal({
-        ...props.newGoal,
-        createGoal: {
-          ...props.newGoal.createGoal,
-          error: "Please enter all fields."
-        }
-      });
-    } else {
-      axios
-        .post(
-          "http://localhost:3000/goals",
-          {
-            goal: {
-              goal_type: "saving",
-              amount: parseInt(props.newGoal.createGoal.amount),
-              name: props.newGoal.createGoal.name,
-              start_date: props.newGoal.createGoal.start_date,
-              end_date: props.newGoal.createGoal.end_date
-            }
-          },
-          { withCredentials: true }
-        )
-        .then(() => {
-          props.setNewGoal({
-            ...props.newGoal,
-            goals: props.newGoal.goals.unshift({
-              id: props.newGoal.goals.length + 2,
-              goal_type: "saving",
-              amount: parseInt(props.newGoal.createGoal.amount),
-              name: props.newGoal.createGoal.name,
-              start_date: props.newGoal.createGoal.start_date,
-              end_date: props.newGoal.createGoal.end_date
-            })
-          });
-        })
-        .then(() => {
-          setActive(!active);
-          clearFields();
+
+  const onSave = newState => {
+    axios
+      .post(
+        "http://localhost:3000/goals",
+        {
+          goal: {
+            goal_type: "saving",
+            amount: parseInt(newState.amount),
+            name: newState.name,
+            start_date: newState.start_date,
+            end_date: newState.end_date
+          }
+        },
+        { withCredentials: true }
+      )
+      .then(res => {
+        const newGoalArray = [...props.newGoal.goals];
+        newGoalArray.unshift({
+          id: res.data.goal.id,
+          amount: res.data.goal.amount,
+          name: res.data.goal.name,
+          start_date: new Date(res.data.goal.start_date),
+          end_date: new Date(res.data.goal.end_date)
         });
-    }
+        props.setNewGoal({
+          ...props.newGoal,
+          goals: newGoalArray
+        });
+      })
+      .then(() => {
+        setActive(!active);
+      });
   };
 
   return (
     <Card>
       <CardContent>
-        <div
-          onClick={() => setActive(!active)}
-          style={{ display: !active ? "block" : "none" }}
-        >
-          <h2>Create Goal</h2>
-        </div>
-        <div style={{ display: active ? "block" : "none" }}>
-          <button
-            onClick={() => {
-              setActive(!active);
-              clearFields();
-            }}
-          >
-            X
-          </button>
-          <TextField
-            helperText={props.newGoal.createGoal.error}
-            value={props.newGoal.createGoal.name}
-            label="Name"
-            name="name"
-            maxLength="20"
-            type="text"
-            onChange={event =>
-              props.setNewGoal({
-                ...props.newGoal,
-                createGoal: {
-                  ...props.newGoal.createGoal,
-                  name: event.target.value
-                }
-              })
-            }
-            margin="normal"
-            required
-          />
-          <br />
-          <TextField
-            helperText={props.newGoal.error}
-            value={props.newGoal.createGoal.amount}
-            label="Amount"
-            name="amount"
-            type="number"
-            margin="normal"
-            onChange={event =>
-              props.setNewGoal({
-                ...props.newGoal,
-                createGoal: {
-                  ...props.newGoal.createGoal,
-                  amount: event.target.value
-                }
-              })
-            }
-            required
-          />
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-              disableToolbar
-              variant="inline"
-              format="MM/dd/yyyy"
-              margin="normal"
-              label="Start Date"
-              minDate={Date.now()}
-              value={props.newGoal.createGoal.start_date}
-              onChange={value => {
-                props.setNewGoal({
-                  ...props.newGoal,
-                  createGoal: {
-                    ...props.newGoal.createGoal,
-                    start_date: value
-                  }
-                });
-              }}
-              KeyboardButtonProps={{
-                "aria-label": "change date"
-              }}
-              helperText={props.newGoal.error}
-              required
+        {!active && (
+          <div onClick={() => setActive(!active)}>
+            <h2>Create Goal</h2>
+          </div>
+        )}
+        {active && (
+          <div>
+            <GoalForm
+              active={active}
+              setActive={setActive}
+              name={props.newGoal.createGoal.name}
+              amount={props.newGoal.createGoal.amount}
+              start_date={props.newGoal.createGoal.start_date}
+              end_date={props.newGoal.createGoal.end_date}
+              onSave={onSave}
             />
-            <KeyboardDatePicker
-              disableToolbar
-              variant="inline"
-              format="MM/dd/yyyy"
-              margin="normal"
-              label="End Date"
-              minDate={props.newGoal.createGoal.start_date.getTime() + 86400000}
-              value={props.newGoal.createGoal.end_date}
-              onChange={value => {
-                props.setNewGoal({
-                  ...props.newGoal,
-                  createGoal: {
-                    ...props.newGoal.createGoal,
-                    end_date: value
-                  }
-                });
-              }}
-              KeyboardButtonProps={{
-                "aria-label": "change date"
-              }}
-              helperText={props.newGoal.error}
-              required
-            />
-          </MuiPickersUtilsProvider>
-          <button onClick={() => onSave()}>Save</button>
-        </div>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
