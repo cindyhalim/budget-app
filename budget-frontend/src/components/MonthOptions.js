@@ -29,7 +29,10 @@ const MonthOptions = ({ month, setMonth }) => {
             {month}
           </option>
         ))}
-        <option selected="selected">
+        <option
+          selected
+          value={new Date().toLocaleString("default", { month: "long" })}
+        >
           {new Date().toLocaleString("default", { month: "long" })}
         </option>
       </select>
