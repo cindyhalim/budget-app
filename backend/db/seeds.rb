@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-# user1 = User.create({name: "Ahana", email: "test@test.com", password: "password"})
+user1 = User.create({name: "Ahana", email: "test@test.com", password: "password"})
 
 #Recreation November
 user1.transactions.create({amount: 10, category: "Recreation", location: "Toronto", transaction_date: "2019-11-01T10:35:17.552Z"})
