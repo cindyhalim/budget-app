@@ -73,5 +73,10 @@ user1.transactions.create({amount: 25, category: "Shopping", location: "Toronto"
 
 #goals
 
-user1.goals.create({end_date: "2019-11-26T22:05:55.552Z", goal_type: "budget", amount: 1000, name: "budget"})
+user1.goals.create({end_date: nil, goal_type: "budget", amount: 1000, name: "budget"})
+user1.goals.create({end_date: nil, goal_type: "budget", amount: 2000, name: "budget"})
+user1.goals.create({end_date: nil, goal_type: "budget", amount: 1500, name: "budget"})
+user1.goals.create({end_date: nil, goal_type: "budget", amount: 3000, name: "budget"})
+user1.goals.create({end_date: nil, goal_type: "budget", amount: 3500, name: "budget"})
+user1.goals.create({end_date: nil, goal_type: "budget", amount: 4000, name: "budget"})
 
