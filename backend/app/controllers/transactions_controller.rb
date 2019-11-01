@@ -31,5 +31,12 @@ class TransactionsController < ApplicationController
         render json: {transactions: @bar1}
     end
   end
-  end
+  
+end
+def create
+  pp params
+  user = User.find_by(id: session[:user_id])
+  user.transactions.create(amount: params["amount"], category: params["category"], location: params["location"], transaction_date: params["transaction_date"])
+  pp Transaction.all
+end
 end
