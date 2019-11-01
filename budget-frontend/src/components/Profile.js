@@ -3,10 +3,12 @@ import { useHistory } from "react-router-dom";
 import Navbar from "./Navbar";
 import { datePickerDefaultProps } from "@material-ui/pickers/constants/prop-types";
 import EditProfile from "./EditProfile";
+import EditBudget from "./EditBudget";
 
 export default function Profile(props) {
   const history = useHistory();
   const [openEdit, setOpenEdit] = useState(false);
+  const [openBudget, setOpenBudget] = useState(false);
   console.log(props);
   props.checkLogInStatus();
   return (
@@ -24,9 +26,13 @@ export default function Profile(props) {
         Logout
       </p>
       <Navbar />
-      <button onClick={() => setOpenEdit(!openEdit)}>Edit</button>
+      <button onClick={() => setOpenEdit(!openEdit)}>Edit Profile</button>
+      <button onClick={() => setOpenBudget(!openBudget)}>Edit Budget</button>
       {openEdit ? (
         <EditProfile closeEditProfile={() => setOpenEdit(false)} />
+      ) : null}
+      {openBudget ? (
+        <EditBudget closeEditBudget={() => setOpenBudget(false)} />
       ) : null}
     </div>
   );
