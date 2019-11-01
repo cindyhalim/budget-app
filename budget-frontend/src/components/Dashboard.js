@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
-
 import Navbar from "./Navbar";
 import CreateGoal from "./CreateGoal";
+import DashboardProfile from "./DashboardProfile";
 import SavedGoal from "./SavedGoal";
 
 export default function Dashboard(props) {
+  props.checkLogInStatus();
   const [newGoal, setNewGoal] = useState({
     createGoal: {
       name: "",
@@ -25,18 +25,6 @@ export default function Dashboard(props) {
       }
     }
   };
-
-  const logOutClick = () => {
-    axios
-      .delete("http://localhost:3000/logout", { withCredentials: true })
-      .then(res => {
-        props.handleLogout(res);
-        history.push("/");
-      })
-      .catch(err => console.log("logout error", err));
-  };
-  props.checkLogInStatus();
-  const history = useHistory();
 
   useEffect(() => {
     axios
@@ -77,8 +65,10 @@ export default function Dashboard(props) {
   return (
     <div>
       <h1>Welcome to Dashboard</h1>
-      <p>Logged in: {props.logInStatus.status}</p>
-      <p onClick={() => logOutClick()}>Logout</p>
+      <DashboardProfile
+        user={props.logInStatus.user}
+        logOutClick={() => props.logOutClick()}
+      />
 
       <h3>Saving Goals:</h3>
       <CreateGoal newGoal={newGoal} setNewGoal={setNewGoal} />

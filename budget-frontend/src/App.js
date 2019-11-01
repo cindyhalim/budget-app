@@ -10,16 +10,16 @@ import Analytics from "./components/Analytics";
 import Profile from "./components/Profile";
 import Leaderboard from "./components/Leaderboard";
 
-function App() {
+export default function App() {
   const [logInStatus, setLogInStatus] = useState({
     status: "not_logged_in",
-    user: {}
+    user: ""
   });
 
   const handleLogin = data => {
     setLogInStatus({
       status: "logged_in",
-      user: data.data.user[0]
+      user: data.name
     });
   };
 
@@ -27,9 +27,18 @@ function App() {
     if (!data.logged_in) {
       setLogInStatus({
         status: "not_logged_in",
-        user: {}
+        user: ""
       });
     }
+  };
+
+  const logOutClick = () => {
+    axios
+      .delete("http://localhost:3000/logout", { withCredentials: true })
+      .then(res => {
+        handleLogout(res);
+      })
+      .catch(err => console.log("logout error", err));
   };
 
   const checkLogInStatus = () => {
@@ -37,7 +46,7 @@ function App() {
       .get("http://localhost:3000/logged_in", { withCredentials: true })
       .then(res => {
         if (res.data.logged_in && logInStatus.status === "not_logged_in") {
-          handleLogin(res);
+          handleLogin(res.data.user);
         }
 
         if (!res.data.logged_in && logInStatus === "logged_in") {
@@ -71,17 +80,26 @@ function App() {
               checkLogInStatus={checkLogInStatus}
               handleLogout={handleLogout}
               logInStatus={logInStatus}
+              logOutClick={() => logOutClick()}
             />
           )}
         />
         <Route path="/onboarding" render={() => <Onboarding />} />
         <Route path="/analytics" render={() => <Analytics />} />
-        <Route path="/profile" render={() => <Profile />} />
+        <Route
+          path="/profile"
+          render={() => (
+            <Profile
+              handleLogin={handleLogin}
+              logInStatus={logInStatus}
+              checkLogInStatus={checkLogInStatus}
+              logOutClick={() => logOutClick()}
+            />
+          )}
+        />
         <Route path="/leaderboard" render={() => <Leaderboard />} />
         <Route path="/" render={() => <Home />} />
       </Switch>
     </Router>
   );
 }
-
-export default App;
