@@ -25,7 +25,9 @@ export default function Profile(props) {
       </p>
       <Navbar />
       <button onClick={() => setOpenEdit(!openEdit)}>Edit</button>
-      {openEdit ? <EditProfile /> : null}
+      {openEdit ? (
+        <EditProfile closeEditProfile={() => setOpenEdit(false)} />
+      ) : null}
     </div>
   );
 }
