@@ -7,23 +7,27 @@ import { lighten, makeStyles, withStyles } from "@material-ui/core/styles";
 const ProgressBar = () => {
   const [total, setTotal] = useState([]);
   const [budget, setBudget] = useState(0);
-  const [month, setMonth] = useState(
-    new Date().toLocaleString("default", { month: "long" })
-  );
+
   useEffect(() => {
+    let currentMonth = new Date().toLocaleString("default", { month: "long" });
     axios
-      .get(`http://localhost:3000/transactions/?month=${month}&type=progress`, {
-        withCredentials: true
-      })
+      .get(
+        `http://localhost:3000/transactions/?month=${currentMonth}&type=progress`,
+        {
+          withCredentials: true
+        }
+      )
       .then(res => {
-        setTotal(res.data.total[0].total);
-        setBudget(Number(res.data.budget.amount));
+        setTotal(res.data.total);
+        setBudget(Number(res.data.budget));
       });
-  }, [month]);
+  }, []);
 
   const BorderLinearProgress = withStyles({
     root: {
       height: 30,
+      margin: 20,
+      borderRadius: 20,
       backgroundColor: lighten("#949494", 0.5)
     },
     bar: {
