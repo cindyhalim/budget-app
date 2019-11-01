@@ -9,14 +9,6 @@ export default function DashboardProfile(props) {
         Profile Pic
       </div>
       <p>Logged in: {props.user}</p>
-      <p
-        onClick={() => {
-          props.logOutClick();
-          history.push("/");
-        }}
-      >
-        Logout
-      </p>
     </div>
   );
 }

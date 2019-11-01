@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import CreateGoal from "./CreateGoal";
 import DashboardProfile from "./DashboardProfile";
 import SavedGoal from "./SavedGoal";
+import HealthBar from "./HealthBar";
 
 export default function Dashboard(props) {
   props.checkLogInStatus();
@@ -69,6 +70,7 @@ export default function Dashboard(props) {
         user={props.logInStatus.user}
         logOutClick={() => props.logOutClick()}
       />
+      <HealthBar />
 
       <h3>Saving Goals:</h3>
       <CreateGoal newGoal={newGoal} setNewGoal={setNewGoal} />
