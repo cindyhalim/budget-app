@@ -7,8 +7,6 @@ import SavedGoal from "./SavedGoal";
 
 export default function Dashboard(props) {
   props.checkLogInStatus();
-
-  export default function Dashboard(props) {
   const [newGoal, setNewGoal] = useState({
     createGoal: {
       name: "",
@@ -64,7 +62,6 @@ export default function Dashboard(props) {
     );
   };
 
-
   return (
     <div>
       <h1>Welcome to Dashboard</h1>
@@ -72,8 +69,6 @@ export default function Dashboard(props) {
         user={props.logInStatus.user}
         logOutClick={() => props.logOutClick()}
       />
-      <CreateGoal />
-
 
       <h3>Saving Goals:</h3>
       <CreateGoal newGoal={newGoal} setNewGoal={setNewGoal} />

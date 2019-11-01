@@ -24,9 +24,6 @@ class GoalsController < ApplicationController
   end
 
   def update
-    pp "=========="
-    pp params
-    pp "=========="
     goal = Goal.find(params["id"])
     goal.update(start_date: params['goal']['start_date'], end_date: params['goal']['end_date'], amount: params['goal']['amount'], name: params['goal']['name'])
   end
