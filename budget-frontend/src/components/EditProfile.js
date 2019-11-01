@@ -4,9 +4,7 @@ export default function EditProfile(props) {
   const [updatedParams, setUpdatedParams] = useState({
     name: "",
     username: "",
-    email: "",
-    password: "",
-    passwordConfirm: ""
+    email: ""
   });
   return (
     <div>
@@ -35,14 +33,7 @@ export default function EditProfile(props) {
           //     setUpdatedParams({ ...updatedParams, email: e.target.value })
           //   }
         ></input>
-        <input
-          type="text"
-          placeholder="password"
-          //   value={updatedParams.password}
-          //   onChange={e =>
-          //     setUpdatedParams({ ...updatedParams, name: e.target.params })
-          //   }
-        ></input>
+        <input type="text" placeholder="password"></input>
         <input type="text" placeholder="re-enter password"></input>
         <button type="submit" onClick={() => props.closeEditProfile()}>
           Save
