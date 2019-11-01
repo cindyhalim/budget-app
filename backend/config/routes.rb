@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :registrations, only: [:create]
   resources :goals, only: [:create]
   resources :image_recognition, only: [:create, :show]
+  resources :transactions, only: [:index]
   delete :logout, to: "sessions#logout"
   get :logged_in, to: "sessions#logged_in"
 end

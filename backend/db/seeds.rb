@@ -9,6 +9,10 @@
 
 user1 = User.create({name: "Ahana", email: "test@test.com", password: "password"})
 
+#Recreation November
+user1.transactions.create({amount: 10, category: "Recreation", location: "Toronto", transaction_date: "2019-11-01T10:35:17.552Z"})
+user1.transactions.create({amount: 15, category: "Recreation", location: "Toronto", transaction_date: "2019-11-01T10:05:55.552Z"})
+
 #Recreation October
 user1.transactions.create({amount: 10, category: "Recreation", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
 user1.transactions.create({amount: 15, category: "Recreation", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
@@ -27,6 +31,17 @@ user1.transactions.create({amount: 45, category: "Recreation", location: "Toront
 user1.transactions.create({amount: 70, category: "Recreation", location: "Toronto", transaction_date: "2019-09-26T22:05:55.552Z"})
 user1.transactions.create({amount: 80, category: "Recreation", location: "Toronto", transaction_date: "2019-09-26T22:05:55.552Z"})
 
+#Recreation August
+user1.transactions.create({amount: 10, category: "Recreation", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
+user1.transactions.create({amount: 15, category: "Recreation", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
+user1.transactions.create({amount: 20, category: "Recreation", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
+user1.transactions.create({amount: 30, category: "Recreation", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
+
+
+#RideShare November
+user1.transactions.create({amount: 10, category: "Rideshare", location: "Toronto", transaction_date: "2019-11-01T10:35:17.552Z"})
+user1.transactions.create({amount: 12, category: "Rideshare", location: "Toronto", transaction_date: "2019-11-01T10:35:17.552Z"})
+
 #RideShare October
 user1.transactions.create({amount: 10, category: "Rideshare", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
 user1.transactions.create({amount: 12, category: "Rideshare", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
@@ -38,6 +53,14 @@ user1.transactions.create({amount: 20, category: "Rideshare", location: "Toronto
 user1.transactions.create({amount: 22, category: "Rideshare", location: "Toronto", transaction_date: "2019-09-26T22:05:55.552Z"})
 user1.transactions.create({amount: 27, category: "Rideshare", location: "Toronto", transaction_date: "2019-09-26T22:05:55.552Z"})
 user1.transactions.create({amount: 25, category: "Rideshare", location: "Toronto", transaction_date: "2019-09-26T22:05:55.552Z"})
+
+#RideShare August
+user1.transactions.create({amount: 20, category: "Rideshare", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
+user1.transactions.create({amount: 22, category: "Rideshare", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
+
+#Food and Drink November
+user1.transactions.create({amount: 20, category: "Food and Drink", location: "Toronto", transaction_date: "2019-11-01T10:35:17.552Z"})
+user1.transactions.create({amount: 35, category: "Food and Drink", location: "Toronto", transaction_date: "2019-11-01T10:35:17.552Z"})
 
 #Food and Drink October
 user1.transactions.create({amount: 20, category: "Food and Drink", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
@@ -51,6 +74,14 @@ user1.transactions.create({amount: 45, category: "Food and Drink", location: "To
 user1.transactions.create({amount: 25, category: "Food and Drink", location: "Toronto", transaction_date: "2019-09-26T22:05:55.552Z"})
 user1.transactions.create({amount: 25, category: "Food and Drink", location: "Toronto", transaction_date: "2019-09-26T22:05:55.552Z"})
 
+#Food and Drink August
+user1.transactions.create({amount: 20, category: "Food and Drink", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
+user1.transactions.create({amount: 35, category: "Food and Drink", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
+
+#Shopping November
+user1.transactions.create({amount: 15, category: "Shopping", location: "Toronto", transaction_date: "2019-11-01T10:35:17.552Z"})
+user1.transactions.create({amount: 25, category: "Shopping", location: "Toronto", transaction_date: "2019-11-01T10:35:17.552Z"})
+
 #Shopping October
 user1.transactions.create({amount: 15, category: "Shopping", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
 user1.transactions.create({amount: 25, category: "Shopping", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
@@ -62,6 +93,10 @@ user1.transactions.create({amount: 25, category: "Shopping", location: "Toronto"
 user1.transactions.create({amount: 15, category: "Shopping", location: "Toronto", transaction_date: "2019-09-26T22:05:55.552Z"})
 user1.transactions.create({amount: 25, category: "Shopping", location: "Toronto", transaction_date: "2019-09-26T22:05:55.552Z"})
 user1.transactions.create({amount: 25, category: "Shopping", location: "Toronto", transaction_date: "2019-09-26T22:05:55.552Z"})
+
+#Shopping August
+user1.transactions.create({amount: 15, category: "Shopping", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
+user1.transactions.create({amount: 25, category: "Shopping", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
 
 #goals
 user1.goals.create({end_date: "2019-11-26T22:05:55.552Z", goal_type: "saving", amount: 500, name: "new phone"})
