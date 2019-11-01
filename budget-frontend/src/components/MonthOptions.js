@@ -24,8 +24,10 @@ const MonthOptions = ({ month, setMonth }) => {
           setMonth(e.target.value);
         }}
       >
-        {months.map(month => (
-          <option value={month}>{month}</option>
+        {months.map((month, index) => (
+          <option key={index} value={month}>
+            {month}
+          </option>
         ))}
         <option selected="selected">
           {new Date().toLocaleString("default", { month: "long" })}
