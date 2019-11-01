@@ -38,7 +38,7 @@ user1.transactions.create({amount: 10, category: "Rideshare", location: "Toronto
 user1.transactions.create({amount: 12, category: "Rideshare", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
 user1.transactions.create({amount: 7, category: "Rideshare", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
 user1.transactions.create({amount: 5, category: "Rideshare", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
-
+#
 #RideShare August
 user1.transactions.create({amount: 20, category: "Rideshare", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
 user1.transactions.create({amount: 22, category: "Rideshare", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
