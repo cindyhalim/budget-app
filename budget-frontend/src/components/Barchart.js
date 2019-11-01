@@ -9,8 +9,8 @@ export default function Barchart() {
   );
   const [bar2Month, setBar2Month] = useState("");
 
-  const [transactions1, setTransactions1] = useState("");
-  const [transactions2, setTransactions2] = useState("");
+  const [transactions1, setTransactions1] = useState([]);
+  const [transactions2, setTransactions2] = useState([]);
 
   useEffect(() => {
     axios
@@ -91,12 +91,16 @@ export default function Barchart() {
   function ifTwoCharts(index) {
     if (bar2Month) {
       return [
-        transactions1[index].amount,
-        transactions2 ? transactions2[index].amount : []
+        transactions1.length > 0 ? transactions1[index].amount : [],
+        transactions2.length > 0 ? transactions2[index].amount : []
       ];
-    } else if (transactions1) {
-      return [transactions1[index].amount];
-    } else return [];
+    } else {
+      if (transactions1.length > 0) {
+        return [transactions1[index].amount];
+      } else {
+        return [];
+      }
+    }
   }
 
   return (

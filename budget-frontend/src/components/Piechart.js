@@ -16,8 +16,12 @@ export default function Piechart() {
         withCredentials: true
       })
       .then(res => {
-        setTransactions(res.data.transactions);
-        setMonthTotal(res.data.total[0].total);
+        if (res.data.transactions.length > 0) {
+          setTransactions(res.data.transactions);
+          setMonthTotal(res.data.total[0].total);
+        } else {
+          setTransactions([]);
+        }
       });
   }, [pieMonth]);
 
@@ -46,7 +50,7 @@ export default function Piechart() {
       series: [
         {
           name: "Expenses",
-          data: transactions ? transactions : []
+          data: transactions
         }
       ]
     });
@@ -55,7 +59,8 @@ export default function Piechart() {
   return (
     <div>
       <MonthOptions month={pieMonth} setMonth={setPieMonth} />
-      <div id="Expenses-graph"> PIE CHART</div>
+      {transactions.length === 0 && <div> No Data</div>}
+      <div id="Expenses-graph"></div>
     </div>
   );
 }
