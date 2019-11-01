@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 import PieChartIcon from "@material-ui/icons/PieChart";
