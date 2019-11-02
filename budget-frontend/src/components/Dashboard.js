@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
+import moment from "moment";
 import axios from "axios";
 import Navbar from "./Navbar";
 import CreateGoal from "./CreateGoal";
 import DashboardProfile from "./DashboardProfile";
 import SavedGoal from "./SavedGoal";
-import HealthBar from "./HealthBar";
-import CoinCount from "./CoinCount";
 import ProgressBar from "./ProgressBar";
+import { Grid } from "@material-ui/core";
 
+import "../styles/Dashboard.sass";
 export default function Dashboard(props) {
   props.checkLogInStatus();
   const [newGoal, setNewGoal] = useState({
@@ -70,52 +71,56 @@ export default function Dashboard(props) {
   };
 
   return (
-    <div>
-      <h1>Welcome to Dashboard</h1>
+    <div className="Dashboard">
+      {/* <Grid
+        container
+        direction="column"
+        justify="space-between"
+        alignItems="center"
+      > */}
       <DashboardProfile
         user={props.logInStatus.user}
-        logOutClick={() => props.logOutClick()}
-      />
-      <HealthBar
         hp={props.logInStatus.user.hp}
         minusHP={props.minusHP}
         resetHP={props.resetHP}
-      />
-      <CoinCount
         coins={props.logInStatus.user.coins}
         updateCoins={props.updateCoins}
       />
+
+      <h1 class="date-now">{moment().format("MMMM Do, YYYY")}</h1>
       <ProgressBar />
 
-      <h3>Saving Goals:</h3>
-      <CreateGoal
-        newGoal={newGoal}
-        setNewGoal={setNewGoal}
-        refreshGoals={props.refreshGoals}
-        setRefreshGoals={props.setRefreshGoals}
-      />
-      <div style={{ WebkitOverflowScrolling: "auto" }}>
-        {newGoal.goals.length > 0 &&
-          newGoal.goals.map(goal => (
-            <SavedGoal
-              newGoal={newGoal}
-              setNewGoal={setNewGoal}
-              refreshGoals={props.refreshGoals}
-              setRefreshGoals={props.setRefreshGoals}
-              key={goal.id}
-              id={goal.id}
-              name={goal.name}
-              amount={goal.amount}
-              startDate={goal.start_date}
-              endDate={goal.end_date}
-              onDelete={data => deleteGoal(data)}
-              editRequest={data => editGoal(data)}
-              findGoalIndexById={findGoalIndexById}
-              dailyTarget={goal.target_per_day}
-            />
-          ))}
-      </div>
-
+      <section className="goals">
+        <h3>Saving Goals:</h3>
+        <CreateGoal
+          newGoal={newGoal}
+          setNewGoal={setNewGoal}
+          refreshGoals={props.refreshGoals}
+          setRefreshGoals={props.setRefreshGoals}
+        />
+        <div style={{ WebkitOverflowScrolling: "touch" }}>
+          {newGoal.goals.length > 0 &&
+            newGoal.goals.map(goal => (
+              <SavedGoal
+                newGoal={newGoal}
+                setNewGoal={setNewGoal}
+                refreshGoals={props.refreshGoals}
+                setRefreshGoals={props.setRefreshGoals}
+                key={goal.id}
+                id={goal.id}
+                name={goal.name}
+                amount={goal.amount}
+                startDate={goal.start_date}
+                endDate={goal.end_date}
+                onDelete={data => deleteGoal(data)}
+                editRequest={data => editGoal(data)}
+                findGoalIndexById={findGoalIndexById}
+                dailyTarget={goal.target_per_day}
+              />
+            ))}
+        </div>
+      </section>
+      {/* </Grid> */}
       <Navbar />
     </div>
   );

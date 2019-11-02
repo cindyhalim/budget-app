@@ -27,7 +27,7 @@ export default function CreateGoal(props) {
   };
 
   return (
-    <Card>
+    <Card className="goal-card">
       <CardContent>
         {!active && (
           <div onClick={() => setActive(!active)}>

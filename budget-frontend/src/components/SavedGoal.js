@@ -32,7 +32,7 @@ export default function SavedGoal(props) {
 
   return (
     <div>
-      <Card>
+      <Card className="goal-card">
         {goalClicked.status !== "edit" && (
           <CardContent>
             <div

@@ -9,13 +9,16 @@ export default function HealthBar(props) {
 
   return (
     <div>
-      <LinearProgress
-        value={completed}
-        style={{ height: "30px", width: "150px", borderRadius: 20 }}
-        variant="determinate"
-        color="secondary"
-      />
-      <button
+      <section className="health">
+        <LinearProgress
+          value={completed}
+          className="health-bar"
+          variant="determinate"
+          color="secondary"
+        />
+        <p className="hp">HP</p>
+      </section>
+      {/* <button
         onClick={() => {
           props.minusHP(20);
         }}
@@ -28,7 +31,7 @@ export default function HealthBar(props) {
         }}
       >
         Reset Health
-      </button>
+      </button> */}
     </div>
   );
 }

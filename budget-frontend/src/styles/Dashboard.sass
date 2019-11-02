@@ -1,0 +1,38 @@
+@import "./variables/variables.sass"
+@import "./variables/mixins.sass"
+
+.Dashboard
+
+  height: 100vh
+  .user-profile
+    padding: 5vh 2vh
+    .user
+      display: flex
+      align-items: center
+      .avatar
+        width: 80px
+        height: 80px
+      .user-name
+        font-size: 35px
+    .user-health
+      margin-left: 20px
+      width: 100%
+      .health
+        display: flex
+        align-items: center
+        .health-bar
+          height: 10px
+          width: 100%
+        .hp
+          margin: 0
+          padding: 0 5px
+          font-size: 12px
+  .date-now
+    border: 1px solid red
+    font-size: 30px
+  .goals
+    padding: 2vh
+    h3
+      font-size: 20px
+    .goal-card
+      margin: 2vh 0
