@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-// import Highcharts from "highcharts";
+import { Progress } from "reactstrap";
 import axios from "axios";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import { lighten, makeStyles, withStyles } from "@material-ui/core/styles";
 
 const ProgressBar = () => {
   const [total, setTotal] = useState([]);
@@ -25,26 +23,24 @@ const ProgressBar = () => {
       });
   }, []);
 
-  const BorderLinearProgress = withStyles({
-    root: {
-      height: 30,
-      margin: 20,
-      borderRadius: 20,
-      backgroundColor: lighten("#949494", 0.5)
-    },
-    bar: {
-      borderRadius: 20,
-      backgroundColor: "#16e050"
-    }
-  })(LinearProgress);
-
   return (
     <div>
-      <BorderLinearProgress
-        variant="determinate"
-        color="secondary"
-        value={(total / budget) * 100}
-      />
+      <Progress multi>
+        <Progress animated bar color="success" value={(total / budget) * 100}>
+          {total}
+        </Progress>
+        <Progress
+          animated
+          bar
+          color="warning"
+          value={(savingGoal / budget) * 100}
+        >
+          {savingGoal}
+        </Progress>
+        <Progress animated bar color="danger" value="20">
+          UH...OH BRUH
+        </Progress>
+      </Progress>
     </div>
   );
 };
