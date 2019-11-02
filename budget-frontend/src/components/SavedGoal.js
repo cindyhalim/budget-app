@@ -39,7 +39,9 @@ export default function SavedGoal(props) {
               onClick={() => setGoalClicked({ status: !goalClicked.status })}
             >
               <h2>Goal: {props.name}</h2>
-              <h4>${props.dailyTarget}/day</h4>
+              <h4>
+                {props.completed ? "Completed" : `$${props.dailyTarget}/day`}
+              </h4>
             </div>
             <div style={{ display: goalClicked.status ? "block" : "none" }}>
               <h4>Total: {props.amount}</h4>

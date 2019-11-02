@@ -99,6 +99,7 @@ export default function Dashboard(props) {
               setNewGoal={setNewGoal}
               refreshGoals={props.refreshGoals}
               setRefreshGoals={props.setRefreshGoals}
+              completed={goal.completed}
               key={goal.id}
               id={goal.id}
               name={goal.name}
