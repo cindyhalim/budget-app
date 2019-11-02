@@ -3,9 +3,19 @@ class GoalsController < ApplicationController
     user = User.find_by(id: session[:user_id])
     @goals = user.goals.where('goal_type = "saving" AND end_date >= ?', DateTime.now.to_date) 
     @sorted_goals = @goals.order('created_at DESC')
+    @goals_with_target = @sorted_goals.map do |goal|
+      {
+        id: goal.id, 
+        start_date: goal.start_date, 
+        end_date: goal.end_date, 
+        amount: goal.amount, 
+        name: goal.name, 
+        target_per_day: ((goal.amount/(goal.end_date.to_date - goal.start_date.to_date).to_i).ceil)
+      }
+    end
 
     render json: {
-      goals: @sorted_goals
+      goals: @goals_with_target
     }
   end
 
@@ -19,7 +29,11 @@ class GoalsController < ApplicationController
     if user.id == goal.user_id
       render json: {
         status: :created,
-        goal: {id: goal.id, start_date: goal.start_date, end_date: goal.end_date, amount: goal.amount, name: goal.name}
+        goal: {id: goal.id, 
+        start_date: goal.start_date, 
+        end_date: goal.end_date, 
+        amount: goal.amount, 
+        name: goal.name}
       }
     else 
       render json: { status: 500 }
