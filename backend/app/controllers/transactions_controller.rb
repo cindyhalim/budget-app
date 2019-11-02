@@ -44,6 +44,10 @@ class TransactionsController < ApplicationController
           }
         end
           render json: {transactions: @bar1}
+
+      elsif params[:type] === "transactions"
+        @category_transactions = user.transactions.where('category = ? AND transaction_date BETWEEN ? AND ?', params[:category],Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day)
+        render json: {category_transactions: @category_transactions}
       end
     end
   end

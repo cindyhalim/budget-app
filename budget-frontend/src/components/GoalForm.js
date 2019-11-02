@@ -8,7 +8,6 @@ import {
 } from "@material-ui/pickers";
 
 export default function GoalForm(props) {
-  console.log("this is props in goal", props);
   const [formFields, setFormFields] = useState({
     id: props.id,
     name: props.name,
