@@ -19,13 +19,13 @@ export default function SavedGoal(props) {
       ...newState
     }));
 
-    const index = props.findGoalIndexById(props.id, props.newGoal.goals);
-    const updatedGoals = [...props.newGoal.goals];
-    updatedGoals.splice(index, 1, newState);
-    props.setNewGoal({
-      ...props.newGoal,
-      goals: updatedGoals
-    });
+    // const index = props.findGoalIndexById(props.id, props.newGoal.goals);
+    // const updatedGoals = [...props.newGoal.goals];
+    // updatedGoals.splice(index, 1, newState);
+    // props.setNewGoal({
+    //   ...props.newGoal,
+    //   goals: updatedGoals
+    // });
 
     props.editRequest(newState);
   };

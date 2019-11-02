@@ -9,7 +9,6 @@ import CoinCount from "./CoinCount";
 import ProgressBar from "./ProgressBar";
 
 export default function Dashboard(props) {
-  console.log("props in dashboard", props);
   props.checkLogInStatus();
   const [newGoal, setNewGoal] = useState({
     createGoal: {
@@ -52,18 +51,22 @@ export default function Dashboard(props) {
   };
 
   const editGoal = data => {
-    axios.put(
-      `http://localhost:3000/goals/${data.id}`,
-      {
-        goal: {
-          start_date: new Date(data.start_date),
-          end_date: new Date(data.end_date),
-          amount: parseInt(data.amount),
-          name: data.name
-        }
-      },
-      { withCredentials: true }
-    );
+    axios
+      .put(
+        `http://localhost:3000/goals/${data.id}`,
+        {
+          goal: {
+            start_date: new Date(data.start_date),
+            end_date: new Date(data.end_date),
+            amount: parseInt(data.amount),
+            name: data.name
+          }
+        },
+        { withCredentials: true }
+      )
+      .then(() => {
+        props.setRefreshGoals(!props.refreshGoals);
+      });
   };
 
   return (
