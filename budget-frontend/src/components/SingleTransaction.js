@@ -1,5 +1,8 @@
 import React from "react";
 import { Card, CardContent } from "@material-ui/core";
+import moment from "moment";
+
+import "../styles/SingleTransaction.sass";
 
 const SingleTransaction = ({ amount, location, transactionDate, category }) => {
   return (
@@ -7,9 +10,16 @@ const SingleTransaction = ({ amount, location, transactionDate, category }) => {
       <Card>
         <CardContent className="transaction-card">
           <h4>{location}</h4>
-          <p>${amount}</p>
-          <p>{transactionDate}</p>
-          <p>{category}</p>
+          <div className="transaction-details">
+            <div className="transaction-labels">
+              <p>Amount:</p>
+              <p>Date:</p>
+            </div>
+            <div className="transaction-content">
+              <p>${amount}</p>
+              <p>{moment(transactionDate).format("MMMM Do YYYY, h:mm:ss a")}</p>
+            </div>
+          </div>
         </CardContent>
       </Card>
     </div>
