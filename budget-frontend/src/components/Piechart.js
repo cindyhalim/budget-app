@@ -41,6 +41,15 @@ export default function Piechart() {
       },
       plotOptions: {
         pie: {
+          allowPointSelect: true,
+          cursor: "pointer",
+          point: {
+            events: {
+              click: function(event) {
+                console.log(event.point.name);
+              }
+            }
+          },
           dataLabels: {
             format: "{point.name}: {point.percentage:.1f} %"
           },
