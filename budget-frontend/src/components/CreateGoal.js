@@ -21,20 +21,6 @@ export default function CreateGoal(props) {
         },
         { withCredentials: true }
       )
-      .then(res => {
-        const newGoalArray = [...props.newGoal.goals];
-        newGoalArray.unshift({
-          id: res.data.goal.id,
-          amount: res.data.goal.amount,
-          name: res.data.goal.name,
-          start_date: new Date(res.data.goal.start_date),
-          end_date: new Date(res.data.goal.end_date)
-        });
-        props.setNewGoal({
-          ...props.newGoal,
-          goals: newGoalArray
-        });
-      })
       .then(() => {
         setActive(!active);
       });
