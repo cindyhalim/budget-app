@@ -5,7 +5,6 @@ import SingleTransaction from "./SingleTransaction";
 import "../styles/CategoryTransaction.sass";
 
 const CategoryTransaction = ({ category, pieMonth }) => {
-  console.log("CATEGORYYY", category);
   const [allTransactions, setAllTransactions] = useState([]);
 
   useEffect(() => {

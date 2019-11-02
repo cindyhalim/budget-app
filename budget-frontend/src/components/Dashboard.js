@@ -7,6 +7,7 @@ import SavedGoal from "./SavedGoal";
 import HealthBar from "./HealthBar";
 import CoinCount from "./CoinCount";
 import ProgressBar from "./ProgressBar";
+import MonthlyProgressBar from "./MonthlyProgressBar";
 
 export default function Dashboard(props) {
   props.checkLogInStatus();
@@ -86,6 +87,7 @@ export default function Dashboard(props) {
         updateCoins={props.updateCoins}
       />
       <ProgressBar />
+      <MonthlyProgressBar />
 
       <h3>Saving Goals:</h3>
       <CreateGoal
