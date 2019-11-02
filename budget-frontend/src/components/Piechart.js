@@ -3,13 +3,15 @@ import axios from "axios";
 import Highcharts from "highcharts";
 import MonthOptions from "./MonthOptions";
 import CategoryTransaction from "./CategoryTransaction";
+import { useFormControl } from "@material-ui/core/FormControl";
 
-export default function Piechart({ setCategory, category }) {
+export default function Piechart() {
   const [transactions, setTransactions] = useState([]);
   const [monthTotal, setMonthTotal] = useState(0);
   const [pieMonth, setPieMonth] = useState(
     new Date().toLocaleString("default", { month: "long" })
   );
+  const [category, setCategory] = useState("All Transactions");
 
   useEffect(() => {
     axios
@@ -47,7 +49,11 @@ export default function Piechart({ setCategory, category }) {
           point: {
             events: {
               click: function(event) {
-                setCategory(event.point.name);
+                setCategory(prev =>
+                  prev === event.point.name
+                    ? "All Transactions"
+                    : event.point.name
+                );
               }
             }
           },
@@ -82,7 +88,7 @@ export default function Piechart({ setCategory, category }) {
           );
         }
       },
-      colors: ["#FAD331", "#96D5DF", "#1BA8BB", "#C5D930"],
+      colors: ["#FAD331", "#64b5f6", "#b39ddb", "#ef5350"],
       series: [
         {
           name: "Expenses",
@@ -91,6 +97,8 @@ export default function Piechart({ setCategory, category }) {
       ]
     });
   }, [transactions]);
+
+  // useEffect(() => {}, [category]);
 
   return (
     <div>

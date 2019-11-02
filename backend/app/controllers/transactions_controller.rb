@@ -27,7 +27,11 @@ class TransactionsController < ApplicationController
           budget: (@budget.last.amount/Time.days_in_month(Date::MONTHNAMES.index(params[:month]))).round(2).to_i,
           toSave: @to_save_amount
         }
-        
+
+      elsif params[:type] === "alltransactions"
+        @alltransactions = user.transactions.where('transaction_date BETWEEN ? AND ?', Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day)
+        render json: {allTransactions: @alltransactions} 
+
       elsif params[:type] === "monthlyprogress"
         @budget = user.goals.where('goal_type = "budget"')
         @total = (@transactions.map do |transaction| 
