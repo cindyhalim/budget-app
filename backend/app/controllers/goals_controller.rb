@@ -3,7 +3,17 @@ class GoalsController < ApplicationController
     user = User.find_by(id: session[:user_id])
     @goals = user.goals.where('goal_type = "saving" AND end_date >= ?', DateTime.now.to_date) 
     @sorted_goals = @goals.order('created_at DESC')
+    @budget = user.goals.where('goal_type = "budget"')
+    pp Date::MONTHNAMES[DateTime.now.month]
+    @budget_per_day = (@budget.last.amount/Time.days_in_month(Date::MONTHNAMES[DateTime.now.month])).round(2).to_i
+    
     @goals_with_target = @sorted_goals.map do |goal|
+      
+      if DateTime.now.to_date > goal.start_date
+        pp "HERE"
+        pp @budget
+        pp @budget_per_day
+      end
       {
         id: goal.id, 
         start_date: goal.start_date, 
