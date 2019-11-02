@@ -64,7 +64,6 @@ export default function NewTransaction(props) {
               margin="normal"
               label="Date picker inline"
               value={props.transactionData.transaction_date}
-              minDate={new Date(Date.now())}
               onChange={props.onInputDate}
               KeyboardButtonProps={{
                 "aria-label": "change date"
