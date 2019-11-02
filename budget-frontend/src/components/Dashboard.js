@@ -4,10 +4,15 @@ import Navbar from "./Navbar";
 import CreateGoal from "./CreateGoal";
 import DashboardProfile from "./DashboardProfile";
 import SavedGoal from "./SavedGoal";
+<<<<<<< HEAD
 import HealthBar from "./HealthBar";
 import CoinCount from "./CoinCount";
+=======
+import ProgressBar from "./ProgressBar";
+>>>>>>> 6bc9ae5de27aef88dc2d9a0cb2ce223f064331f7
 
 export default function Dashboard(props) {
+  console.log("props in dashboard", props);
   props.checkLogInStatus();
   const [newGoal, setNewGoal] = useState({
     createGoal: {
@@ -34,7 +39,7 @@ export default function Dashboard(props) {
       .then(res => {
         setNewGoal({ ...newGoal, goals: res.data.goals });
       });
-  }, []);
+  }, [props.refreshGoals]);
 
   const deleteGoal = data => {
     axios
@@ -71,17 +76,28 @@ export default function Dashboard(props) {
         user={props.logInStatus.user}
         logOutClick={() => props.logOutClick()}
       />
+<<<<<<< HEAD
       <HealthBar hp={props.logInStatus.user.hp} />
       <CoinCount coins={props.logInStatus.user.coins} />
+=======
+      <ProgressBar />
+>>>>>>> 6bc9ae5de27aef88dc2d9a0cb2ce223f064331f7
 
       <h3>Saving Goals:</h3>
-      <CreateGoal newGoal={newGoal} setNewGoal={setNewGoal} />
+      <CreateGoal
+        newGoal={newGoal}
+        setNewGoal={setNewGoal}
+        refreshGoals={props.refreshGoals}
+        setRefreshGoals={props.setRefreshGoals}
+      />
       <div style={{ WebkitOverflowScrolling: "auto" }}>
         {newGoal.goals.length > 0 &&
           newGoal.goals.map(goal => (
             <SavedGoal
               newGoal={newGoal}
               setNewGoal={setNewGoal}
+              refreshGoals={props.refreshGoals}
+              setRefreshGoals={props.setRefreshGoals}
               key={goal.id}
               id={goal.id}
               name={goal.name}
@@ -91,6 +107,7 @@ export default function Dashboard(props) {
               onDelete={data => deleteGoal(data)}
               editRequest={data => editGoal(data)}
               findGoalIndexById={findGoalIndexById}
+              dailyTarget={goal.target_per_day}
             />
           ))}
       </div>
