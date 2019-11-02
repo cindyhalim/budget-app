@@ -42,6 +42,7 @@ export default function Login(props) {
       <h1 className="title">Login</h1>
       <form onSubmit={event => handleSubmit(event)}>
         <TextField
+          className="textinput"
           type="email"
           name="email"
           placeholder="Email"
@@ -49,6 +50,7 @@ export default function Login(props) {
           required
         />
         <TextField
+          className="textinput"
           type="password"
           name="password"
           placeholder="Password"
