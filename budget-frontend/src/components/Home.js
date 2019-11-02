@@ -8,12 +8,16 @@ export default function Home(props) {
     <div className="Home">
       <h1 className="title">Budgie</h1>
       <img src="pig.png" className="logo"></img>
-      <Button variant="contained" color="primary" className="button">
-        <Link to="/login">Login</Link>
-      </Button>
-      <Button variant="contained" color="" className="button">
-        <Link to="/register">Register</Link>
-      </Button>
+      <Link to="/login">
+        <Button variant="contained" color="primary" className="button">
+          login
+        </Button>
+      </Link>
+      <Link to="/register">
+        <Button variant="contained" color="" className="button">
+          Register
+        </Button>
+      </Link>
     </div>
   );
 }
