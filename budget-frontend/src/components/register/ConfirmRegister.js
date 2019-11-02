@@ -2,11 +2,11 @@ import React from "react";
 
 export default function ConfirmRegister(props) {
   return (
-    <div>
-      <h1>Confirm</h1>
-      <button type="submit" onClick={props.submit}>
-        Submit
-      </button>
+    <div className="ConfirmRegister">
+      <h1 className="title">Confirm</h1>
+      <p>Click me to submit</p>
+      <img src="pig.png" onClick={props.submit}></img>
+      {props.error && <p class="error-message">{props.error}</p>}
     </div>
   );
 }

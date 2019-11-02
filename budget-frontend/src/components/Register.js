@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
+
 import { useHistory } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
+import MobileStepper from "@material-ui/core/MobileStepper";
 import UserRegister from "./register/UserRegister";
 import BudgetRegister from "./register/BudgetRegister";
 import PlaidRegister from "./register/PlaidRegister";
 import ConfirmRegister from "./register/ConfirmRegister";
+
+import "../styles/Register.sass";
 
 export default function Register(props) {
   const [newUser, setNewUser] = useState({
@@ -15,6 +19,17 @@ export default function Register(props) {
     password_confirmation: ""
   });
   const [budget, setBudget] = useState(0);
+  const [error, setError] = useState("");
+  const [activeStep, setActiveStep] = React.useState(0);
+
+  const handleNextSwipe = () => {
+    setActiveStep(prevActiveStep => prevActiveStep + 1);
+  };
+
+  const handleBackSwipe = () => {
+    setActiveStep(prevActiveStep => prevActiveStep - 1);
+  };
+
   const history = useHistory();
 
   const handleChange = event => {
@@ -57,16 +72,37 @@ export default function Register(props) {
           });
       })
       .catch(err => {
-        console.log("registration error", err);
+        if (err) {
+          if (err.response.status === 422) {
+            setError("Please ensure you have filled out all text fields");
+          } else if (err.response.status === 500) {
+            setError("Sorry, there is something wrong with our server");
+          }
+        }
       });
   };
 
   return (
-    <SwipeableViews>
-      <UserRegister onChange={handleChange} />
-      <BudgetRegister onChange={event => setBudget(event.target.value)} />
-      <PlaidRegister />
-      <ConfirmRegister submit={handleSubmit} />
-    </SwipeableViews>
+    <div className="Register">
+      <div className="swipe-card">
+        <SwipeableViews
+          onChangeIndex={(index, indexLatest) => {
+            index > indexLatest ? handleNextSwipe() : handleBackSwipe();
+          }}
+        >
+          <UserRegister onChange={handleChange} />
+          <BudgetRegister onChange={event => setBudget(event.target.value)} />
+          <PlaidRegister />
+          <ConfirmRegister submit={handleSubmit} error={error} />
+        </SwipeableViews>
+        <MobileStepper
+          className="register-stepper"
+          variant="dots"
+          steps={4}
+          position="static"
+          activeStep={activeStep}
+        />
+      </div>
+    </div>
   );
 }

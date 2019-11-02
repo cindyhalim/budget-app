@@ -42,16 +42,21 @@ export default function Login(props) {
       <h1 className="title">Login</h1>
       <form onSubmit={event => handleSubmit(event)}>
         <TextField
+          label="Email"
+          maxLength="20"
+          margin="normal"
+          className="textinput"
           type="email"
           name="email"
-          placeholder="Email"
           onChange={event => handleChange(event)}
           required
         />
         <TextField
+          label="Password"
+          margin="normal"
+          className="textinput"
           type="password"
           name="password"
-          placeholder="Password"
           onChange={event => handleChange(event)}
           required
         />
