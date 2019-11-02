@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Highcharts from "highcharts";
 import MonthOptions from "./MonthOptions";
+import CategoryTransaction from "./CategoryTransaction";
 
-export default function Piechart() {
+export default function Piechart({ setCategory, category }) {
   const [transactions, setTransactions] = useState([]);
   const [monthTotal, setMonthTotal] = useState(0);
   const [pieMonth, setPieMonth] = useState(
@@ -46,7 +47,7 @@ export default function Piechart() {
           point: {
             events: {
               click: function(event) {
-                console.log(event.point.name);
+                setCategory(event.point.name);
               }
             }
           },
@@ -71,6 +72,7 @@ export default function Piechart() {
       <MonthOptions month={pieMonth} setMonth={setPieMonth} />
       {transactions.length === 0 && <div> No Data</div>}
       <div id="Expenses-graph"></div>
+      <CategoryTransaction category={category} pieMonth={pieMonth} />
     </div>
   );
 }
