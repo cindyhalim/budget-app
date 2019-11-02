@@ -5,7 +5,18 @@ class GoalsController < ApplicationController
     @sorted_goals = @goals.order('created_at DESC')
     @budget = user.goals.where('goal_type = "budget"')
     @budget_per_day = (@budget.last.amount/Time.now.end_of_month.day).round(2).to_i
+    @database_last_checked = User.select("date_last_checked").where(id: session[:user_id])
+    pp @database_last_checked[0].date_last_checked
+    pp Date.today.at_beginning_of_month.prev_month
     
+    if DateTime.now.to_date > @database_last_checked[0].date_last_checked && DateTime.now.to_date.month != @database_last_checked[0].date_last_checked.month
+      @transactions_for_last_month = user.transactions.where("transaction_date BETWEEN ? AND ?", Date.today.at_beginning_of_month.prev_month, Date.today.at_end_of_month.next_month).sum(:amount)
+      if @transactions_for_last_month > user.goals.where('goal_type = "budget" AND start_date BETWEEN ? AND ? ',Date.today.at_beginning_of_month.prev_month, Date.today.at_end_of_month.next_month).last.amount
+        pp "HELLO"
+      else
+        pp "LESSSSSSSS TAHADLISHVKFSB:FBFSJBV:FBFBJ>FB:LFBJNFDL:JKBNFD>BNF>JF>B"
+      end
+    end
     
     @goals_with_target = @sorted_goals.map do |goal|
       
@@ -48,7 +59,8 @@ class GoalsController < ApplicationController
         amount: goal.amount, 
         name: goal.name, 
         target_per_day: @target_for_day,
-        completed: @is_completed
+        completed: @is_completed,
+        met_budget: @exceeded_budget
       }
     end
 
@@ -58,7 +70,6 @@ class GoalsController < ApplicationController
   end
 
   def create
-    pp "I AM HEREEEEEEE"
     pp session[:user_id]
     user = User.find_by(id: session[:user_id])
     pp user
