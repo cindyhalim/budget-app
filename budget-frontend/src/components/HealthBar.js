@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 export default function HealthBar(props) {
-  console.log(props.hp);
   const [completed, setCompleted] = useState();
   useEffect(() => {
     setCompleted(props.hp);

@@ -64,23 +64,21 @@ export default function App() {
       <Switch>
         <Route
           path="/login"
-          render={props => (
+          render={() => (
             <Login handleLogin={handleLogin} logInStatus={logInStatus} />
           )}
         />
         <Route
           path="/register"
-          render={props => <Register {...props} handleLogin={handleLogin} />}
+          render={() => <Register handleLogin={handleLogin} />}
         />
         <Route
           path="/dashboard"
-          render={props => (
+          render={() => (
             <Dashboard
-              {...props}
               checkLogInStatus={checkLogInStatus}
               handleLogout={handleLogout}
               logInStatus={logInStatus}
-              logOutClick={() => logOutClick()}
             />
           )}
         />

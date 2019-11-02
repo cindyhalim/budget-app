@@ -5,6 +5,7 @@ import CreateGoal from "./CreateGoal";
 import DashboardProfile from "./DashboardProfile";
 import SavedGoal from "./SavedGoal";
 import HealthBar from "./HealthBar";
+import CoinCount from "./CoinCount";
 
 export default function Dashboard(props) {
   props.checkLogInStatus();
@@ -71,6 +72,7 @@ export default function Dashboard(props) {
         logOutClick={() => props.logOutClick()}
       />
       <HealthBar hp={props.logInStatus.user.hp} />
+      <CoinCount coins={props.logInStatus.user.coins} />
 
       <h3>Saving Goals:</h3>
       <CreateGoal newGoal={newGoal} setNewGoal={setNewGoal} />
