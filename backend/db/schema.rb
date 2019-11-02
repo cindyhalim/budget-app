@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_24_223044) do
+ActiveRecord::Schema.define(version: 2019_11_01_235336) do
 
   create_table "goals", force: :cascade do |t|
     t.datetime "start_date"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2019_10_24_223044) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "hp"
   end
 
   add_foreign_key "goals", "users"
