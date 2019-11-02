@@ -1,42 +1,42 @@
 import React from "react";
+import { TextField } from "@material-ui/core";
 
 export default function UserRegister(props) {
   return (
     <div>
-      <form>
-        User Name:
-        <input
+      <h1 className="title">Get Started</h1>
+      <form className="userForm">
+        <TextField
+          label="Name"
           type="text"
           name="userName"
+          className="textinput"
           onChange={props.onChange}
-          placeholder="Name"
           required
         />
-        <br />
-        Email:
-        <input
+        <TextField
           type="email"
           name="email"
+          className="textinput"
           onChange={props.onChange}
-          placeholder="Email"
+          label="Email"
           required
         />
-        <br />
-        Password:
-        <input
+
+        <TextField
           type="password"
           name="password"
+          className="textinput"
           onChange={props.onChange}
-          placeholder="Password"
+          label="Password"
           required
         />
-        <br />
-        Confirm Password:
-        <input
+        <TextField
           type="password"
           name="password_confirmation"
+          className="textinput"
           onChange={props.onChange}
-          placeholder="Confirm Password"
+          label="Confirm Password"
           required
         />
       </form>
