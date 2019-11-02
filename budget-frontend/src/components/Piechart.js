@@ -3,13 +3,15 @@ import axios from "axios";
 import Highcharts from "highcharts";
 import MonthOptions from "./MonthOptions";
 import CategoryTransaction from "./CategoryTransaction";
+import { useFormControl } from "@material-ui/core/FormControl";
 
-export default function Piechart({ setCategory, category }) {
+export default function Piechart() {
   const [transactions, setTransactions] = useState([]);
   const [monthTotal, setMonthTotal] = useState(0);
   const [pieMonth, setPieMonth] = useState(
     new Date().toLocaleString("default", { month: "long" })
   );
+  const [category, setCategory] = useState("All Transactions");
 
   useEffect(() => {
     axios
@@ -47,7 +49,11 @@ export default function Piechart({ setCategory, category }) {
           point: {
             events: {
               click: function(event) {
-                setCategory(event.point.name);
+                setCategory(prev =>
+                  prev === event.point.name
+                    ? "All Transactions"
+                    : event.point.name
+                );
               }
             }
           },
@@ -58,6 +64,31 @@ export default function Piechart({ setCategory, category }) {
           showInLegend: true
         }
       },
+      legend: {
+        enabled: true,
+        floating: false,
+        borderWidth: 0,
+        align: "center", // Moving the legend to the right of the donut chart
+        layout: "vertical", // Display in columns
+        verticalAlign: "bottom",
+        itemMarginTop: 2, // Space between each category in the legend
+        itemMarginBottom: 2,
+        itemStyle: {
+          lineHeight: "35px" // Aligning icons and text
+        },
+        useHTML: true,
+        labelFormatter: function() {
+          // Includes cat & price in legend
+          return (
+            '<span style="display:block; margin-top:-10px; position:relative; width:210px;border-bottom:1px solid #DCDCDC;">&nbsp<span style="font-weight:normal; vertical-align:super;">' +
+            this.name +
+            ' </span><span style="font-weight:normal; vertical-align:super; position:absolute; right:0px;">$' +
+            this.y +
+            "<br/></span></span>"
+          );
+        }
+      },
+      colors: ["#FAD331", "#64b5f6", "#b39ddb", "#ef5350"],
       series: [
         {
           name: "Expenses",
@@ -66,6 +97,8 @@ export default function Piechart({ setCategory, category }) {
       ]
     });
   }, [transactions]);
+
+  // useEffect(() => {}, [category]);
 
   return (
     <div>

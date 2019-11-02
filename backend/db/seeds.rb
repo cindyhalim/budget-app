@@ -10,8 +10,8 @@
 user1 = User.create({name: "Ahana", email: "test@test.com", password: "password"})
 
 #Recreation November
-user1.transactions.create({amount: 10, category: "Recreation", location: "Toronto", transaction_date: "2019-11-01T10:35:17.552Z"})
-user1.transactions.create({amount: 15, category: "Recreation", location: "Toronto", transaction_date: "2019-11-01T10:05:55.552Z"})
+user1.transactions.create({amount: 10, category: "Recreation", location: "The Rec Room, Toronto", transaction_date: "2019-11-01T10:35:17.552Z"})
+user1.transactions.create({amount: 15, category: "Recreation", location: "Joe Rockheads, Toronto", transaction_date: "2019-11-01T10:05:55.552Z"})
 
 #Recreation October
 user1.transactions.create({amount: 10, category: "Recreation", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})

@@ -6,12 +6,9 @@ import Navbar from "./Navbar";
 
 export default function Analytics() {
   const [chart, setChart] = useState("Current Breakdown");
-  const [category, setCategory] = useState("");
 
   const chartDropdown = {
-    "Current Breakdown": (
-      <Piechart setCategory={setCategory} category={category} />
-    ),
+    "Current Breakdown": <Piechart />,
     "Monthly Comparison": <Barchart />
   };
   return (
