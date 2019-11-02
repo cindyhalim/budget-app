@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Piechart from "./Piechart";
 import Barchart from "./Barchart";
-
+import MonthlyProgressBar from "./MonthlyProgressBar";
 import Navbar from "./Navbar";
 
 const chartDropdown = {
@@ -13,6 +13,7 @@ export default function Analytics() {
   const [chart, setChart] = useState("Current Breakdown");
   return (
     <div>
+      <MonthlyProgressBar />
       <select
         name=""
         id="select"
