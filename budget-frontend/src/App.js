@@ -15,6 +15,7 @@ export default function App() {
     status: "not_logged_in",
     user: ""
   });
+  const [refreshGoals, setRefreshGoals] = useState(false);
 
   const handleLogin = data => {
     setLogInStatus({
@@ -74,9 +75,10 @@ export default function App() {
         />
         <Route
           path="/dashboard"
-          render={props => (
+          render={() => (
             <Dashboard
-              {...props}
+              refreshGoals={refreshGoals}
+              setRefreshGoals={setRefreshGoals}
               checkLogInStatus={checkLogInStatus}
               handleLogout={handleLogout}
               logInStatus={logInStatus}

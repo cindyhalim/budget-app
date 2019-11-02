@@ -53,6 +53,8 @@ export default function CreateGoal(props) {
             <GoalForm
               active={active}
               setActive={setActive}
+              refreshGoals={props.refreshGoals}
+              setRefreshGoals={props.setRefreshGoals}
               name={props.newGoal.createGoal.name}
               amount={props.newGoal.createGoal.amount}
               start_date={props.newGoal.createGoal.start_date}

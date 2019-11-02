@@ -7,6 +7,7 @@ import SavedGoal from "./SavedGoal";
 import ProgressBar from "./ProgressBar";
 
 export default function Dashboard(props) {
+  console.log("props in dashboard", props);
   props.checkLogInStatus();
   const [newGoal, setNewGoal] = useState({
     createGoal: {
@@ -33,7 +34,7 @@ export default function Dashboard(props) {
       .then(res => {
         setNewGoal({ ...newGoal, goals: res.data.goals });
       });
-  }, []);
+  }, [props.refreshGoals]);
 
   const deleteGoal = data => {
     axios
@@ -73,13 +74,20 @@ export default function Dashboard(props) {
       <ProgressBar />
 
       <h3>Saving Goals:</h3>
-      <CreateGoal newGoal={newGoal} setNewGoal={setNewGoal} />
+      <CreateGoal
+        newGoal={newGoal}
+        setNewGoal={setNewGoal}
+        refreshGoals={props.refreshGoals}
+        setRefreshGoals={props.setRefreshGoals}
+      />
       <div style={{ WebkitOverflowScrolling: "auto" }}>
         {newGoal.goals.length > 0 &&
           newGoal.goals.map(goal => (
             <SavedGoal
               newGoal={newGoal}
               setNewGoal={setNewGoal}
+              refreshGoals={props.refreshGoals}
+              setRefreshGoals={props.setRefreshGoals}
               key={goal.id}
               id={goal.id}
               name={goal.name}
@@ -89,6 +97,7 @@ export default function Dashboard(props) {
               onDelete={data => deleteGoal(data)}
               editRequest={data => editGoal(data)}
               findGoalIndexById={findGoalIndexById}
+              dailyTarget={goal.target_per_day}
             />
           ))}
       </div>
