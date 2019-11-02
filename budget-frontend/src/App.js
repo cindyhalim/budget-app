@@ -8,7 +8,7 @@ import Dashboard from "./components/Dashboard";
 import Onboarding from "./components/Onboarding";
 import Analytics from "./components/Analytics";
 import Profile from "./components/Profile";
-import Leaderboard from "./components/Leaderboard";
+import Store from "./components/Store";
 
 export default function App() {
   const [logInStatus, setLogInStatus] = useState({
@@ -59,7 +59,7 @@ export default function App() {
       })
       .catch(err => console.log("check log in error", err));
   };
-
+  console.log("USER STATE", logInStatus);
   return (
     <Router>
       <Switch>
@@ -82,6 +82,33 @@ export default function App() {
               checkLogInStatus={checkLogInStatus}
               handleLogout={handleLogout}
               logInStatus={logInStatus}
+              updateCoins={amt =>
+                setLogInStatus({
+                  ...logInStatus,
+                  user: {
+                    ...logInStatus.user,
+                    coins: amt
+                  }
+                })
+              }
+              minusHP={amt =>
+                setLogInStatus({
+                  ...logInStatus,
+                  user: {
+                    ...logInStatus.user,
+                    hp: logInStatus.user.hp - amt
+                  }
+                })
+              }
+              resetHP={amt =>
+                setLogInStatus({
+                  ...logInStatus,
+                  user: {
+                    ...logInStatus.user,
+                    hp: amt
+                  }
+                })
+              }
             />
           )}
         />
@@ -98,7 +125,27 @@ export default function App() {
             />
           )}
         />
-        <Route path="/leaderboard" render={() => <Leaderboard />} />
+        <Route
+          path="/store"
+          render={() => (
+            <Store
+              checkLogInStatus={checkLogInStatus}
+              coins={logInStatus.user.coins}
+              hp={logInStatus.user.hp}
+              subtractCoinsAddHP={(hp, coins) => {
+                console.log(logInStatus.user.coins);
+                setLogInStatus({
+                  ...logInStatus,
+                  user: {
+                    ...logInStatus.user,
+                    coins: logInStatus.user.coins - coins,
+                    hp: logInStatus.user.hp + hp
+                  }
+                });
+              }}
+            />
+          )}
+        />
         <Route path="/" render={() => <Home />} />
       </Switch>
     </Router>

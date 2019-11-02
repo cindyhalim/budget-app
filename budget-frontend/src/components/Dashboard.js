@@ -73,8 +73,15 @@ export default function Dashboard(props) {
         user={props.logInStatus.user}
         logOutClick={() => props.logOutClick()}
       />
-      <HealthBar hp={props.logInStatus.user.hp} />
-      <CoinCount coins={props.logInStatus.user.coins} />
+      <HealthBar
+        hp={props.logInStatus.user.hp}
+        minusHP={props.minusHP}
+        resetHP={props.resetHP}
+      />
+      <CoinCount
+        coins={props.logInStatus.user.coins}
+        updateCoins={props.updateCoins}
+      />
       <ProgressBar />
 
       <h3>Saving Goals:</h3>

@@ -15,10 +15,20 @@ export default function HealthBar(props) {
         variant="determinate"
         color="secondary"
       />
-      <button onClick={() => setCompleted(completed - 20)}>
+      <button
+        onClick={() => {
+          props.minusHP(20);
+        }}
+      >
         Subtract Health
       </button>
-      <button onClick={() => setCompleted(100)}>Reset Health</button>
+      <button
+        onClick={() => {
+          props.resetHP(100);
+        }}
+      >
+        Reset Health
+      </button>
     </div>
   );
 }

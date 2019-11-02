@@ -9,8 +9,13 @@ export default function CoinCount(props) {
     <div>
       <img src="coins.jpg" style={{ height: "30px", width: "30px" }} />
       {coins}
-      <button onClick={() => setCoins(coins - 20)}>Subtract Coins</button>
-      <button onClick={() => setCoins(40)}>Reset Coins</button>
+      <button
+        onClick={() => {
+          props.updateCoins(40);
+        }}
+      >
+        Reset Coins
+      </button>
     </div>
   );
 }
