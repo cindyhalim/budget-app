@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Highcharts from "highcharts";
 import MonthOptions from "./MonthOptions";
+import CategoryTransaction from "./CategoryTransaction";
 
-export default function Piechart() {
+export default function Piechart({ setCategory, category }) {
   const [transactions, setTransactions] = useState([]);
   const [monthTotal, setMonthTotal] = useState(0);
   const [pieMonth, setPieMonth] = useState(
@@ -46,16 +47,42 @@ export default function Piechart() {
           point: {
             events: {
               click: function(event) {
-                console.log(event.point.name);
+                setCategory(event.point.name);
               }
             }
           },
           dataLabels: {
-            format: "{point.name}: {point.percentage:.1f} %"
+            enabled: false
           },
-          innerSize: "20%"
+          innerSize: "20%",
+          showInLegend: true
         }
       },
+      legend: {
+        enabled: true,
+        floating: false,
+        borderWidth: 0,
+        align: "center", // Moving the legend to the right of the donut chart
+        layout: "vertical", // Display in columns
+        verticalAlign: "bottom",
+        itemMarginTop: 2, // Space between each category in the legend
+        itemMarginBottom: 2,
+        itemStyle: {
+          lineHeight: "35px" // Aligning icons and text
+        },
+        useHTML: true,
+        labelFormatter: function() {
+          // Includes cat & price in legend
+          return (
+            '<span style="display:block; margin-top:-10px; position:relative; width:210px;border-bottom:1px solid #DCDCDC;">&nbsp<span style="font-weight:normal; vertical-align:super;">' +
+            this.name +
+            ' </span><span style="font-weight:normal; vertical-align:super; position:absolute; right:0px;">$' +
+            this.y +
+            "<br/></span></span>"
+          );
+        }
+      },
+      colors: ["#FAD331", "#96D5DF", "#1BA8BB", "#C5D930"],
       series: [
         {
           name: "Expenses",
@@ -70,6 +97,7 @@ export default function Piechart() {
       <MonthOptions month={pieMonth} setMonth={setPieMonth} />
       {transactions.length === 0 && <div> No Data</div>}
       <div id="Expenses-graph"></div>
+      <CategoryTransaction category={category} pieMonth={pieMonth} />
     </div>
   );
 }
