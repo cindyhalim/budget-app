@@ -4,12 +4,9 @@ import Navbar from "./Navbar";
 import CreateGoal from "./CreateGoal";
 import DashboardProfile from "./DashboardProfile";
 import SavedGoal from "./SavedGoal";
-<<<<<<< HEAD
 import HealthBar from "./HealthBar";
 import CoinCount from "./CoinCount";
-=======
 import ProgressBar from "./ProgressBar";
->>>>>>> 6bc9ae5de27aef88dc2d9a0cb2ce223f064331f7
 
 export default function Dashboard(props) {
   console.log("props in dashboard", props);
@@ -76,12 +73,9 @@ export default function Dashboard(props) {
         user={props.logInStatus.user}
         logOutClick={() => props.logOutClick()}
       />
-<<<<<<< HEAD
       <HealthBar hp={props.logInStatus.user.hp} />
       <CoinCount coins={props.logInStatus.user.coins} />
-=======
       <ProgressBar />
->>>>>>> 6bc9ae5de27aef88dc2d9a0cb2ce223f064331f7
 
       <h3>Saving Goals:</h3>
       <CreateGoal

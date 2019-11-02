@@ -77,11 +77,8 @@ export default function App() {
           path="/dashboard"
           render={() => (
             <Dashboard
-<<<<<<< HEAD
-=======
               refreshGoals={refreshGoals}
               setRefreshGoals={setRefreshGoals}
->>>>>>> 6bc9ae5de27aef88dc2d9a0cb2ce223f064331f7
               checkLogInStatus={checkLogInStatus}
               handleLogout={handleLogout}
               logInStatus={logInStatus}
