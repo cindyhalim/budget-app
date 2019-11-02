@@ -23,7 +23,7 @@ const MonthlyProgressBar = () => {
 
   return (
     <div>
-      <Progress animated bar color="success" value={(total / budget) * 100}>
+      <Progress bar color="success" value={(total / budget) * 100}>
         {(total / budget) * 100}%
       </Progress>
     </div>

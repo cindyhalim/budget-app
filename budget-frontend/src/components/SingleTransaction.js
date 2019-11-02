@@ -5,7 +5,7 @@ const SingleTransaction = ({ amount, location, transactionDate, category }) => {
   return (
     <div>
       <Card>
-        <CardContent>
+        <CardContent className="transaction-card">
           <h4>{location}</h4>
           <p>${amount}</p>
           <p>{transactionDate}</p>
