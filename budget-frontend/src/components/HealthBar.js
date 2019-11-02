@@ -1,12 +1,21 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
-export default function HealthBar() {
-  const [completed, setCompleted] = React.useState(50);
+export default function HealthBar(props) {
+  const [completed, setCompleted] = React.useState(props.hp);
+
   return (
     <div>
-      <LinearProgress variant="determinate" value={completed} />
+      <LinearProgress
+        style={{ height: "30px", width: "150px", borderRadius: 20 }}
+        variant="determinate"
+        value={completed}
+        color="secondary"
+      />
+      <button onClick={() => setCompleted(prev => prev - 20)}>
+        Subtract Health
+      </button>
+      <button onClick={() => setCompleted(100)}>Reset Health</button>
     </div>
   );
 }

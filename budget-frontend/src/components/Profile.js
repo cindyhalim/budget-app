@@ -16,7 +16,7 @@ export default function Profile(props) {
       <div style={{ height: "50px", width: "20%", border: "1px solid black" }}>
         Profile Pic
       </div>
-      <p>Username {props.logInStatus.user}</p>
+      <p>Username {props.logInStatus.user.name}</p>
       <p
         onClick={() => {
           props.logOutClick();

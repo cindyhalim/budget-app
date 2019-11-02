@@ -70,7 +70,7 @@ export default function Dashboard(props) {
         user={props.logInStatus.user}
         logOutClick={() => props.logOutClick()}
       />
-      <HealthBar />
+      <HealthBar hp={props.logInStatus.hp} />
 
       <h3>Saving Goals:</h3>
       <CreateGoal newGoal={newGoal} setNewGoal={setNewGoal} />
