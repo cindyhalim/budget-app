@@ -4,6 +4,8 @@ import Navbar from "./Navbar";
 import CreateGoal from "./CreateGoal";
 import DashboardProfile from "./DashboardProfile";
 import SavedGoal from "./SavedGoal";
+import HealthBar from "./HealthBar";
+import CoinCount from "./CoinCount";
 import ProgressBar from "./ProgressBar";
 
 export default function Dashboard(props) {
@@ -71,6 +73,8 @@ export default function Dashboard(props) {
         user={props.logInStatus.user}
         logOutClick={() => props.logOutClick()}
       />
+      <HealthBar hp={props.logInStatus.user.hp} />
+      <CoinCount coins={props.logInStatus.user.coins} />
       <ProgressBar />
 
       <h3>Saving Goals:</h3>

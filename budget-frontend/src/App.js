@@ -20,7 +20,7 @@ export default function App() {
   const handleLogin = data => {
     setLogInStatus({
       status: "logged_in",
-      user: data.name
+      user: data
     });
   };
 
@@ -65,13 +65,13 @@ export default function App() {
       <Switch>
         <Route
           path="/login"
-          render={props => (
+          render={() => (
             <Login handleLogin={handleLogin} logInStatus={logInStatus} />
           )}
         />
         <Route
           path="/register"
-          render={props => <Register {...props} handleLogin={handleLogin} />}
+          render={() => <Register handleLogin={handleLogin} />}
         />
         <Route
           path="/dashboard"
@@ -82,7 +82,6 @@ export default function App() {
               checkLogInStatus={checkLogInStatus}
               handleLogout={handleLogout}
               logInStatus={logInStatus}
-              logOutClick={() => logOutClick()}
             />
           )}
         />
