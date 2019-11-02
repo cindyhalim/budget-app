@@ -52,9 +52,10 @@ export default function Piechart({ setCategory, category }) {
             }
           },
           dataLabels: {
-            format: "{point.name}: {point.percentage:.1f} %"
+            enabled: false
           },
-          innerSize: "20%"
+          innerSize: "20%",
+          showInLegend: true
         }
       },
       series: [

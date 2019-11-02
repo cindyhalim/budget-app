@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Piechart from "./Piechart";
 import Barchart from "./Barchart";
-
+import MonthlyProgressBar from "./MonthlyProgressBar";
 import Navbar from "./Navbar";
 
 export default function Analytics() {
@@ -16,6 +16,7 @@ export default function Analytics() {
   };
   return (
     <div>
+      <MonthlyProgressBar />
       <select
         name=""
         id="select"

@@ -23,9 +23,9 @@ export default function Navbar() {
       <Link to="/dashboard">
         <BottomNavigationAction label="Home" icon={<HomeIcon />} />
       </Link>
-      <Link to="/leaderboard">
+      <Link to="/store">
         <BottomNavigationAction
-          label="Leaderboard"
+          label="Store"
           icon={<FormatListNumberedIcon />}
         />
       </Link>
