@@ -38,7 +38,7 @@ user1.transactions.create({amount: 10, category: "Rideshare", location: "Toronto
 user1.transactions.create({amount: 12, category: "Rideshare", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
 user1.transactions.create({amount: 7, category: "Rideshare", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
 user1.transactions.create({amount: 5, category: "Rideshare", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
-
+#
 #RideShare August
 user1.transactions.create({amount: 20, category: "Rideshare", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
 user1.transactions.create({amount: 22, category: "Rideshare", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
@@ -81,4 +81,5 @@ user1.goals.create({end_date: nil, goal_type: "budget", amount: 3500, name: "bud
 user1.goals.create({end_date: nil, goal_type: "budget", amount: 6000, name: "budget"})
 
 user1.goals.create({start_date:"2019-11-01T10:35:17.552Z" , end_date: "2019-11-30T10:35:17.552Z", goal_type: "saving", amount: 200, name: "new phone"})
-
+user1.goals.create({start_date:"2019-11-21T10:35:17.552Z" , end_date: "2019-12-03T10:35:17.552Z", goal_type: "saving", amount: 300, name: "new watch"})
+user1.goals.create({start_date:"2019-11-01T10:35:17.552Z" , end_date: "2019-12-03T10:35:17.552Z", goal_type: "saving", amount: 300, name: "new watch"})

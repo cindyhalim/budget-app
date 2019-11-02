@@ -10,8 +10,11 @@ class GoalsController < ApplicationController
   end
 
   def create
+    pp "I AM HEREEEEEEE"
+    pp session[:user_id]
     user = User.find_by(id: session[:user_id])
-    goal = user.goals.create(start_date: params['goal']['start_date'], end_date: params['goal']['end_date'], user_id: session[:user_id], goal_type: params['goal']['goal_type'], amount: params['goal']['amount'], name: params['goal']['name'])
+    pp user
+    goal = user.goals.create(start_date: params['goal']['start_date'], end_date: params['goal']['end_date'], goal_type: params['goal']['goal_type'], amount: params['goal']['amount'], name: params['goal']['name'])
 
     if user.id == goal.user_id
       render json: {

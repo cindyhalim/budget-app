@@ -7,6 +7,7 @@ import { lighten, makeStyles, withStyles } from "@material-ui/core/styles";
 const ProgressBar = () => {
   const [total, setTotal] = useState([]);
   const [budget, setBudget] = useState(0);
+  const [savingGoal, setSavingGoal] = useState(0);
 
   useEffect(() => {
     let currentMonth = new Date().toLocaleString("default", { month: "long" });
@@ -20,6 +21,7 @@ const ProgressBar = () => {
       .then(res => {
         setTotal(res.data.total);
         setBudget(Number(res.data.budget));
+        setSavingGoal(Number(res.data.toSave));
       });
   }, []);
 

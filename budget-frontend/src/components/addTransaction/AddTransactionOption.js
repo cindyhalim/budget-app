@@ -105,6 +105,14 @@ export default function AddTransactionOption(props) {
           })
         }
         changeNavbarStatus={() => props.changeOpenStatus(false)}
+        resetValues={() =>
+          setTransactionData({
+            amount: "",
+            location: "",
+            category: "",
+            transaction_date: new Date(Date.now())
+          })
+        }
       ></NewTransaction>
     </div>
   );

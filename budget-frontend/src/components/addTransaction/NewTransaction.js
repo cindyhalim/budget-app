@@ -19,12 +19,16 @@ import {
 
 export default function NewTransaction(props) {
   function triggerNewTransactionPost() {
-    Axios.post("http://localhost:300/new-transaction", {
-      amount: props.transactionData.amount,
-      location: props.transactionData.location,
-      category: props.transactionData.location,
-      transaction_date: props.transactionData.transaction_date
-    });
+    Axios.post(
+      "http://localhost:3000/transactions",
+      {
+        amount: props.transactionData.amount,
+        location: props.transactionData.location,
+        category: props.transactionData.category,
+        transaction_date: props.transactionData.transaction_date
+      },
+      { withCredentials: true }
+    );
   }
   return (
     <div>
@@ -83,6 +87,7 @@ export default function NewTransaction(props) {
               props.changeNavbarStatus();
               props.onChangeOpenStatus({ transaction: false, list: false });
               triggerNewTransactionPost();
+              props.resetValues();
             }}
           >
             Add
