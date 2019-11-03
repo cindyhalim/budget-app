@@ -48,6 +48,16 @@ export default function App() {
       .then(res => {
         if (res.data.logged_in && logInStatus.status === "not_logged_in") {
           handleLogin(res.data.user);
+          axios
+            .get("http://localhost:3000/check_budget_met", {
+              withCredentials: true
+            })
+            .then(result => {
+              setLogInStatus({
+                status: "logged_in",
+                user: result.data.user
+              });
+            });
         }
 
         if (!res.data.logged_in && logInStatus === "logged_in") {
