@@ -20,9 +20,7 @@ class SessionsController < ApplicationController
   end
 
   def logged_in
-    
     if @current_user
-      pp @current_user
       render json: {
         logged_in: true,
         user: @current_user
