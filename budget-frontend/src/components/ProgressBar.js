@@ -31,14 +31,13 @@ const ProgressBar = () => {
     <Card className="progress-card">
       <h3>Daily Progress:</h3>
       <Progress className="daily-progress" multi>
-        <Progress animated bar color="success" value={totalSpending}>
+        <Progress bar color="success" value={totalSpending}>
           {total}
         </Progress>
-        <Progress animated bar color="warning" value={totalSaving}>
+        <Progress bar color="warning" value={totalSaving}>
           {savingGoal}
         </Progress>
         <Progress
-          animated
           bar
           color="danger"
           value={100 - (totalSpending + totalSaving)}
