@@ -1,0 +1,24 @@
+@import "./variables/variables.sass"
+@import "./variables/mixins.sass"
+
+.Login
+  text-align: center
+  margin: 10vh
+
+  .title
+    @include title
+
+  form
+    margin: 5vh 0
+    display: flex
+    flex-direction: column
+    align-items: center
+
+  .textinput
+    margin: 4vh 0
+    width: 100%
+    @include textinput
+
+  .button
+    margin: 5vh 0
+    @include button

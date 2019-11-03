@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Redirect, useHistory } from "react-router-dom";
+import "../styles/Login.sass";
+import { TextField, Button } from "@material-ui/core";
 
 export default function Login(props) {
   const [user, setUser] = useState({
@@ -8,7 +10,6 @@ export default function Login(props) {
     password: ""
   });
   const history = useHistory();
-  console.log("log in stattus", props.logInStatus);
   const handleChange = event => {
     event.persist();
     setUser(prev => ({ ...prev, [event.target.name]: event.target.value }));
@@ -37,26 +38,31 @@ export default function Login(props) {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="Login">
+      <h1 className="title">Login</h1>
       <form onSubmit={event => handleSubmit(event)}>
-        Email:
-        <input
+        <TextField
+          label="Email"
+          maxLength="20"
+          margin="normal"
+          className="textinput"
           type="email"
           name="email"
-          placeholder="Email"
           onChange={event => handleChange(event)}
           required
         />
-        Password:
-        <input
+        <TextField
+          label="Password"
+          margin="normal"
+          className="textinput"
           type="password"
           name="password"
-          placeholder="Password"
           onChange={event => handleChange(event)}
           required
         />
-        <button type="submit">Login</button>
+        <Button type="submit" variant="contained" color="" className="button">
+          Login
+        </Button>
       </form>
     </div>
   );
