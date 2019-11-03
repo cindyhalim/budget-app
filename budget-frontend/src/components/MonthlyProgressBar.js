@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Card, CardContent } from "@material-ui/core";
 import { Progress } from "reactstrap";
 import axios from "axios";
 
@@ -22,11 +23,19 @@ const MonthlyProgressBar = () => {
   }, []);
 
   return (
-    <div>
-      <Progress bar color="success" value={(total / budget) * 100}>
-        {(total / budget) * 100}%
+    <Card className="progress-card">
+      <h3>Monthly Progress:</h3>
+      <Progress className="monthly-progress" value={100}>
+        <Progress
+          className="monthly-progress"
+          bar
+          color="success"
+          value={(total / budget) * 100}
+        >
+          {(total / budget) * 100}%
+        </Progress>
       </Progress>
-    </div>
+    </Card>
   );
 };
 

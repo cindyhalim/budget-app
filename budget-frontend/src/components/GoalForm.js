@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "date-fns";
-import { TextField } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider
 } from "@material-ui/pickers";
+import Close from "@material-ui/icons/Close";
 
 export default function GoalForm(props) {
   const [formFields, setFormFields] = useState({
@@ -32,19 +33,21 @@ export default function GoalForm(props) {
         props.setRefreshGoals(!props.refreshGoals);
         props.setActive(!props.active);
       }}
+      className="goal-form"
     >
-      <button
-        type="button"
+      <Close
+        className="close-button"
         onClick={() => {
           props.setActive(!props.active);
         }}
-      >
-        X
-      </button>
+      />
+
       <TextField
+        className="name-field"
         label="Name"
         name="name"
-        maxLength="20"
+        inputProps={{ maxLength: 20 }}
+        style={{ color: "#FFFFFF" }}
         type="text"
         margin="normal"
         value={formFields.name}
@@ -110,7 +113,9 @@ export default function GoalForm(props) {
           required
         />
       </MuiPickersUtilsProvider>
-      <button type="submit">Save</button>
+      <Button className="save-button" type="submit" size="small">
+        Save
+      </Button>
     </form>
   );
 }

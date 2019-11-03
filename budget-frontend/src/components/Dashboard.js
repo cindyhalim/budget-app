@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
+import SwipeableViews from "react-swipeable-views";
+import MobileStepper from "@material-ui/core/MobileStepper";
+
+import moment from "moment";
 import axios from "axios";
+
 import Navbar from "./Navbar";
 import CreateGoal from "./CreateGoal";
 import DashboardProfile from "./DashboardProfile";
 import SavedGoal from "./SavedGoal";
-import HealthBar from "./HealthBar";
-import CoinCount from "./CoinCount";
 import ProgressBar from "./ProgressBar";
+import TopSpending from "./TopSpending";
 import MonthlyProgressBar from "./MonthlyProgressBar";
+
+import "../styles/Dashboard.sass";
 
 export default function Dashboard(props) {
   props.checkLogInStatus();
@@ -21,6 +27,19 @@ export default function Dashboard(props) {
     },
     goals: []
   });
+  const [progressActiveStep, setProgressActiveStep] = useState(1);
+
+  const handleNextSwipe = () => {
+    if (progressActiveStep <= 2) {
+      setProgressActiveStep(prevActiveStep => prevActiveStep + 1);
+    }
+  };
+
+  const handleBackSwipe = () => {
+    if (progressActiveStep >= 0) {
+      setProgressActiveStep(prevActiveStep => prevActiveStep - 1);
+    }
+  };
 
   const findGoalIndexById = (id, arr) => {
     for (let i = 0; i < arr.length; i++) {
@@ -71,54 +90,72 @@ export default function Dashboard(props) {
   };
 
   return (
-    <div>
-      <h1>Welcome to Dashboard</h1>
+    <div className="Dashboard">
       <DashboardProfile
         user={props.logInStatus.user}
-        logOutClick={() => props.logOutClick()}
-      />
-      <HealthBar
         hp={props.logInStatus.user.hp}
         minusHP={props.minusHP}
         resetHP={props.resetHP}
-      />
-      <CoinCount
         coins={props.logInStatus.user.coins}
         updateCoins={props.updateCoins}
       />
-      <ProgressBar />
-      <MonthlyProgressBar />
 
-      <h3>Saving Goals:</h3>
-      <CreateGoal
-        newGoal={newGoal}
-        setNewGoal={setNewGoal}
-        refreshGoals={props.refreshGoals}
-        setRefreshGoals={props.setRefreshGoals}
+      <h1 class="date-now">{moment().format("MMMM Do, YYYY")}</h1>
+      <SwipeableViews
+        index="1"
+        onChangeIndex={(index, indexLatest) => {
+          index > indexLatest ? handleNextSwipe() : handleBackSwipe();
+        }}
+      >
+        <TopSpending />
+        <ProgressBar />
+        <MonthlyProgressBar />
+      </SwipeableViews>
+      <MobileStepper
+        className="progress-stepper"
+        variant="dots"
+        steps={3}
+        position="static"
+        activeStep={progressActiveStep}
       />
-      <div style={{ WebkitOverflowScrolling: "auto" }}>
-        {newGoal.goals.length > 0 &&
-          newGoal.goals.map(goal => (
-            <SavedGoal
-              newGoal={newGoal}
-              setNewGoal={setNewGoal}
-              refreshGoals={props.refreshGoals}
-              setRefreshGoals={props.setRefreshGoals}
-              completed={goal.completed}
-              key={goal.id}
-              id={goal.id}
-              name={goal.name}
-              amount={goal.amount}
-              startDate={goal.start_date}
-              endDate={goal.end_date}
-              onDelete={data => deleteGoal(data)}
-              editRequest={data => editGoal(data)}
-              findGoalIndexById={findGoalIndexById}
-              dailyTarget={goal.target_per_day}
-            />
-          ))}
-      </div>
-
+      <section className="goals">
+        <h3>Saving Goals:</h3>
+        <CreateGoal
+          newGoal={newGoal}
+          setNewGoal={setNewGoal}
+          refreshGoals={props.refreshGoals}
+          setRefreshGoals={props.setRefreshGoals}
+        />
+        <div className="goal-card" style={{ WebkitOverflowScrolling: "touch" }}>
+          {newGoal.goals.length > 0 &&
+            newGoal.goals.map(goal => (
+              <SavedGoal
+                newGoal={newGoal}
+                setNewGoal={setNewGoal}
+                refreshGoals={props.refreshGoals}
+                setRefreshGoals={props.setRefreshGoals}
+                key={goal.id}
+                id={goal.id}
+                name={goal.name}
+                amount={goal.amount}
+                startDate={goal.start_date}
+                endDate={goal.end_date}
+                onDelete={data => deleteGoal(data)}
+                editRequest={data => editGoal(data)}
+                findGoalIndexById={findGoalIndexById}
+                dailyTarget={goal.target_per_day}
+                completed={goal.completed}
+                bgColor={
+                  goal.completed
+                    ? "#66bb6a"
+                    : new Date(goal.start_date) > new Date(Date.now())
+                    ? "#d95c52"
+                    : "#4db6ac"
+                }
+              />
+            ))}
+        </div>
+      </section>
       <Navbar />
     </div>
   );
