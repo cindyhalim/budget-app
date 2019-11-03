@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SwipeableViews from "react-swipeable-views";
 import MobileStepper from "@material-ui/core/MobileStepper";
-import { Card, CardContent } from "@material-ui/core";
 
 import moment from "moment";
 import axios from "axios";
@@ -92,12 +91,6 @@ export default function Dashboard(props) {
 
   return (
     <div className="Dashboard">
-      {/* <Grid
-        container
-        direction="column"
-        justify="space-between"
-        alignItems="center"
-      > */}
       <DashboardProfile
         user={props.logInStatus.user}
         hp={props.logInStatus.user.hp}
@@ -125,7 +118,6 @@ export default function Dashboard(props) {
         position="static"
         activeStep={progressActiveStep}
       />
-
       <section className="goals">
         <h3>Saving Goals:</h3>
         <CreateGoal
@@ -153,12 +145,18 @@ export default function Dashboard(props) {
                 findGoalIndexById={findGoalIndexById}
                 dailyTarget={goal.target_per_day}
                 completed={goal.completed}
+                bgColor={
+                  goal.completed
+                    ? "#66bb6a"
+                    : new Date(goal.start_date) > new Date(Date.now())
+                    ? "#d95c52"
+                    : "#4db6ac"
+                }
               />
             ))}
         </div>
       </section>
       <Navbar />
-      {/* </Grid> */}
     </div>
   );
 }

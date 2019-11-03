@@ -15,6 +15,8 @@
         height: 80px
       .user-name
         font-size: 25px
+        font-family: $title-font
+        color: $title-color
     .user-health
       margin-left: 20px
       width: 100%
@@ -29,8 +31,11 @@
           padding: 0 5px
           font-size: 12px
   .date-now
-    font-size: 30px
-    padding: 0 5vw
+    font-size: 35px
+    padding: 2vh 5vw
+    font-family: $title-font
+    font-weight: 300
+    color: $title-color
   .MuiMobileStepper-root
     background-color: transparent
     justify-content: center
@@ -56,24 +61,57 @@
       margin: 0
     h3
       font-size: 20px
+    .save-button
+      float: right
+      color: white
+      font-size: 18px
+      font-weight: bold
+      margin: 10vh 0 4vh 0
+    .close-button
+      position: relative
+      float: right
     .new-goal-card
       margin: 2vh 0
       background-color: #3949ab
       color: white
-    .goal-card
-      margin: 2vh 0
-      .goal-target
-        margin: 0
-        font-size: 18px
-      .goal-main-info
+      .new-goal-card-title
         display: flex
         justify-content: space-between
         align-items: center
+
+    .goal-card
+      margin: 2vh 0
+      color: white
+      .goal-main-info
+        padding: 2vh 0
+        display: flex
+        justify-content: space-between
+        align-items: center
+        .goal-target
+          margin: 0
+          font-size: 18px
       .goal-extra-info
         margin-top: 1em
-        .MuiCardActions-root.card-buttons
+        .card-buttons
           display: block
           padding: 0
           text-align: right
-          .MuiButton-root
-            color: $title-color
+          color: white
+    .goal-form
+      margin: 2vh
+      .MuiFormControl-root.MuiTextField-root
+        width: 70%
+      .MuiFormControl-root.MuiTextField-root.name-field
+        width: 80%
+      .MuiFormLabel-root
+        color: white
+      .MuiInput-underline:before
+        border-bottom: 1px solid white
+      .MuiInput-underline:after
+        border-bottom: 2px solid white
+      .MuiFormHelperText-root
+        color: white
+      .MuiInputBase-input
+        color: white
+      .MuiIconButton-root
+        color: white
