@@ -45,7 +45,9 @@ class TransactionsController < ApplicationController
         @percent = @transactions.map do |transaction| 
      
           {
-            name: transaction.category, y: (transaction.amount/@total_for_month[0].total * 100).to_f
+            name: transaction.category, 
+            y: (transaction.amount/@total_for_month[0].total * 100).to_f, 
+            amount: transaction.amount.to_f
           } 
         end
         render json: {transactions: @percent, total: @total_for_month}

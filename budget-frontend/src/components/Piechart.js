@@ -82,11 +82,13 @@ export default function Piechart() {
           labelFormatter: function() {
             // Includes cat & price in legend
             return (
-              '<span style="display:block; margin-top:-10px; position:relative; width:210px;border-bottom:1px solid #DCDCDC;">&nbsp<span style="font-weight:normal; vertical-align:super;">' +
+              '<div style="display:flex; justify-content:space-around; margin-top:-10px; position:relative; width:300px;border-bottom:1px solid #DCDCDC;"><span style="font-weight:normal; vertical-align:super; width:100px">' +
               this.name +
-              ' </span><span style="font-weight:normal; vertical-align:super; position:absolute; right:0px;">' +
+              ' </span> <div style="display:flex; justify-content:space-around; width:200px"><span style="font-weight:normal; vertical-align:super; ">' +
               this.y.toFixed(2) +
-              "%<br/></span></span>"
+              '%</span><span style="font-weight:normal; vertical-align:super; right:0px;">$' +
+              this.amount.toFixed(2) +
+              "</span></div></div>"
             );
           }
         },
