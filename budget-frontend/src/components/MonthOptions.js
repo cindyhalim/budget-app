@@ -1,4 +1,8 @@
 import React from "react";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
 
 const months = [
   "January",
@@ -22,7 +26,7 @@ const MonthOptions = ({ month, setMonth }) => {
 
   return (
     <div>
-      <select
+      {/* <Select
         name=""
         id="select"
         onChange={e => {
@@ -30,11 +34,36 @@ const MonthOptions = ({ month, setMonth }) => {
         }}
       >
         {months.map((month, index) => (
-          <option key={index} value={month} selected={month === isCurrentMonth}>
+          <MenuItem
+            key={index}
+            value={month}
+            selected={month === isCurrentMonth}
+          >
             {month}
-          </option>
+          </MenuItem>
         ))}
-      </select>
+      </Select> */}
+      <FormControl variant="filled">
+        <InputLabel id="demo-simple-select-outlined-label">Month</InputLabel>
+        <Select
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          value={month}
+          onChange={e => {
+            setMonth(e.target.value);
+          }}
+        >
+          {months.map((month, index) => (
+            <MenuItem
+              key={index}
+              value={month}
+              selected={month === isCurrentMonth}
+            >
+              {month}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </div>
   );
 };

@@ -83,7 +83,7 @@ export default function Piechart() {
             '<span style="display:block; margin-top:-10px; position:relative; width:210px;border-bottom:1px solid #DCDCDC;">&nbsp<span style="font-weight:normal; vertical-align:super;">' +
             this.name +
             ' </span><span style="font-weight:normal; vertical-align:super; position:absolute; right:0px;">$' +
-            this.y +
+            this.y.toFixed(2) +
             "<br/></span></span>"
           );
         }
@@ -97,8 +97,6 @@ export default function Piechart() {
       ]
     });
   }, [transactions]);
-
-  // useEffect(() => {}, [category]);
 
   return (
     <div>

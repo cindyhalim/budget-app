@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SingleTransaction from "./SingleTransaction";
+import TablePagination from "@material-ui/core/TablePagination";
 
 import "../styles/CategoryTransaction.sass";
 
 const CategoryTransaction = ({ category, pieMonth }) => {
   const [allTransactions, setAllTransactions] = useState([]);
+  const [page, setPage] = useState(0);
+  const [transactionsPerPage, setTransactionsPerPage] = useState(5);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeTransactionsPerPage = event => {
+    setTransactionsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   useEffect(() => {
     axios
@@ -39,15 +51,36 @@ const CategoryTransaction = ({ category, pieMonth }) => {
       <h3 className="category-title-selected">
         {category ? category : "All Transactions"}
       </h3>
-      {filteredTransaction.map(allTransaction => (
-        <SingleTransaction
-          key={allTransaction.id}
-          location={allTransaction.location}
-          amount={allTransaction.amount}
-          transactionDate={allTransaction.transaction_date}
-          category={allTransaction.category}
-        />
-      ))}
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={filteredTransaction.length}
+        rowsPerPage={transactionsPerPage}
+        page={page}
+        backIconButtonProps={{
+          "aria-label": "previous page"
+        }}
+        nextIconButtonProps={{
+          "aria-label": "next page"
+        }}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeTransactionsPerPage}
+        labelRowsPerPage="Transactions per page:"
+      />
+      {filteredTransaction
+        .slice(
+          page * transactionsPerPage,
+          page * transactionsPerPage + transactionsPerPage
+        )
+        .map(allTransaction => (
+          <SingleTransaction
+            key={allTransaction.id}
+            location={allTransaction.location}
+            amount={allTransaction.amount}
+            transactionDate={allTransaction.transaction_date}
+            category={allTransaction.category}
+          />
+        ))}
     </div>
   );
 };
