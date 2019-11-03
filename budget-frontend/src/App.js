@@ -34,12 +34,14 @@ export default function App() {
   };
 
   function updateHealthAndCoins(coins, hp) {
-    axios.update(`http://localhost:3000/update_attr/?coins=${coins}&hp=${hp}`);
+    axios.get(`http://localhost:3000/game/?coins=${coins}&hp=${hp}`, {
+      withCredentials: true
+    });
     setLogInStatus({
       ...logInStatus,
       user: {
         ...logInStatus.user,
-        coins: logInStatus.user.coins - coins,
+        coins: logInStatus.user.coins + coins,
         hp: logInStatus.user.hp + hp
       }
     });
@@ -154,17 +156,9 @@ export default function App() {
               checkLogInStatus={checkLogInStatus}
               coins={logInStatus.user.coins}
               hp={logInStatus.user.hp}
-              subtractCoinsAddHP={(hp, coins) => {
-                console.log(logInStatus.user.coins);
-                setLogInStatus({
-                  ...logInStatus,
-                  user: {
-                    ...logInStatus.user,
-                    coins: logInStatus.user.coins - coins,
-                    hp: logInStatus.user.hp + hp
-                  }
-                });
-              }}
+              subtractCoinsAddHP={(hp, coins) =>
+                updateHealthAndCoins(hp, coins)
+              }
             />
           )}
         />

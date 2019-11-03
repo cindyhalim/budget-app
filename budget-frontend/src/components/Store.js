@@ -20,8 +20,10 @@ export default function Store(props) {
         <br></br>
         <button
           onClick={() => {
-            if (props.hp !== 100) {
-              props.subtractCoinsAddHP(20, 20);
+            if (props.hp !== 100 && props.coins >= 20) {
+              props.subtractCoinsAddHP(-20, 20);
+            } else if (props.coins < 20) {
+              alert("You don't have enough money");
             } else {
               alert("Your health is already full");
             }
