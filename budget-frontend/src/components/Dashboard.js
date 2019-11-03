@@ -98,7 +98,7 @@ export default function Dashboard(props) {
           refreshGoals={props.refreshGoals}
           setRefreshGoals={props.setRefreshGoals}
         />
-        <div style={{ WebkitOverflowScrolling: "touch" }}>
+        <div className="goal-card" style={{ WebkitOverflowScrolling: "touch" }}>
           {newGoal.goals.length > 0 &&
             newGoal.goals.map(goal => (
               <SavedGoal

@@ -2,10 +2,9 @@
 @import "./variables/mixins.sass"
 
 .Dashboard
-
   height: 100vh
   .user-profile
-    padding: 5vh 2vh
+    padding: 2vh
     .user
       display: flex
       align-items: center
@@ -13,7 +12,7 @@
         width: 80px
         height: 80px
       .user-name
-        font-size: 35px
+        font-size: 25px
     .user-health
       margin-left: 20px
       width: 100%
@@ -31,8 +30,24 @@
     border: 1px solid red
     font-size: 30px
   .goals
-    padding: 2vh
+    padding: 4vh 2vh
+    h2
+      margin: 0
     h3
       font-size: 20px
+    .new-goal-card
+      margin: 2vh 0
+      background-color: #3949ab
+      color: white
     .goal-card
       margin: 2vh 0
+
+      .goal-target
+        margin: 0
+        font-size: 18px
+      .goal-main-info
+        display: flex
+        justify-content: space-between
+        align-items: center
+      .goal-extra-info
+        margin-top: 1em
