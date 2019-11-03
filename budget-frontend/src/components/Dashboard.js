@@ -7,6 +7,7 @@ import DashboardProfile from "./DashboardProfile";
 import SavedGoal from "./SavedGoal";
 import ProgressBar from "./ProgressBar";
 import { Grid } from "@material-ui/core";
+import MonthlyProgressBar from "./MonthlyProgressBar";
 
 import "../styles/Dashboard.sass";
 export default function Dashboard(props) {
@@ -89,7 +90,7 @@ export default function Dashboard(props) {
 
       <h1 class="date-now">{moment().format("MMMM Do, YYYY")}</h1>
       <ProgressBar />
-
+      {/* <MonthlyProgressBar /> */}
       <section className="goals">
         <h3>Saving Goals:</h3>
         <CreateGoal
@@ -116,12 +117,13 @@ export default function Dashboard(props) {
                 editRequest={data => editGoal(data)}
                 findGoalIndexById={findGoalIndexById}
                 dailyTarget={goal.target_per_day}
+                completed={goal.completed}
               />
             ))}
         </div>
       </section>
-      {/* </Grid> */}
       <Navbar />
+      {/* </Grid> */}
     </div>
   );
 }

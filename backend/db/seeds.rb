@@ -5,71 +5,222 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+require 'faker'
 
 user1 = User.create({name: "Ahana", email: "test@test.com", password: "password"})
 
 #Recreation November
-user1.transactions.create({amount: 10, category: "Recreation", location: "The Rec Room, Toronto", transaction_date: "2019-11-01T10:35:17.552Z"})
-user1.transactions.create({amount: 15, category: "Recreation", location: "Joe Rockheads, Toronto", transaction_date: "2019-11-01T10:05:55.552Z"})
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Recreation", location: Faker::Artist.name, transaction_date: "2019-11-01T10:35:17.552Z"})
+end
+
 
 #Recreation October
-user1.transactions.create({amount: 10, category: "Recreation", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
-user1.transactions.create({amount: 15, category: "Recreation", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
-user1.transactions.create({amount: 20, category: "Recreation", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
-user1.transactions.create({amount: 30, category: "Recreation", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
-user1.transactions.create({amount: 35, category: "Recreation", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
-user1.transactions.create({amount: 42, category: "Recreation", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
-user1.transactions.create({amount: 68, category: "Recreation", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Recreation", location: Faker::Artist.name, transaction_date: "2019-10-01T10:35:17.552Z"})
+end
 
+#Recreation September
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Recreation", location: Faker::Artist.name, transaction_date: "2019-09-01T10:35:17.552Z"})
+end
 #Recreation August
-user1.transactions.create({amount: 10, category: "Recreation", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
-user1.transactions.create({amount: 15, category: "Recreation", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
-user1.transactions.create({amount: 20, category: "Recreation", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
-user1.transactions.create({amount: 30, category: "Recreation", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Recreation", location: Faker::Artist.name, transaction_date: "2019-08-01T10:35:17.552Z"})
+end
+#Recreation July
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Recreation", location: Faker::Artist.name, transaction_date: "2019-07-01T10:35:17.552Z"})
+end
+#Recreation June
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Recreation", location: Faker::Artist.name, transaction_date: "2019-06-01T10:35:17.552Z"})
+end
+#Recreation May
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Recreation", location: Faker::Artist.name, transaction_date: "2019-05-01T10:35:17.552Z"})
+end
+#Recreation April
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Recreation", location: Faker::Artist.name, transaction_date: "2019-04-01T10:35:17.552Z"})
+end
+#Recreation March
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Recreation", location: Faker::Artist.name, transaction_date: "2019-03-01T10:35:17.552Z"})
+end
+#Recreation February
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Recreation", location: Faker::Artist.name, transaction_date: "2019-02-01T10:35:17.552Z"})
+end
+#Recreation January
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Recreation", location: Faker::Artist.name, transaction_date: "2019-01-01T10:35:17.552Z"})
+end
 
 
 #RideShare November
-user1.transactions.create({amount: 10, category: "Rideshare", location: "Toronto", transaction_date: "2019-11-01T10:35:17.552Z"})
-user1.transactions.create({amount: 12, category: "Rideshare", location: "Toronto", transaction_date: "2019-11-01T10:35:17.552Z"})
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Rideshare", location: Faker::Vehicle.make_and_model, transaction_date: "2019-11-01T10:35:17.552Z"})
+end
 
 #RideShare October
-user1.transactions.create({amount: 10, category: "Rideshare", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
-user1.transactions.create({amount: 12, category: "Rideshare", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
-user1.transactions.create({amount: 7, category: "Rideshare", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
-user1.transactions.create({amount: 5, category: "Rideshare", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
-#
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Rideshare", location: Faker::Vehicle.make_and_model, transaction_date: "2019-10-01T10:35:17.552Z"})
+end
+
+#RideShare October
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Rideshare", location: Faker::Vehicle.make_and_model, transaction_date: "2019-10-01T10:35:17.552Z"})
+end
+
+#RideShare September
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Rideshare", location: Faker::Vehicle.make_and_model, transaction_date: "2019-09-01T10:35:17.552Z"})
+end
+
 #RideShare August
-user1.transactions.create({amount: 20, category: "Rideshare", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
-user1.transactions.create({amount: 22, category: "Rideshare", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Rideshare", location: Faker::Vehicle.make_and_model, transaction_date: "2019-08-01T10:35:17.552Z"})
+end
+
+#RideShare July
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Rideshare", location: Faker::Vehicle.make_and_model, transaction_date: "2019-07-01T10:35:17.552Z"})
+end
+
+#RideShare June
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Rideshare", location: Faker::Vehicle.make_and_model, transaction_date: "2019-06-01T10:35:17.552Z"})
+end
+
+#RideShare May
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Rideshare", location: Faker::Vehicle.make_and_model, transaction_date: "2019-05-01T10:35:17.552Z"})
+end
+
+#RideShare April
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Rideshare", location: Faker::Vehicle.make_and_model, transaction_date: "2019-04-01T10:35:17.552Z"})
+end
+
+#RideShare March
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Rideshare", location: Faker::Vehicle.make_and_model, transaction_date: "2019-03-01T10:35:17.552Z"})
+end
+
+#RideShare February
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Rideshare", location: Faker::Vehicle.make_and_model, transaction_date: "2019-02-01T10:35:17.552Z"})
+end
+
+#RideShare January
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Rideshare", location: Faker::Vehicle.make_and_model, transaction_date: "2019-01-01T10:35:17.552Z"})
+end
 
 #Food and Drink November
-user1.transactions.create({amount: 20, category: "Food and Drink", location: "Toronto", transaction_date: "2019-11-01T10:35:17.552Z"})
-user1.transactions.create({amount: 35, category: "Food and Drink", location: "Toronto", transaction_date: "2019-11-01T10:35:17.552Z"})
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Food and Drink", location: Faker::Restaurant.name, transaction_date: "2019-11-01T10:35:17.552Z"})
+end
 
 #Food and Drink October
-user1.transactions.create({amount: 20, category: "Food and Drink", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
-user1.transactions.create({amount: 35, category: "Food and Drink", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
-user1.transactions.create({amount: 5, category: "Food and Drink", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
-user1.transactions.create({amount: 15, category: "Food and Drink", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Food and Drink", location: Faker::Restaurant.name, transaction_date: "2019-10-26T22:05:55.552Z"})
+end
+
+#Food and Drink September
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Food and Drink", location: Faker::Restaurant.name, transaction_date: "2019-09-26T22:05:55.552Z"})
+end
 
 #Food and Drink August
-user1.transactions.create({amount: 20, category: "Food and Drink", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
-user1.transactions.create({amount: 35, category: "Food and Drink", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Food and Drink", location: Faker::Restaurant.name, transaction_date: "2019-08-26T22:05:55.552Z"})
+end
+
+#Food and Drink July
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Food and Drink", location: Faker::Restaurant.name, transaction_date: "2019-07-26T22:05:55.552Z"})
+end
+
+#Food and Drink June
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Food and Drink", location: Faker::Restaurant.name, transaction_date: "2019-06-26T22:05:55.552Z"})
+end
+
+#Food and Drink May
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Food and Drink", location: Faker::Restaurant.name, transaction_date: "2019-05-26T22:05:55.552Z"})
+end
+
+#Food and Drink April
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Food and Drink", location: Faker::Restaurant.name, transaction_date: "2019-04-26T22:05:55.552Z"})
+end
+
+#Food and Drink March
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Food and Drink", location: Faker::Restaurant.name, transaction_date: "2019-03-26T22:05:55.552Z"})
+end
+
+#Food and Drink February
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Food and Drink", location: Faker::Restaurant.name, transaction_date: "2019-02-26T22:05:55.552Z"})
+end
+
+#Food and Drink January
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Food and Drink", location: Faker::Restaurant.name, transaction_date: "2019-01-26T22:05:55.552Z"})
+end
+
 
 #Shopping November
-user1.transactions.create({amount: 15, category: "Shopping", location: "Toronto", transaction_date: "2019-11-01T10:35:17.552Z"})
-user1.transactions.create({amount: 25, category: "Shopping", location: "Toronto", transaction_date: "2019-11-01T10:35:17.552Z"})
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Shopping", location: Faker::Company.name, transaction_date: "2019-11-26T22:05:55.552Z"})
+end
+
 
 #Shopping October
-user1.transactions.create({amount: 15, category: "Shopping", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
-user1.transactions.create({amount: 25, category: "Shopping", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
-user1.transactions.create({amount: 75, category: "Shopping", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
-user1.transactions.create({amount: 15, category: "Shopping", location: "Toronto", transaction_date: "2019-10-26T22:05:55.552Z"})
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Shopping", location: Faker::Company.name, transaction_date: "2019-10-26T22:05:55.552Z"})
+end
 
+#Shopping September
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Shopping", location: Faker::Company.name, transaction_date: "2019-09-26T22:05:55.552Z"})
+end
 #Shopping August
-user1.transactions.create({amount: 15, category: "Shopping", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
-user1.transactions.create({amount: 25, category: "Shopping", location: "Toronto", transaction_date: "2019-08-26T22:05:55.552Z"})
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Shopping", location: Faker::Company.name, transaction_date: "2019-08-26T22:05:55.552Z"})
+end
+#Shopping July
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Shopping", location: Faker::Company.name, transaction_date: "2019-07-26T22:05:55.552Z"})
+end
+#Shopping June
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Shopping", location: Faker::Company.name, transaction_date: "2019-06-26T22:05:55.552Z"})
+end
+#Shopping May
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Shopping", location: Faker::Company.name, transaction_date: "2019-05-26T22:05:55.552Z"})
+end
+#Shopping April
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Shopping", location: Faker::Company.name, transaction_date: "2019-04-26T22:05:55.552Z"})
+end
+#Shopping March
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Shopping", location: Faker::Company.name, transaction_date: "2019-03-26T22:05:55.552Z"})
+end
+#Shopping February
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Shopping", location: Faker::Company.name, transaction_date: "2019-02-26T22:05:55.552Z"})
+end
+#Shopping January
+(1..20).each do 
+  user1.transactions.create({amount: Faker::Number.decimal(l_digits: 2), category: "Shopping", location: Faker::Company.name, transaction_date: "2019-01-26T22:05:55.552Z"})
+end
 
 #goals
 
@@ -78,8 +229,7 @@ user1.goals.create({end_date: nil, goal_type: "budget", amount: 2000, name: "bud
 user1.goals.create({end_date: nil, goal_type: "budget", amount: 1500, name: "budget"})
 user1.goals.create({end_date: nil, goal_type: "budget", amount: 3000, name: "budget"})
 user1.goals.create({end_date: nil, goal_type: "budget", amount: 3500, name: "budget"})
-user1.goals.create({end_date: nil, goal_type: "budget", amount: 6000, name: "budget"})
+user1.goals.create({end_date: nil, goal_type: "budget", amount: 700, name: "budget"})
 
-user1.goals.create({start_date:"2019-11-01T10:35:17.552Z" , end_date: "2019-11-30T10:35:17.552Z", goal_type: "saving", amount: 200, name: "new phone"})
+user1.goals.create({start_date:"2019-10-01T10:35:17.552Z" , end_date: "2019-11-30T10:35:17.552Z", goal_type: "saving", amount: 400, name: "new phone"})
 user1.goals.create({start_date:"2019-11-21T10:35:17.552Z" , end_date: "2019-12-03T10:35:17.552Z", goal_type: "saving", amount: 300, name: "new watch"})
-user1.goals.create({start_date:"2019-11-01T10:35:17.552Z" , end_date: "2019-12-03T10:35:17.552Z", goal_type: "saving", amount: 300, name: "new watch"})

@@ -7,8 +7,8 @@ import "../styles/SingleTransaction.sass";
 const SingleTransaction = ({ amount, location, transactionDate, category }) => {
   return (
     <div>
-      <Card>
-        <CardContent className="transaction-card">
+      <Card elevation={0}>
+        <CardContent className="transaction-card" elevation={2}>
           <h4>{location}</h4>
           <div className="transaction-details">
             <div className="transaction-labels">
@@ -16,7 +16,7 @@ const SingleTransaction = ({ amount, location, transactionDate, category }) => {
               <p>Date:</p>
             </div>
             <div className="transaction-content">
-              <p>${amount}</p>
+              <p>${Number(amount).toFixed(2)}</p>
               <p>{moment(transactionDate).format("MMMM Do YYYY, h:mm:ss a")}</p>
             </div>
           </div>

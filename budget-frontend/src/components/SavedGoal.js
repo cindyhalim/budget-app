@@ -3,7 +3,6 @@ import { Card, CardContent, CardActions, Button } from "@material-ui/core";
 import GoalForm from "./GoalForm";
 
 export default function SavedGoal(props) {
-  console.log("props in saved goals", props);
   const [goalClicked, setGoalClicked] = useState({ status: false });
   const [goalEdit, setGoalEdit] = useState({
     id: props.id,
@@ -39,7 +38,9 @@ export default function SavedGoal(props) {
             onClick={() => setGoalClicked({ status: !goalClicked.status })}
           >
             <h2>{props.name}</h2>
-            <p class="goal-target">${props.dailyTarget}/day</p>
+            <p className="goal-target">
+              {props.completed ? "Completed" : `$${props.dailyTarget}/day`}
+            </p>
           </div>
           <div
             className="goal-extra-info"
