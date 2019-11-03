@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2019_11_01_235336) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "hp", default: 100
     t.integer "coins", default: 20
+    t.date "date_last_checked", default: "2000-01-01"
   end
 
   add_foreign_key "goals", "users"

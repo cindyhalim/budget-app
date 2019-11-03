@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :transactions, only: [:index, :create]
   delete :logout, to: "sessions#logout"
   get :logged_in, to: "sessions#logged_in"
+  get :check_budget_met, to: "goals#check_budget_met"
 end
