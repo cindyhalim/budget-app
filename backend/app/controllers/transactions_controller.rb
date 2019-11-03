@@ -37,7 +37,7 @@ class TransactionsController < ApplicationController
         @total = (@transactions.map do |transaction| 
           ((transaction.amount).to_i).ceil end).reduce(0, :+)
         render json: {
-          budget: (@budget.last.amount/Time.days_in_month(Date::MONTHNAMES.index(params[:month]))).round(2).to_i,
+          budget: (@budget.last.amount),
           total: @total
         }
 

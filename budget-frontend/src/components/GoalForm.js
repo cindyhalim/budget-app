@@ -32,6 +32,7 @@ export default function GoalForm(props) {
         props.setRefreshGoals(!props.refreshGoals);
         props.setActive(!props.active);
       }}
+      className="goal-form"
     >
       <button
         type="button"
@@ -44,7 +45,7 @@ export default function GoalForm(props) {
       <TextField
         label="Name"
         name="name"
-        maxLength="20"
+        inputProps={{ maxLength: 20 }}
         type="text"
         margin="normal"
         value={formFields.name}

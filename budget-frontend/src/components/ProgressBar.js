@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Progress } from "reactstrap";
+import { Card, CardContent } from "@material-ui/core";
 import axios from "axios";
 
 const ProgressBar = () => {
@@ -23,25 +24,31 @@ const ProgressBar = () => {
       });
   }, []);
 
+  const totalSpending = (total / budget) * 100;
+  const totalSaving = (savingGoal / budget) * 100;
+
   return (
-    <div>
-      <Progress multi>
-        <Progress animated bar color="success" value={(total / budget) * 100}>
+    <Card className="progress-card">
+      {/* <CardContent> */}
+      <h3>Daily Progress:</h3>
+      <Progress className="daily-progress" multi>
+        <Progress animated bar color="success" value={totalSpending}>
           {total}
+        </Progress>
+        <Progress animated bar color="warning" value={totalSaving}>
+          {savingGoal}
         </Progress>
         <Progress
           animated
           bar
-          color="warning"
-          value={(savingGoal / budget) * 100}
+          color="danger"
+          value={100 - (totalSpending + totalSaving)}
         >
-          {savingGoal}
-        </Progress>
-        <Progress animated bar color="danger" value="20">
           UH...OH BRUH
         </Progress>
       </Progress>
-    </div>
+      {/* </CardContent> */}
+    </Card>
   );
 };
 

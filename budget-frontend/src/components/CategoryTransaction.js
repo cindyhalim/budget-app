@@ -5,6 +5,8 @@ import TablePagination from "@material-ui/core/TablePagination";
 
 import "../styles/CategoryTransaction.sass";
 
+import "../styles/CategoryTransaction.sass";
+
 const CategoryTransaction = ({ category, pieMonth }) => {
   const [allTransactions, setAllTransactions] = useState([]);
   const [page, setPage] = useState(0);

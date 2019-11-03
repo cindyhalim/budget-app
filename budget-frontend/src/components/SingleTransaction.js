@@ -4,7 +4,7 @@ import moment from "moment";
 
 import "../styles/SingleTransaction.sass";
 
-const SingleTransaction = ({ amount, location, transactionDate, category }) => {
+const SingleTransaction = ({ amount, location, transactionDate }) => {
   return (
     <div>
       <Card elevation={0}>

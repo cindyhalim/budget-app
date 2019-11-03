@@ -4,7 +4,6 @@ import Highcharts from "highcharts";
 import MonthOptions from "./MonthOptions";
 import CategoryTransaction from "./CategoryTransaction";
 import { useFormControl } from "@material-ui/core/FormControl";
-
 export default function Piechart() {
   const [transactions, setTransactions] = useState([]);
   const [monthTotal, setMonthTotal] = useState(0);
@@ -12,7 +11,6 @@ export default function Piechart() {
     new Date().toLocaleString("default", { month: "long" })
   );
   const [category, setCategory] = useState("All Transactions");
-
   useEffect(() => {
     axios
       .get(`http://localhost:3000/transactions/?month=${pieMonth}&type=pie`, {
@@ -27,7 +25,6 @@ export default function Piechart() {
         }
       });
   }, [pieMonth]);
-
   useEffect(() => {
     if (transactions.length > 0) {
       Highcharts.chart({
@@ -99,7 +96,6 @@ export default function Piechart() {
       });
     }
   }, [transactions]);
-
   return (
     <div>
       <MonthOptions month={pieMonth} setMonth={setPieMonth} />

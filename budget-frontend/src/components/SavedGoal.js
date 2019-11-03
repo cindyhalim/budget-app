@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Card, CardContent } from "@material-ui/core";
+import { Card, CardContent, CardActions, Button } from "@material-ui/core";
 import GoalForm from "./GoalForm";
 
 export default function SavedGoal(props) {
-  console.log("props in saved goals", props);
   const [goalClicked, setGoalClicked] = useState({ status: false });
   const [goalEdit, setGoalEdit] = useState({
     id: props.id,
@@ -31,63 +30,75 @@ export default function SavedGoal(props) {
   };
 
   return (
-    <div>
-      <Card>
-        {goalClicked.status !== "edit" && (
-          <CardContent>
-            <div
-              onClick={() => setGoalClicked({ status: !goalClicked.status })}
-            >
-              <h2>Goal: {props.name}</h2>
-              <h4>
-                {props.completed ? "Completed" : `$${props.dailyTarget}/day`}
-              </h4>
-            </div>
-            <div style={{ display: goalClicked.status ? "block" : "none" }}>
-              <h4>Total: {props.amount}</h4>
-              <h4>
-                Start date:{" "}
-                {new Date(props.startDate).toLocaleString("default", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric"
-                })}
-              </h4>
-              <h4>
-                End date:{" "}
-                {new Date(props.endDate).toLocaleString("default", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric"
-                })}
-              </h4>
-              <button onClick={() => setGoalClicked({ status: "edit" })}>
-                Edit
-              </button>
-              <button onClick={() => props.onDelete(goalEdit)}>Delete</button>
-            </div>
-          </CardContent>
-        )}
+    <Card className="goal-card">
+      {goalClicked.status !== "edit" && (
         <CardContent>
-          {goalClicked.status === "edit" && (
-            <div>
-              <GoalForm
-                key={props.id}
-                id={props.id}
-                active={goalClicked}
-                setActive={setGoalClicked}
-                name={goalEdit.name}
-                amount={goalEdit.amount}
-                start_date={goalEdit.start_date}
-                end_date={goalEdit.end_date}
-                onSave={data => editGoal(data)}
-                refreshGoals={props.refreshGoals}
-                setRefreshGoals={props.setRefreshGoals}
-              />
-            </div>
-          )}
+          <div
+            className="goal-main-info"
+            onClick={() => setGoalClicked({ status: !goalClicked.status })}
+          >
+            <h2>{props.name}</h2>
+            <p className="goal-target">
+              {props.completed ? "Completed" : `$${props.dailyTarget}/day`}
+            </p>
+          </div>
+          <div
+            className="goal-extra-info"
+            style={{ display: goalClicked.status ? "block" : "none" }}
+          >
+            <p>
+              {new Date(props.startDate).toLocaleString("default", {
+                month: "short",
+                day: "numeric",
+                year: "numeric"
+              })}{" "}
+              -{" "}
+              {new Date(props.endDate).toLocaleString("default", {
+                month: "short",
+                day: "numeric",
+                year: "numeric"
+              })}
+              <p>Total: ${parseInt(props.amount)}</p>
+            </p>
+            <CardActions className="card-buttons">
+              <Button
+                size="small"
+                color="#ef5350"
+                onClick={() => setGoalClicked({ status: "edit" })}
+              >
+                Edit
+              </Button>
+              <Button
+                size="small"
+                color="primary"
+                onClick={() => props.onDelete(goalEdit)}
+              >
+                Delete
+              </Button>
+            </CardActions>
+          </div>
         </CardContent>
-      </Card>
-    </div>
+      )}
+
+      {goalClicked.status === "edit" && (
+        <CardContent>
+          <div>
+            <GoalForm
+              key={props.id}
+              id={props.id}
+              active={goalClicked}
+              setActive={setGoalClicked}
+              name={goalEdit.name}
+              amount={goalEdit.amount}
+              start_date={goalEdit.start_date}
+              end_date={goalEdit.end_date}
+              onSave={data => editGoal(data)}
+              refreshGoals={props.refreshGoals}
+              setRefreshGoals={props.setRefreshGoals}
+            />
+          </div>
+        </CardContent>
+      )}
+    </Card>
   );
 }
