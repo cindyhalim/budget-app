@@ -5,6 +5,7 @@ import MonthOptions from "./MonthOptions";
 import CategoryTransaction from "./CategoryTransaction";
 import { useFormControl } from "@material-ui/core/FormControl";
 
+import "../styles/Piechart.sass";
 export default function Piechart() {
   const [transactions, setTransactions] = useState([]);
   const [monthTotal, setMonthTotal] = useState(0);
@@ -102,7 +103,11 @@ export default function Piechart() {
 
   return (
     <div>
-      <MonthOptions month={pieMonth} setMonth={setPieMonth} />
+      <MonthOptions
+        month={pieMonth}
+        setMonth={setPieMonth}
+        className="piechart-month-options"
+      />
       {transactions.length === 0 && (
         <div> You don't have Transactions for this month</div>
       )}

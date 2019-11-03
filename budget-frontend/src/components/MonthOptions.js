@@ -26,24 +26,7 @@ const MonthOptions = ({ month, setMonth }) => {
 
   return (
     <div>
-      {/* <Select
-        name=""
-        id="select"
-        onChange={e => {
-          setMonth(e.target.value);
-        }}
-      >
-        {months.map((month, index) => (
-          <MenuItem
-            key={index}
-            value={month}
-            selected={month === isCurrentMonth}
-          >
-            {month}
-          </MenuItem>
-        ))}
-      </Select> */}
-      <FormControl variant="filled">
+      <FormControl>
         <InputLabel id="demo-simple-select-outlined-label">Month</InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
