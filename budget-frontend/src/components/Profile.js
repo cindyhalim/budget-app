@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 import Navbar from "./Navbar";
 import { datePickerDefaultProps } from "@material-ui/pickers/constants/prop-types";
 import EditProfile from "./EditProfile";
@@ -20,7 +21,7 @@ export default function Profile(props) {
           <div className="header-profile">
             {/* <p className="username">Hi {props.logInStatus.user.name}</p> */}
             <p className="profile-text">Profile Page</p>
-            <button
+            <Button
               className="logout"
               onClick={() => {
                 props.logOutClick();
@@ -28,7 +29,7 @@ export default function Profile(props) {
               }}
             >
               Logout
-            </button>
+            </Button>
           </div>
         </div>
         <div className="description">
@@ -38,21 +39,21 @@ export default function Profile(props) {
           </p>
         </div>
         <div className="edit-fields">
-          <button
+          <Button
             className="edit-user-fields-button"
             onClick={() => setOpenEdit(!openEdit)}
           >
             Edit Profile
-          </button>
+          </Button>
           {openEdit ? (
             <EditProfile closeEditProfile={() => setOpenEdit(false)} />
           ) : null}
-          <button
+          <Button
             className="edit-budget-fields-button"
             onClick={() => setOpenBudget(!openBudget)}
           >
             Edit Budget
-          </button>
+          </Button>
           {openBudget ? (
             <EditBudget closeEditBudget={() => setOpenBudget(false)} />
           ) : null}
