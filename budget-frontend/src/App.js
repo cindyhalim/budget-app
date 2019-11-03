@@ -33,6 +33,18 @@ export default function App() {
     }
   };
 
+  function updateHealthAndCoins(coins, hp) {
+    axios.update(`http://localhost:3000/update_attr/?coins=${coins}&hp=${hp}`);
+    setLogInStatus({
+      ...logInStatus,
+      user: {
+        ...logInStatus.user,
+        coins: logInStatus.user.coins - coins,
+        hp: logInStatus.user.hp + hp
+      }
+    });
+  }
+
   const logOutClick = () => {
     axios
       .delete("http://localhost:3000/logout", { withCredentials: true })
