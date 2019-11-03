@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
+import SwipeableViews from "react-swipeable-views";
+import MobileStepper from "@material-ui/core/MobileStepper";
+import { Card, CardContent } from "@material-ui/core";
+
 import moment from "moment";
 import axios from "axios";
+
 import Navbar from "./Navbar";
 import CreateGoal from "./CreateGoal";
 import DashboardProfile from "./DashboardProfile";
 import SavedGoal from "./SavedGoal";
 import ProgressBar from "./ProgressBar";
-import { Grid } from "@material-ui/core";
+import TopSpending from "./TopSpending";
 import MonthlyProgressBar from "./MonthlyProgressBar";
 
 import "../styles/Dashboard.sass";
+
 export default function Dashboard(props) {
   props.checkLogInStatus();
   const [newGoal, setNewGoal] = useState({
@@ -89,8 +95,19 @@ export default function Dashboard(props) {
       />
 
       <h1 class="date-now">{moment().format("MMMM Do, YYYY")}</h1>
-      <ProgressBar />
-      {/* <MonthlyProgressBar /> */}
+      <SwipeableViews index="1">
+        <TopSpending />
+        <ProgressBar />
+        <MonthlyProgressBar />
+      </SwipeableViews>
+      <MobileStepper
+        className="register-stepper"
+        variant="dots"
+        steps={3}
+        position="static"
+        // activeStep={activeStep}
+      />
+
       <section className="goals">
         <h3>Saving Goals:</h3>
         <CreateGoal

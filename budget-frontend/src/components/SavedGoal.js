@@ -60,10 +60,10 @@ export default function SavedGoal(props) {
               })}
               <p>Total: ${parseInt(props.amount)}</p>
             </p>
-            <CardActions>
+            <CardActions className="card-buttons">
               <Button
                 size="small"
-                color="primary"
+                color="#ef5350"
                 onClick={() => setGoalClicked({ status: "edit" })}
               >
                 Edit
