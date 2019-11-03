@@ -5,7 +5,7 @@ class TransactionsController < ApplicationController
     @total_for_month = user.transactions.select("sum(amount) as total").where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day)
     
     @transactions = user.transactions.select("category,sum(amount) as amount").where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day).group("category")
-
+  
 
     if @transactions.length == 0
       render json: {transactions: []}
@@ -42,9 +42,10 @@ class TransactionsController < ApplicationController
         }
 
       elsif params[:type] === "pie"        
-        @percent = @transactions.map do |transaction|     
+        @percent = @transactions.map do |transaction| 
+     
           {
-            name: transaction.category, y: (transaction.amount/@total_for_month[0].total * 100).round(2).to_i
+            name: transaction.category, y: (transaction.amount/@total_for_month[0].total * 100).to_f
           } 
         end
         render json: {transactions: @percent, total: @total_for_month}
