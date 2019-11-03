@@ -25,13 +25,15 @@ const MonthlyProgressBar = () => {
   return (
     <Card className="progress-card">
       <h3>Monthly Progress:</h3>
-      <Progress
-        className="monthly-progress"
-        bar
-        color="success"
-        value={(total / budget) * 100}
-      >
-        {(total / budget) * 100}%
+      <Progress className="monthly-progress" value={100}>
+        <Progress
+          className="monthly-progress"
+          bar
+          color="success"
+          value={(total / budget) * 100}
+        >
+          {(total / budget) * 100}%
+        </Progress>
       </Progress>
     </Card>
   );

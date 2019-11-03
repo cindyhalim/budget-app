@@ -28,6 +28,19 @@ export default function Dashboard(props) {
     },
     goals: []
   });
+  const [progressActiveStep, setProgressActiveStep] = useState(1);
+
+  const handleNextSwipe = () => {
+    if (progressActiveStep <= 2) {
+      setProgressActiveStep(prevActiveStep => prevActiveStep + 1);
+    }
+  };
+
+  const handleBackSwipe = () => {
+    if (progressActiveStep >= 0) {
+      setProgressActiveStep(prevActiveStep => prevActiveStep - 1);
+    }
+  };
 
   const findGoalIndexById = (id, arr) => {
     for (let i = 0; i < arr.length; i++) {
@@ -95,17 +108,22 @@ export default function Dashboard(props) {
       />
 
       <h1 class="date-now">{moment().format("MMMM Do, YYYY")}</h1>
-      <SwipeableViews index="1">
+      <SwipeableViews
+        index="1"
+        onChangeIndex={(index, indexLatest) => {
+          index > indexLatest ? handleNextSwipe() : handleBackSwipe();
+        }}
+      >
         <TopSpending />
         <ProgressBar />
         <MonthlyProgressBar />
       </SwipeableViews>
       <MobileStepper
-        className="register-stepper"
+        className="progress-stepper"
         variant="dots"
         steps={3}
         position="static"
-        // activeStep={activeStep}
+        activeStep={progressActiveStep}
       />
 
       <section className="goals">
