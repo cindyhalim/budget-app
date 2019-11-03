@@ -45,9 +45,9 @@ const CategoryTransaction = ({ category, pieMonth }) => {
 
   return (
     <div>
-      {filteredTransaction.length > 0 && (
+      {/* {filteredTransaction.length > 0 && (
         <p> Please Click on pie slice to get transactions for that category</p>
-      )}
+      )} */}
       <h3 className="category-title-selected">
         {category ? category : "All Transactions"}
       </h3>

@@ -4,6 +4,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 
+import "../styles/MonthOptions.sass";
+
 const months = [
   "January",
   "February",
@@ -26,7 +28,7 @@ const MonthOptions = ({ month, setMonth }) => {
 
   return (
     <div>
-      <FormControl>
+      <FormControl className="monthly-options-list">
         <InputLabel id="demo-simple-select-outlined-label">Month</InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"

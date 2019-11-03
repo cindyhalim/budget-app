@@ -103,13 +103,13 @@ export default function Piechart() {
 
   return (
     <div>
-      <MonthOptions
-        month={pieMonth}
-        setMonth={setPieMonth}
-        className="piechart-month-options"
-      />
+      <div className="piechart-month-options">
+        <MonthOptions month={pieMonth} setMonth={setPieMonth} />
+      </div>
       {transactions.length === 0 && (
-        <div> You don't have Transactions for this month</div>
+        <div className="no-transactions-error">
+          You don't have Transactions for this month
+        </div>
       )}
       {transactions.length > 0 && (
         <div>

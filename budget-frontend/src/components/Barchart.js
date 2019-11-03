@@ -3,6 +3,7 @@ import Highcharts from "highcharts";
 import MonthOptions from "./MonthOptions";
 import axios from "axios";
 
+import "../styles/Barchart.sass";
 export default function Barchart() {
   const [bar1Month, setBar1Month] = useState(
     new Date().toLocaleString("default", { month: "long" })
@@ -35,7 +36,7 @@ export default function Barchart() {
         renderTo: "bar-expenses-graph"
       },
       title: {
-        text: "This year"
+        text: "This Year"
       },
       xAxis: {
         categories: bar2Month ? [bar1Month, bar2Month] : [bar1Month],
@@ -105,8 +106,11 @@ export default function Barchart() {
 
   return (
     <div>
-      <MonthOptions month={bar1Month} setMonth={setBar1Month} />
-      <MonthOptions month={bar2Month} setMonth={setBar2Month} />
+      <div className="barchart-month-options">
+        <MonthOptions month={bar1Month} setMonth={setBar1Month} />
+        <div>Vs</div>
+        <MonthOptions month={bar2Month} setMonth={setBar2Month} />
+      </div>
       <div id="bar-expenses-graph">BAR CHART</div>
     </div>
   );
