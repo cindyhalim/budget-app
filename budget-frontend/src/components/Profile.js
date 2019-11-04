@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
 import Navbar from "./Navbar";
-import { datePickerDefaultProps } from "@material-ui/pickers/constants/prop-types";
 import EditProfile from "./EditProfile";
 import EditBudget from "./EditBudget";
 import "../styles/ProfilePage.sass";
@@ -18,11 +17,9 @@ export default function Profile(props) {
     <div>
       <div className="profile-page">
         <div className="header">
-          <img src="pig.png" className="avatar"></img>
-          <div className="header-profile">
-            {/* <p className="username">Hi {props.logInStatus.user.name}</p> */}
-            <p className="profile-text">Profile Page</p>
-            <Button
+          <div className="header-left">
+            <img src="pig.png" className="avatar"></img>
+            <p
               className="logout"
               onClick={() => {
                 props.logOutClick();
@@ -30,7 +27,12 @@ export default function Profile(props) {
               }}
             >
               Logout
-            </Button>
+            </p>
+          </div>
+          <div className="header-profile">
+            {/* <p className="username">Hi {props.logInStatus.user.name}</p> */}
+            <p className="profile-username">{props.logInStatus.user.name}</p>
+            <p className="profile-email">{props.logInStatus.user.email}</p>
           </div>
         </div>
         <div className="description">
@@ -47,7 +49,12 @@ export default function Profile(props) {
             Edit Profile
           </Button>
           {openEdit ? (
-            <EditProfile closeEditProfile={() => setOpenEdit(false)} />
+            <EditProfile
+              id={props.logInStatus.user.id}
+              setLoginStatus={props.setLoginStatus}
+              logInStatus={props.logInStatus}
+              closeEditProfile={() => setOpenEdit(false)}
+            />
           ) : null}
           <Button
             className="edit-budget-fields-button"
