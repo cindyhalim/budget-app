@@ -28,6 +28,7 @@ export default function Piechart() {
         }
       });
   }, [pieMonth]);
+
   useEffect(() => {
     if (transactions.length > 0) {
       Highcharts.chart({
@@ -101,6 +102,7 @@ export default function Piechart() {
       });
     }
   }, [transactions]);
+
   return (
     <div>
       <div className="piechart-month-options">
@@ -108,7 +110,7 @@ export default function Piechart() {
       </div>
       {transactions.length === 0 && (
         <div className="no-transactions-error">
-          You don't have Transactions for this month
+          You have no transactions for this month
         </div>
       )}
       {transactions.length > 0 && (

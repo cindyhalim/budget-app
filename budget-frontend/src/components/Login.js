@@ -27,7 +27,7 @@ export default function Login(props) {
       .then(res => {
         if (res.data.logged_in) {
           props.handleLogin(res.data.user[0]);
-          history.push("/dashboard");
+          history.push("/home");
         }
       })
       .catch(err => {
@@ -60,14 +60,22 @@ export default function Login(props) {
           onChange={event => handleChange(event)}
           required
         />
-        <Button type="submit" variant="contained" color="" className="button">
+        <Button
+          type="submit"
+          variant="contained"
+          color=""
+          className="login button"
+        >
           Login
         </Button>
-        <Link to="/register">
-          <Button variant="contained" color="" className="button">
-            Register
-          </Button>
-        </Link>
+        <Button
+          variant="contained"
+          color=""
+          className="button"
+          onClick={() => history.push("/register")}
+        >
+          Register
+        </Button>
       </form>
     </div>
   );
