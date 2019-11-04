@@ -71,10 +71,10 @@ export default function Store(props) {
               </div>
             </div>
           </div>
-          <p>
+          <div>
             You have met your budget <strong>{props.budgetAchieved}</strong>{" "}
             times this year
-          </p>
+          </div>
           <div className="badge-collection-card">
             <div className="market-title">My Badges</div>
             {Array.from(props.images).length > 0 &&
