@@ -33,6 +33,24 @@ class TransactionsController < ApplicationController
           toSave: @to_save_amount
         }
 
+      elsif params[:type] ==="budgetchart"
+        @budget = user.goals.where('goal_type = "budget"')
+        current_year = DateTime.now.year
+        current_month = DateTime.now.mon
+
+        monthly_transactions = {}
+
+        (1..current_month).each do |month|
+	        start_of_month = DateTime.civil_from_format :utc, current_year, month
+          end_of_month = start_of_month.end_of_month
+
+          monthly_transactions_sum = user.transactions.where(transaction_date: start_of_month..end_of_month).pluck(:amount).sum.to_f.round(2)
+
+          monthly_transactions[Date::MONTHNAMES[month][0,3]] = monthly_transactions_sum
+        end
+
+        render json: {transactions: monthly_transactions, budget: @budget.last.amount.to_f }
+
       elsif params[:type] === "alltransactions"
         @alltransactions = user.transactions.where('transaction_date BETWEEN ? AND ?', Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day)
         render json: {allTransactions: @alltransactions} 

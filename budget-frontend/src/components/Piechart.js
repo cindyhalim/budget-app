@@ -91,7 +91,7 @@ export default function Piechart() {
             );
           }
         },
-        colors: ["#FAD331", "#64b5f6", "#b39ddb", "#ef5350"],
+        colors: ["#FAD331", "#64b5f6", "#b39ddb", "#ef6c00"],
         series: [
           {
             name: "Expenses",
