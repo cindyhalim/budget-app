@@ -17,11 +17,15 @@ import "../styles/Analytics.sass";
 export default function Analytics() {
   const [chart, setChart] = useState("Current Breakdown");
   const history = useHistory();
-  console.log(history.location.pathname);
+  const [category, setCategory] = useState("All Transactions");
 
   const chartDropdown = {
-    "Current Breakdown": <Piechart />,
-    "Monthly Comparison": <Barchart />,
+    "Current Breakdown": (
+      <Piechart category={category} setCategory={setCategory} />
+    ),
+    "Monthly Comparison": (
+      <Barchart category={category} setCategory={setCategory} />
+    ),
     "Budget Comparison": <Budgetchart />
   };
 

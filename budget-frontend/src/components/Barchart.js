@@ -5,7 +5,7 @@ import axios from "axios";
 
 import "../styles/Barchart.sass";
 
-export default function Barchart() {
+export default function Barchart({ category, setCategory }) {
   const [bar1Month, setBar1Month] = useState(
     new Date().toLocaleString("default", { month: "long" })
   );
@@ -96,9 +96,17 @@ export default function Barchart() {
   return (
     <div>
       <div className="barchart-month-options">
-        <MonthOptions month={bar1Month} setMonth={setBar1Month} />
+        <MonthOptions
+          month={bar1Month}
+          setMonth={setBar1Month}
+          setCategory={setCategory}
+        />
         <div>Vs</div>
-        <MonthOptions month={bar2Month} setMonth={setBar2Month} />
+        <MonthOptions
+          month={bar2Month}
+          setMonth={setBar2Month}
+          setCategory={setCategory}
+        />
       </div>
       <div id="bar-expenses-graph">BAR CHART</div>
     </div>
