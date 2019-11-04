@@ -18,32 +18,40 @@ export default function Store(props) {
           <div className="inventory-title">Inventory</div>
           <div className="coins-inventory">
             <div className="coin-title">Coins:</div>
-            <div>
-              {props.coins}
-              <img src="coins.jpg" style={{ height: "30px", width: "30px" }} />
+            <div className="coin-count">
+              <div>{props.coins}</div>
+              <div>
+                <img
+                  src="coins.jpg"
+                  style={{ height: "30px", width: "30px" }}
+                />
+              </div>
             </div>
           </div>
         </div>
         <div className="market-card">
           <div className="market-title">Market</div>
-          <img src="potion.png" style={{ height: "30px", width: "30px" }} />
-          <div>Heal 20 HP</div>
-          Cost: 20
-          <img src="coins.jpg" style={{ height: "30px", width: "30px" }} />
-          <button
-            onClick={() => {
-              if (props.hp !== 100 && props.coins >= 20) {
-                props.subtractCoinsAddHP(-20, 20);
-              } else if (props.coins < 20) {
-                alert("You don't have enough money");
-              } else {
-                alert("Your health is already full");
-              }
-            }}
-            className="buy-button"
-          >
-            Buy
-          </button>
+          <div className="potion-market">
+            <div>Potion</div>
+            <img src="potion.png" style={{ height: "30px", width: "30px" }} />
+            <div>Heals 20 HP</div>
+            20
+            <img src="coins.jpg" style={{ height: "30px", width: "30px" }} />
+            <button
+              onClick={() => {
+                if (props.hp !== 100 && props.coins >= 20) {
+                  props.subtractCoinsAddHP(-20, 20);
+                } else if (props.coins < 20) {
+                  alert("You don't have enough money");
+                } else {
+                  alert("Your health is already full");
+                }
+              }}
+              className="buy-button"
+            >
+              Buy
+            </button>
+          </div>
         </div>
         <div>
           <p>
