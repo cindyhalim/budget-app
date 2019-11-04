@@ -32,6 +32,13 @@ export default function Store(props) {
           Buy
         </button>
       </div>
+      <div>
+        <p>
+          You have met your budget <strong>{props.budgetAchieved}</strong> times
+          this year
+        </p>
+        <p>See your badges below:</p>
+      </div>
       <Navbar />
     </div>
   );

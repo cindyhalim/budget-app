@@ -159,6 +159,7 @@ export default function App() {
               subtractCoinsAddHP={(hp, coins) =>
                 updateHealthAndCoins(hp, coins)
               }
+              budgetAchieved={logInStatus.user.num_times_bud_met}
             />
           )}
         />
