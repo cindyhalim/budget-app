@@ -18,7 +18,7 @@ class GoalsController < ApplicationController
 
       else
         user.update(coins: user.coins + 20)
-        user.update(date_last_checked: Date.today)
+        user.update(date_last_checked: Date.today, num_times_bud_met: user.num_times_bud_met + 1)
       end
     end
     render json: {user: user}

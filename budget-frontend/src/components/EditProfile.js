@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import "../styles/EditProfile.sass";
+import Button from "@material-ui/core/Button";
+import { TextField, CardContent, Card } from "@material-ui/core";
 
 export default function EditProfile(props) {
   const [updatedParams, setUpdatedParams] = useState({
@@ -7,38 +10,56 @@ export default function EditProfile(props) {
     email: ""
   });
   return (
-    <div>
-      <form>
-        <input
-          type="text"
-          placeholder="name"
-          //   value={updatedParams.name}
-          //   onChange={e =>
-          //     setUpdatedParams({ ...updatedParams, name: e.target.value })
-          //   }
-        ></input>
-        <input
-          type="text"
-          placeholder="username"
-          //   value={updatedParams.username}
-          //   onChange={e =>
-          //     setUpdatedParams({ ...updatedParams, username: e.target.value })
-          //   }
-        ></input>
-        <input
-          type="text"
-          placeholder="email"
-          //   value={updatedParams.email}
-          //   onChange={e =>
-          //     setUpdatedParams({ ...updatedParams, email: e.target.value })
-          //   }
-        ></input>
-        <input type="text" placeholder="password"></input>
-        <input type="text" placeholder="re-enter password"></input>
-        <button type="submit" onClick={() => props.closeEditProfile()}>
-          Save
-        </button>
-      </form>
+    <div className="edit-profile" style={{ width: "100%" }}>
+      <Card>
+        <CardContent>
+          <form
+            className="edit-profile-form"
+            onSubmit={() => props.closeEditProfile()}
+          >
+            <div className="text-fields">
+              <TextField
+                required
+                style={{ margin: "5px", width: "80%" }}
+                type="text"
+                placeholder="Name"
+                //   value={updatedParams.name}
+                //   onChange={e =>
+                //     setUpdatedParams({ ...updatedParams, name: e.target.value })
+                //   }
+              ></TextField>
+              <br />
+              <TextField
+                required
+                style={{ margin: "5px", width: "80%" }}
+                type="text"
+                placeholder="Email"
+                //   value={updatedParams.email}
+                //   onChange={e =>
+                //     setUpdatedParams({ ...updatedParams, email: e.target.value })
+                //   }
+              ></TextField>
+              <br />
+              <TextField
+                required
+                style={{ margin: "5px", width: "80%" }}
+                type="text"
+                placeholder="Password"
+              ></TextField>
+              <br />
+              <TextField
+                required
+                style={{ margin: "5px", width: "80%" }}
+                type="text"
+                placeholder="Re-Enter Password"
+              ></TextField>
+            </div>
+            <div className="submit-button">
+              <Button type="submit">Save</Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 }

@@ -23,13 +23,16 @@ const MonthlyProgressBar = () => {
   }, []);
 
   const percentMonthlySpending = (total / budget) * 100;
+
   const checkMonthlySpending = spending => {
-    if (spending >= 0 && spending < 50) {
-      return "success";
-    } else if (spending >= 50 && spending < 80) {
-      return "warning";
-    } else {
-      return "danger";
+    if (spending) {
+      if (spending >= 0 && spending < 50) {
+        return "success";
+      } else if (spending >= 50 && spending < 80) {
+        return "warning";
+      } else {
+        return "danger";
+      }
     }
   };
 
@@ -43,7 +46,7 @@ const MonthlyProgressBar = () => {
           color={checkMonthlySpending(percentMonthlySpending)}
           value={percentMonthlySpending}
         >
-          {percentMonthlySpending}%
+          {total ? `${percentMonthlySpending}%` : ""}
         </Progress>
       </Progress>
     </Card>

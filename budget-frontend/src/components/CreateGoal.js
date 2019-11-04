@@ -23,8 +23,10 @@ export default function CreateGoal(props) {
         { withCredentials: true }
       )
       .then(() => {
+        props.setRefreshGoals(!props.refreshGoals);
         setActive(!active);
-      });
+      })
+      .catch(err => console.log("error posting", err));
   };
 
   return (

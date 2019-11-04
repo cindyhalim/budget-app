@@ -9,6 +9,7 @@ import Onboarding from "./components/Onboarding";
 import Analytics from "./components/Analytics";
 import Profile from "./components/Profile";
 import Store from "./components/Store";
+import Navbar from "./components/Navbar";
 
 export default function App() {
   const [logInStatus, setLogInStatus] = useState({
@@ -32,6 +33,20 @@ export default function App() {
       });
     }
   };
+
+  function updateHealthAndCoins(coins, hp) {
+    axios.get(`http://localhost:3000/game/?coins=${coins}&hp=${hp}`, {
+      withCredentials: true
+    });
+    setLogInStatus({
+      ...logInStatus,
+      user: {
+        ...logInStatus.user,
+        coins: logInStatus.user.coins + coins,
+        hp: logInStatus.user.hp + hp
+      }
+    });
+  }
 
   const logOutClick = () => {
     axios
@@ -142,17 +157,10 @@ export default function App() {
               checkLogInStatus={checkLogInStatus}
               coins={logInStatus.user.coins}
               hp={logInStatus.user.hp}
-              subtractCoinsAddHP={(hp, coins) => {
-                console.log(logInStatus.user.coins);
-                setLogInStatus({
-                  ...logInStatus,
-                  user: {
-                    ...logInStatus.user,
-                    coins: logInStatus.user.coins - coins,
-                    hp: logInStatus.user.hp + hp
-                  }
-                });
-              }}
+              subtractCoinsAddHP={(hp, coins) =>
+                updateHealthAndCoins(hp, coins)
+              }
+              budgetAchieved={logInStatus.user.num_times_bud_met}
             />
           )}
         />

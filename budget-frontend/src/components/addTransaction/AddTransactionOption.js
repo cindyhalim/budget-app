@@ -31,9 +31,15 @@ export default function AddTransactionOption(props) {
     formData.append("image", selectedFile);
     Axios.post("http://localhost:3000/image_recognition", formData).then(
       res => {
+        let textRes = res.data.responses[0].fullTextAnnotation.text
+        let amount = 0
+        if (textRes.includes("McDonald's")) {
+          amount = Number(textRes.split(/(\r\n|\n|\r)/gm).filter(item => item.includes("$") && item.includes("."))[0].slice(2));
+
+        }
         setTransactionData({
           ...transactionData,
-          amount: 5.88,
+          amount: amount,
           location: "McDonald's",
           category: "Food",
           transaction_date: new Date(Date.now())

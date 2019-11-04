@@ -1,0 +1,39 @@
+@import "./variables/mixins.sass"
+
+.profile-page
+    padding: 2vh 5vw
+    .header
+        background-color: #e8e9ed
+        box-shadow: 0 0 10px 10px #e8e9ed
+        display: flex
+        flex-direction: row
+        justify-items: center
+        .avatar
+            width: 80px
+            margin: 20px 10px
+            margin-left: 30px
+        .header-profile
+            width: 100%
+            display: flex
+            flex-direction: column
+            align-items: center
+            justify-content: center
+            .profile-text
+                font-size: 25px
+            .logout
+                @include button
+    .description
+        margin-top: 20px
+        font-size: 15px
+    .edit-fields
+        display: flex
+        flex-direction: column
+        align-items: flex-start
+        .edit-user-fields-button
+            @include button
+            background-color: #2b60ff
+            width: 35%
+        .edit-budget-fields-button
+            @include button
+            background-color: #2b60ff
+            width: 35%
