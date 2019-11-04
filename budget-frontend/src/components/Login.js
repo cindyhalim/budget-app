@@ -27,7 +27,7 @@ export default function Login(props) {
       .then(res => {
         if (res.data.logged_in) {
           props.handleLogin(res.data.user[0]);
-          history.push("/dashboard");
+          history.push("/home");
         }
       })
       .catch(err => {

@@ -40,7 +40,7 @@ export default function SavedGoal(props) {
       .then(() => {
         // props.setRefreshGoals(!props.refreshGoals);
       });
-  }, [goalEdit]);
+  }, [goalEdit, props.goals]);
 
   return (
     <Card className="goal-card" style={{ backgroundColor: props.bgColor }}>
