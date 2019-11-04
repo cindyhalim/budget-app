@@ -17,17 +17,19 @@ export default function Store(props) {
         <div className="inventory-card">
           <div className="inventory-title">Inventory</div>
           <div className="coins-inventory">
-            <div>Coins:</div>
+            <div className="coin-title">Coins:</div>
             <div>
-              <img src="coins.jpg" style={{ height: "30px", width: "30px" }} />
               {props.coins}
+              <img src="coins.jpg" style={{ height: "30px", width: "30px" }} />
             </div>
           </div>
         </div>
         <div className="market-card">
           <div className="market-title">Market</div>
           <img src="potion.png" style={{ height: "30px", width: "30px" }} />
-          Cost: 20 Use it to heal 20 HP
+          <div>Heal 20 HP</div>
+          Cost: 20
+          <img src="coins.jpg" style={{ height: "30px", width: "30px" }} />
           <button
             onClick={() => {
               if (props.hp !== 100 && props.coins >= 20) {
@@ -38,6 +40,7 @@ export default function Store(props) {
                 alert("Your health is already full");
               }
             }}
+            className="buy-button"
           >
             Buy
           </button>
