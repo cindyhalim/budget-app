@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
 import Home from "./components/Home";
@@ -17,7 +17,7 @@ export default function App() {
     user: ""
   });
   const [refreshGoals, setRefreshGoals] = useState(false);
-
+  const [image, setImage] = useState(new Set());
   const handleLogin = data => {
     setLogInStatus({
       status: "logged_in",
@@ -33,6 +33,17 @@ export default function App() {
       });
     }
   };
+
+  useEffect(() => {
+    for (let img of [1, 3, 5, 10]) {
+      if (
+        logInStatus.user.num_times_bud_met !== 0 &&
+        img <= logInStatus.user.num_times_bud_met
+      ) {
+        setImage(image.add(`http://localhost:3000/check_badges/?badge=${img}`));
+      }
+    }
+  }, [logInStatus]);
 
   function updateHealthAndCoins(coins, hp) {
     axios.get(`http://localhost:3000/game/?coins=${coins}&hp=${hp}`, {
@@ -84,7 +95,6 @@ export default function App() {
       })
       .catch(err => console.log("check log in error", err));
   };
-  console.log("USER STATE", logInStatus);
   return (
     <Router>
       <Switch>
@@ -99,7 +109,7 @@ export default function App() {
           render={() => <Register handleLogin={handleLogin} />}
         />
         <Route
-          path="/dashboard"
+          path="/home"
           render={() => (
             <Dashboard
               refreshGoals={refreshGoals}
@@ -161,6 +171,7 @@ export default function App() {
                 updateHealthAndCoins(hp, coins)
               }
               budgetAchieved={logInStatus.user.num_times_bud_met}
+              images={image}
             />
           )}
         />

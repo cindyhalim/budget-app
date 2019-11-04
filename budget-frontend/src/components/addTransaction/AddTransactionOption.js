@@ -31,11 +31,15 @@ export default function AddTransactionOption(props) {
     formData.append("image", selectedFile);
     Axios.post("http://localhost:3000/image_recognition", formData).then(
       res => {
-        let textRes = res.data.responses[0].fullTextAnnotation.text
-        let amount = 0
+        let textRes = res.data.responses[0].fullTextAnnotation.text;
+        let amount = 0;
         if (textRes.includes("McDonald's")) {
-          amount = Number(textRes.split(/(\r\n|\n|\r)/gm).filter(item => item.includes("$") && item.includes("."))[0].slice(2));
-
+          amount = Number(
+            textRes
+              .split(/(\r\n|\n|\r)/gm)
+              .filter(item => item.includes("$") && item.includes("."))[0]
+              .slice(2)
+          );
         }
         setTransactionData({
           ...transactionData,
@@ -57,7 +61,7 @@ export default function AddTransactionOption(props) {
         aria-labelledby="simple-dialog-title"
         open={openStatus.list}
       >
-        <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
+        <DialogTitle id="simple-dialog-title">Add Transaction</DialogTitle>
         <List>
           <ListItem onClick={() => fileInputRef.current.click()}>
             Take Picture

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SwipeableViews from "react-swipeable-views";
 import MobileStepper from "@material-ui/core/MobileStepper";
+import { useHistory } from "react-router-dom";
 
 import moment from "moment";
 import axios from "axios";
@@ -17,6 +18,8 @@ import "../styles/Dashboard.sass";
 
 export default function Dashboard(props) {
   props.checkLogInStatus();
+  const history = useHistory();
+  console.log(history.location.pathname);
   const [goals, setGoals] = useState([]);
   const [progressActiveStep, setProgressActiveStep] = useState(1);
 
@@ -128,7 +131,7 @@ export default function Dashboard(props) {
             ))}
         </div>
       </section>
-      <Navbar />
+      <Navbar location={history.location.pathname.slice(1)} />
     </div>
   );
 }

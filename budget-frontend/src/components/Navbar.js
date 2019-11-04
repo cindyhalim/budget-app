@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 import PieChartIcon from "@material-ui/icons/PieChart";
@@ -9,9 +9,22 @@ import StoreMallDirectoryIcon from "@material-ui/icons/StoreMallDirectory";
 import HomeIcon from "@material-ui/icons/Home";
 import AddTransactionOption from "./addTransaction/AddTransactionOption";
 
-export default function Navbar() {
+import { makeStyles } from "@material-ui/core/styles";
+const useStyles = makeStyles({
+  root: {
+    width: 500
+  }
+});
+
+export default function Navbar(props) {
   const [openAddTransaction, setOpenAddTransaction] = useState(false);
-  const [value, setValue] = useState("home");
+  const [value, setValue] = useState(props.location);
+
+  const classes = useStyles();
+
+  useEffect(() => {
+    setValue(props.location);
+  }, [props.location]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -21,31 +34,37 @@ export default function Navbar() {
 
   return (
     <BottomNavigation
+      className={classes.root}
       value={value}
       onClick={handleChange}
       style={{
         position: "fixed",
         bottom: "0",
         width: "100%",
-        backgroundColor: "lightblue"
+        backgroundColor: "#f7f7f7"
       }}
     >
       <BottomNavigationAction
         label="Home"
         value="home"
         icon={<HomeIcon />}
-        containerElement={<Link to="/dashboard" />}
+        onClick={() => {
+          history.push("/home");
+        }}
       />
 
       <BottomNavigationAction
         label="Store"
         value="store"
         icon={<StoreMallDirectoryIcon />}
-        containerElement={<Link to="/store" />}
+        onClick={() => {
+          history.push("/store");
+        }}
       />
 
       <BottomNavigationAction
-        label="Add Paymnet"
+        label="Payment"
+        value="payment"
         onClick={() => setOpenAddTransaction(true)}
         icon={<AddCircleOutlineIcon />}
       />
@@ -53,14 +72,20 @@ export default function Navbar() {
         openAddTransaction={openAddTransaction}
         changeOpenStatus={data => setOpenAddTransaction(data)}
       />
-      <Link to="/analytics">
-        <BottomNavigationAction label="Analytics" icon={<PieChartIcon />}>
-          Analytics
-        </BottomNavigationAction>
-      </Link>
-      <Link to="/profile">
-        <BottomNavigationAction label="Profile" icon={<AccountCircleIcon />} />
-      </Link>
+      <BottomNavigationAction
+        value="analytics"
+        label="Analytics"
+        icon={<PieChartIcon />}
+        onClick={() => {
+          history.push("/analytics");
+        }}
+      />
+      <BottomNavigationAction
+        value="profile"
+        label="Profile"
+        icon={<AccountCircleIcon />}
+        onClick={() => history.push("/profile")}
+      />
     </BottomNavigation>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { BrowserRouter as Redirect, useHistory } from "react-router-dom";
+import { BrowserRouter as Link, useHistory } from "react-router-dom";
 import "../styles/Login.sass";
 import { TextField, Button } from "@material-ui/core";
 
@@ -63,6 +63,11 @@ export default function Login(props) {
         <Button type="submit" variant="contained" color="" className="button">
           Login
         </Button>
+        <Link to="/register">
+          <Button variant="contained" color="" className="button">
+            Register
+          </Button>
+        </Link>
       </form>
     </div>
   );

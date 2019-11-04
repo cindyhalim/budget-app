@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { useHistory } from "react-router-dom";
 import Piechart from "./Piechart";
 import Barchart from "./Barchart";
 import Budgetchart from "./Budgetchart.js";
@@ -16,6 +16,8 @@ import "../styles/Analytics.sass";
 
 export default function Analytics() {
   const [chart, setChart] = useState("Current Breakdown");
+  const history = useHistory();
+  console.log(history.location.pathname);
 
   const chartDropdown = {
     "Current Breakdown": <Piechart />,
@@ -51,7 +53,7 @@ export default function Analytics() {
         </div>
       </div>
       {chartDropdown[chart]}
-      <Navbar />
+      <Navbar location={history.location.pathname.slice(1)} />
     </div>
   );
 }

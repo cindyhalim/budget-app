@@ -1,11 +1,15 @@
 import React from "react";
 import Navbar from "./Navbar";
+import Badges from "./Badges";
+import { useHistory } from "react-router-dom";
 
 import StoreMallDirectoryIcon from "@material-ui/icons/StoreMallDirectory";
 
 import "../styles/Store.sass";
 
 export default function Store(props) {
+  const history = useHistory();
+  console.log(history.location.pathname);
   props.checkLogInStatus();
   return (
     <div>
@@ -13,47 +17,74 @@ export default function Store(props) {
         <StoreMallDirectoryIcon className="store-icon" />
         <div>Store</div>
       </div>
-      <div className="entire-store">
-        <div className="inventory-card">
-          <div className="inventory-title">Inventory</div>
-          <div className="coins-inventory">
-            <div className="coin-title">Coins:</div>
-            <div>
-              {props.coins}
-              <img src="coins.jpg" style={{ height: "30px", width: "30px" }} />
+
+      <div>
+        <div className="entire-store">
+          <div className="inventory-card">
+            <div className="inventory-title">Inventory</div>
+            <div className="coins-inventory">
+              <div className="coin-title">Coins:</div>
+              <div className="coin-count">
+                <div>{props.coins}</div>
+                <div>
+                  <img
+                    src="coins.jpg"
+                    style={{ height: "30px", width: "30px" }}
+                  />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="market-card">
-          <div className="market-title">Market</div>
-          <img src="potion.png" style={{ height: "30px", width: "30px" }} />
-          <div>Heal 20 HP</div>
-          Cost: 20
-          <img src="coins.jpg" style={{ height: "30px", width: "30px" }} />
-          <button
-            onClick={() => {
-              if (props.hp !== 100 && props.coins >= 20) {
-                props.subtractCoinsAddHP(-20, 20);
-              } else if (props.coins < 20) {
-                alert("You don't have enough money");
-              } else {
-                alert("Your health is already full");
-              }
-            }}
-            className="buy-button"
-          >
-            Buy
-          </button>
-        </div>
-        <div>
+          <div className="market-card">
+            <div className="market-title">Market</div>
+            <div className="potion-market">
+              <div className="potion-details">
+                <div>Potion</div>
+                <img
+                  src="potion.png"
+                  style={{ height: "30px", width: "30px" }}
+                />
+                <div>Heals 20 HP</div>
+              </div>
+              <div>
+                <div>
+                  20
+                  <img
+                    src="coins.jpg"
+                    style={{ height: "30px", width: "30px" }}
+                  />
+                </div>
+                <button
+                  onClick={() => {
+                    if (props.hp !== 100 && props.coins >= 20) {
+                      props.subtractCoinsAddHP(-20, 20);
+                    } else if (props.coins < 20) {
+                      alert("You don't have enough money");
+                    } else {
+                      alert("Your health is already full");
+                    }
+                  }}
+                  className="buy-button"
+                >
+                  Buy
+                </button>
+              </div>
+            </div>
+          </div>
           <p>
             You have met your budget <strong>{props.budgetAchieved}</strong>{" "}
             times this year
           </p>
-          <p>My Badges</p>
+          <div className="badge-collection-card">
+            <div className="market-title">My Badges</div>
+            {Array.from(props.images).length > 0 &&
+              Array.from(props.images).map(image => {
+                return <Badges image={image} />;
+              })}
+          </div>
         </div>
       </div>
-      <Navbar />
+      <Navbar location={history.location.pathname.slice(1)} />
     </div>
   );
 }

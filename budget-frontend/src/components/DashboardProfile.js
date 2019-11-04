@@ -1,12 +1,9 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 
 import HealthBar from "./HealthBar";
 import CoinCount from "./CoinCount";
 
 export default function DashboardProfile(props) {
-  const history = useHistory();
-  console.log(props.user);
   return (
     <div className="user-profile">
       <section className="user">
