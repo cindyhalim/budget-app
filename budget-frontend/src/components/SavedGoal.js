@@ -38,7 +38,7 @@ export default function SavedGoal(props) {
         { withCredentials: true }
       )
       .then(() => {
-        // props.setRefreshGoals(!props.refreshGoals);
+        props.setRefreshGoals(!props.refreshGoals);
       });
   }, [goalEdit]);
 

@@ -31,9 +31,14 @@ export default function GoalForm(props) {
     <form
       onSubmit={event => {
         event.preventDefault();
+
+        console.log(
+          moment(event.target.start_date.value).format("YYYY-M-DD") >=
+            moment(event.target.end_date.value).format("YYYY-M-DD")
+        );
         if (
-          moment(formFields.end_date).format("YYYY-M-DD") !==
-          moment(formFields.start_date).format("YYYY-M-DD")
+          moment(event.target.start_date.value).format("YYYY-M-DD") <=
+          moment(event.target.end_date.value).format("YYYY-M-DD")
         ) {
           props.onSave(formFields);
           props.setRefreshGoals(!props.refreshGoals);
@@ -41,7 +46,7 @@ export default function GoalForm(props) {
         } else {
           setError({
             ...error,
-            date: "***Saving goal must take place over one day***"
+            date: "***Please check your date range***"
           });
         }
 

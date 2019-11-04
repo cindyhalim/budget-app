@@ -16,7 +16,6 @@ export default function Navbar() {
     setValue(newValue);
   };
 
-  console.log("state", value);
   const history = useHistory();
 
   return (
@@ -34,20 +33,14 @@ export default function Navbar() {
         label="Home"
         value="home"
         icon={<HomeIcon />}
-        onClick={() => {
-          setValue("home");
-          history.push("/dashboard");
-        }}
+        containerElement={<Link to="/dashboard" />}
       />
 
       <BottomNavigationAction
         label="Store"
         value="store"
         icon={<FormatListNumberedIcon />}
-        onClick={() => {
-          setValue("store");
-          history.push("/store");
-        }}
+        containerElement={<Link to="/store" />}
       />
 
       <BottomNavigationAction
@@ -60,7 +53,9 @@ export default function Navbar() {
         changeOpenStatus={data => setOpenAddTransaction(data)}
       />
       <Link to="/analytics">
-        <BottomNavigationAction label="Analytics" icon={<PieChartIcon />} />
+        <BottomNavigationAction label="Analytics" icon={<PieChartIcon />}>
+          Analytics
+        </BottomNavigationAction>
       </Link>
       <Link to="/profile">
         <BottomNavigationAction label="Profile" icon={<AccountCircleIcon />} />
