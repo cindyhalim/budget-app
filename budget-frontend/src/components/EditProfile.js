@@ -13,9 +13,13 @@ export default function EditProfile(props) {
     <div className="edit-profile" style={{ width: "100%" }}>
       <Card>
         <CardContent>
-          <form className="edit-profile-form">
+          <form
+            className="edit-profile-form"
+            onSubmit={() => props.closeEditProfile()}
+          >
             <div className="text-fields">
               <TextField
+                required
                 style={{ margin: "5px", width: "80%" }}
                 type="text"
                 placeholder="Name"
@@ -26,6 +30,7 @@ export default function EditProfile(props) {
               ></TextField>
               <br />
               <TextField
+                required
                 style={{ margin: "5px", width: "80%" }}
                 type="text"
                 placeholder="Email"
@@ -36,21 +41,21 @@ export default function EditProfile(props) {
               ></TextField>
               <br />
               <TextField
+                required
                 style={{ margin: "5px", width: "80%" }}
                 type="text"
                 placeholder="Password"
               ></TextField>
               <br />
               <TextField
+                required
                 style={{ margin: "5px", width: "80%" }}
                 type="text"
                 placeholder="Re-Enter Password"
               ></TextField>
             </div>
             <div className="submit-button">
-              <Button type="submit" onClick={() => props.closeEditProfile()}>
-                Save
-              </Button>
+              <Button type="submit">Save</Button>
             </div>
           </form>
         </CardContent>
