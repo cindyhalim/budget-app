@@ -9,6 +9,7 @@ import Onboarding from "./components/Onboarding";
 import Analytics from "./components/Analytics";
 import Profile from "./components/Profile";
 import Store from "./components/Store";
+import Navbar from "./components/Navbar";
 
 export default function App() {
   const [logInStatus, setLogInStatus] = useState({

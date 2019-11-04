@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 import PieChartIcon from "@material-ui/icons/PieChart";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -10,9 +10,19 @@ import AddTransactionOption from "./addTransaction/AddTransactionOption";
 
 export default function Navbar() {
   const [openAddTransaction, setOpenAddTransaction] = useState(false);
+  const [value, setValue] = useState("home");
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  console.log("state", value);
+  const history = useHistory();
 
   return (
     <BottomNavigation
+      value={value}
+      onClick={handleChange}
       style={{
         position: "fixed",
         bottom: "0",
@@ -20,15 +30,25 @@ export default function Navbar() {
         backgroundColor: "lightblue"
       }}
     >
-      <Link to="/dashboard">
-        <BottomNavigationAction label="Home" icon={<HomeIcon />} />
-      </Link>
-      <Link to="/store">
-        <BottomNavigationAction
-          label="Store"
-          icon={<FormatListNumberedIcon />}
-        />
-      </Link>
+      <BottomNavigationAction
+        label="Home"
+        value="home"
+        icon={<HomeIcon />}
+        onClick={() => {
+          setValue("home");
+          history.push("/dashboard");
+        }}
+      />
+
+      <BottomNavigationAction
+        label="Store"
+        value="store"
+        icon={<FormatListNumberedIcon />}
+        onClick={() => {
+          setValue("store");
+          history.push("/store");
+        }}
+      />
 
       <BottomNavigationAction
         label="Add Paymnet"
@@ -39,7 +59,6 @@ export default function Navbar() {
         openAddTransaction={openAddTransaction}
         changeOpenStatus={data => setOpenAddTransaction(data)}
       />
-
       <Link to="/analytics">
         <BottomNavigationAction label="Analytics" icon={<PieChartIcon />} />
       </Link>
