@@ -224,3 +224,10 @@ user1.goals.create({start_date: '2019-10-25T10:35:17.552Z', goal_type: "budget",
 
 user1.goals.create({start_date:"2019-10-01T10:35:17.552Z" , end_date: "2019-11-30T10:35:17.552Z", goal_type: "saving", amount: 400, name: "new phone"})
 user1.goals.create({start_date:"2019-11-21T10:35:17.552Z" , end_date: "2019-12-03T10:35:17.552Z", goal_type: "saving", amount: 300, name: "new watch"})
+
+#badges
+
+Badge.create({name: "badge1", path_name: "storage/badge_1.png"})
+Badge.create({name: "badge2", path_name: "storage/badge.png"})
+Badge.create({name: "badge3", path_name: "storage/medal.png"})
+Badge.create({name: "badge4", path_name: "storage/ribbon-badge-award.png"})
