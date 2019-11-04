@@ -17,16 +17,7 @@ import "../styles/Dashboard.sass";
 
 export default function Dashboard(props) {
   props.checkLogInStatus();
-  const [newGoal, setNewGoal] = useState({
-    createGoal: {
-      name: "",
-      amount: "",
-      start_date: new Date(Date.now()),
-      end_date: new Date(new Date(Date.now()).getTime() + 86400000),
-      error: ""
-    },
-    goals: []
-  });
+  const [goals, setGoals] = useState([]);
   const [progressActiveStep, setProgressActiveStep] = useState(1);
 
   const handleNextSwipe = () => {
@@ -53,7 +44,7 @@ export default function Dashboard(props) {
     axios
       .get("http://localhost:3000/goals", { withCredentials: true })
       .then(res => {
-        setNewGoal({ ...newGoal, goals: res.data.goals });
+        setGoals(res.data.goals);
       });
   }, [props.refreshGoals]);
 
@@ -63,29 +54,10 @@ export default function Dashboard(props) {
         withCredentials: true
       })
       .then(() => {
-        const index = findGoalIndexById(newGoal.goals.id, newGoal.goals);
-        const updatedGoals = [...newGoal.goals];
+        const index = findGoalIndexById(goals.id, goals);
+        const updatedGoals = [...goals];
         updatedGoals.splice(index, 1);
-        setNewGoal({ ...newGoal, goals: updatedGoals });
-      });
-  };
-
-  const editGoal = data => {
-    axios
-      .put(
-        `http://localhost:3000/goals/${data.id}`,
-        {
-          goal: {
-            start_date: new Date(data.start_date),
-            end_date: new Date(data.end_date),
-            amount: parseInt(data.amount),
-            name: data.name
-          }
-        },
-        { withCredentials: true }
-      )
-      .then(() => {
-        props.setRefreshGoals(!props.refreshGoals);
+        setGoals(updatedGoals);
       });
   };
 
@@ -108,7 +80,7 @@ export default function Dashboard(props) {
         }}
       >
         <TopSpending />
-        <ProgressBar />
+        <ProgressBar goals={goals} />
         <MonthlyProgressBar />
       </SwipeableViews>
       <MobileStepper
@@ -121,19 +93,15 @@ export default function Dashboard(props) {
       <section className="goals">
         <h3>Saving Goals:</h3>
         <CreateGoal
-          newGoal={newGoal}
-          setNewGoal={setNewGoal}
+          newGoal={goals}
+          setNewGoal={setGoals}
           refreshGoals={props.refreshGoals}
           setRefreshGoals={props.setRefreshGoals}
         />
         <div className="goal-card" style={{ WebkitOverflowScrolling: "touch" }}>
-          {newGoal.goals.length > 0 &&
-            newGoal.goals.map(goal => (
+          {goals.length > 0 &&
+            goals.map(goal => (
               <SavedGoal
-                newGoal={newGoal}
-                setNewGoal={setNewGoal}
-                refreshGoals={props.refreshGoals}
-                setRefreshGoals={props.setRefreshGoals}
                 key={goal.id}
                 id={goal.id}
                 name={goal.name}
@@ -141,7 +109,11 @@ export default function Dashboard(props) {
                 startDate={goal.start_date}
                 endDate={goal.end_date}
                 onDelete={data => deleteGoal(data)}
-                editRequest={data => editGoal(data)}
+                // editRequest={data => editGoal(data)}
+                newGoal={goals}
+                setNewGoal={setGoals}
+                refreshGoals={props.refreshGoals}
+                setRefreshGoals={props.setRefreshGoals}
                 findGoalIndexById={findGoalIndexById}
                 dailyTarget={goal.target_per_day}
                 completed={goal.completed}

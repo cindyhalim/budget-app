@@ -19,19 +19,11 @@ ActiveRecord::Schema.define(version: 2019_11_04_142925) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-<<<<<<< HEAD
-  create_table "categories_users", id: false, force: :cascade do |t|
-    t.integer "category_id", null: false
-    t.integer "user_id", null: false
-    t.index ["category_id"], name: "index_categories_users_on_category_id"
-    t.index ["user_id"], name: "index_categories_users_on_user_id"
-=======
   create_table "badges_users", id: false, force: :cascade do |t|
     t.integer "badge_id", null: false
     t.integer "user_id", null: false
     t.index ["badge_id"], name: "index_badges_users_on_badge_id"
     t.index ["user_id"], name: "index_badges_users_on_user_id"
->>>>>>> feature/add-badge
   end
 
   create_table "goals", force: :cascade do |t|

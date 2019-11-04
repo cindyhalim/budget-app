@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardActions } from "@material-ui/core";
 import Edit from "@material-ui/icons/Edit";
 import Delete from "@material-ui/icons/Delete";
 import GoalForm from "./GoalForm";
+
+import axios from "axios";
 
 export default function SavedGoal(props) {
   const [goalClicked, setGoalClicked] = useState({ status: false });
@@ -19,17 +21,26 @@ export default function SavedGoal(props) {
       ...goalEdit,
       ...newState
     }));
-
-    // const index = props.findGoalIndexById(props.id, props.newGoal.goals);
-    // const updatedGoals = [...props.newGoal.goals];
-    // updatedGoals.splice(index, 1, newState);
-    // props.setNewGoal({
-    //   ...props.newGoal,
-    //   goals: updatedGoals
-    // });
-
-    props.editRequest(newState);
   };
+
+  useEffect(() => {
+    axios
+      .put(
+        `http://localhost:3000/goals/${goalEdit.id}`,
+        {
+          goal: {
+            start_date: new Date(goalEdit.start_date),
+            end_date: new Date(goalEdit.end_date),
+            amount: parseInt(goalEdit.amount),
+            name: goalEdit.name
+          }
+        },
+        { withCredentials: true }
+      )
+      .then(() => {
+        // props.setRefreshGoals(!props.refreshGoals);
+      });
+  }, [goalEdit]);
 
   return (
     <Card className="goal-card" style={{ backgroundColor: props.bgColor }}>

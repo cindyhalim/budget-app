@@ -26,7 +26,6 @@ export default function Analytics() {
   return (
     <div>
       <div className="analytics-title">
-        {" "}
         <AssessmentIcon className="analytics-icon" />
         <div>Analytics</div>
       </div>

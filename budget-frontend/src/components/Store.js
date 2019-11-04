@@ -2,47 +2,70 @@ import React from "react";
 import Navbar from "./Navbar";
 import Badges from "./Badges";
 
+import StoreMallDirectoryIcon from "@material-ui/icons/StoreMallDirectory";
+
+import "../styles/Store.sass";
+
 export default function Store(props) {
-  console.log(props);
   props.checkLogInStatus();
   return (
     <div>
-      Store Your Coins:
-      <img src="coins.jpg" style={{ height: "30px", width: "30px" }} />
-      {props.coins}
-      <div>
-        Items To Purchase: Potion
-        <br></br>
-        <img src="potion.png" style={{ height: "30px", width: "30px" }} />
-        <br></br>
-        Cost: 20
-        <br></br>
-        Use it to heal 20 HP
-        <br></br>
-        <button
-          onClick={() => {
-            if (props.hp !== 100 && props.coins >= 20) {
-              props.subtractCoinsAddHP(-20, 20);
-            } else if (props.coins < 20) {
-              alert("You don't have enough money");
-            } else {
-              alert("Your health is already full");
-            }
-          }}
-        >
-          Buy
-        </button>
+      <div className="store-title">
+        <StoreMallDirectoryIcon className="store-icon" />
+        <div>Store</div>
       </div>
+
       <div>
-        <p>
-          You have met your budget <strong>{props.budgetAchieved}</strong> times
-          this year
-        </p>
-        <p>See your badges below:</p>
-        {Array.from(props.images).length > 0 &&
-          Array.from(props.images).map(image => {
-            return <Badges image={image} />;
-          })}
+        <div className="entire-store">
+          <div className="inventory-card">
+            <div className="inventory-title">Inventory</div>
+            <div className="coins-inventory">
+              <div className="coin-title">Coins:</div>
+              <div className="coin-count">
+                <div>{props.coins}</div>
+                <div>
+                  <img
+                    src="coins.jpg"
+                    style={{ height: "30px", width: "30px" }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="market-card">
+            <div className="market-title">Market</div>
+            <div className="potion-market">
+              <div>Potion</div>
+              <img src="potion.png" style={{ height: "30px", width: "30px" }} />
+              <div>Heals 20 HP</div>
+              20
+              <img src="coins.jpg" style={{ height: "30px", width: "30px" }} />
+              <button
+                onClick={() => {
+                  if (props.hp !== 100 && props.coins >= 20) {
+                    props.subtractCoinsAddHP(-20, 20);
+                  } else if (props.coins < 20) {
+                    alert("You don't have enough money");
+                  } else {
+                    alert("Your health is already full");
+                  }
+                }}
+                className="buy-button"
+              >
+                Buy
+              </button>
+            </div>
+          </div>
+          <p>
+            You have met your budget <strong>{props.budgetAchieved}</strong>{" "}
+            times this year
+          </p>
+          <p>My Badges</p>
+          {Array.from(props.images).length > 0 &&
+            Array.from(props.images).map(image => {
+              return <Badges image={image} />;
+            })}
+        </div>
       </div>
       <Navbar />
     </div>
