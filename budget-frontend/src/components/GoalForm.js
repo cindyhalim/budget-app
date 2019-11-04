@@ -39,16 +39,19 @@ export default function GoalForm(props) {
           props.setRefreshGoals(!props.refreshGoals);
           props.setActive(!props.active);
         } else {
-          setError("***Saving goal must take place over one day***");
+          setError({
+            ...error,
+            date: "***Saving goal must take place over one day***"
+          });
         }
 
         //error handling
-        if (formFields.amount === "") {
-          setError("This field cannot be left blank");
+        if (formFields.name === "") {
+          setError({ ...error, name: "This field cannot be left blank" });
         }
 
         if (formFields.amount === "") {
-          setError("This field cannot be left blank");
+          setError({ ...error, amount: "This field cannot be left blank" });
         }
       }}
       className="goal-form"
@@ -69,7 +72,7 @@ export default function GoalForm(props) {
         type="text"
         margin="normal"
         value={formFields.name}
-        helperText={error ? { error } : ""}
+        helperText={error.name ? error.name : ""}
         onChange={handleFormFieldChange("name")}
         required
       />
@@ -80,7 +83,7 @@ export default function GoalForm(props) {
         type="number"
         margin="normal"
         value={formFields.amount}
-        helperText={error ? { error } : ""}
+        helperText={error.amount ? error.amount : ""}
         onChange={handleFormFieldChange("amount")}
         required
       />
@@ -99,11 +102,6 @@ export default function GoalForm(props) {
             "aria-label": "change date"
           }}
           onChange={date => handleDateChange("start_date", date)}
-          helperText={
-            formFields.start_date === ""
-              ? "This field cannot be left blank"
-              : " "
-          }
           required
         />
         <KeyboardDatePicker
@@ -121,13 +119,10 @@ export default function GoalForm(props) {
             "aria-label": "change date"
           }}
           error={formFields.end_date === ""}
-          helperText={
-            formFields.end_date === "" ? "This field cannot be left blank" : " "
-          }
           required
         />
       </MuiPickersUtilsProvider>
-      {error ? <p>{error}</p> : ""}
+      {error.date ? <p>{error.date}</p> : ""}
       <Button className="save-button" type="submit" size="small">
         Save
       </Button>
