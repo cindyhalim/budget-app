@@ -14,12 +14,43 @@ export default function EditProfile(props) {
 
   const handleSubmit = () => {
     if (Object.values(updatedFields).filter(field => field).length > 0) {
-      Axios.put("http:localhost:3000/registrations", {
-        name: updatedFields.name,
-        email: updatedFields.email,
-        password: updatedFields.password,
-        password_confirmation: updatedFields.password_confirmation
-      });
+      Axios.put(
+        `http://localhost:3000/registrations/${props.id}`,
+        {
+          name: updatedFields.name,
+          email: updatedFields.email,
+          password: updatedFields.password,
+          password_confirmation: updatedFields.password_confirmation
+        },
+        { withCredentials: true }
+      )
+        .then(result => {
+          if (result.data.success) {
+            props.setLoginStatus({
+              ...props.logInStatus,
+              user: {
+                ...props.logInStatus.user,
+                name: updatedFields.name
+                  ? updatedFields.name
+                  : props.logInStatus.user.name,
+                email: updatedFields.email
+                  ? updatedFields.email
+                  : props.logInStatus.user.email
+              }
+            });
+            setUpdatedFields({
+              ...updatedFields,
+              name: "",
+              email: "",
+              password: "",
+              password_confirmation: ""
+            });
+          }
+          props.closeEditProfile();
+        })
+        .catch(e => {
+          alert("There was an error:", e);
+        });
     } else {
       alert("All Fields Empty");
     }

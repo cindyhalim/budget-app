@@ -157,6 +157,7 @@ export default function App() {
               logInStatus={logInStatus}
               checkLogInStatus={checkLogInStatus}
               logOutClick={() => logOutClick()}
+              setLoginStatus={setLogInStatus}
             />
           )}
         />

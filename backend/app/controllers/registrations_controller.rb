@@ -20,14 +20,6 @@ class RegistrationsController < ApplicationController
       pp user.badges.where(name: "badge1")[0].path_name
       send_file user.badges.where(name: "badge#{params[:badge]}")[0].path_name
     end
-    # pp 'HELLOOOOOOOOOOOOOOOOOOOO'
-    # send_file "storage/badge_1.png"
-    # @badges.each do |badge|
-    #   pp badge
-    #   send_file badge.path_name, :type => 'image/jpeg'
-    # end
-
-    # render json: {badges: @badges}
   end
 
   def create
@@ -42,5 +34,13 @@ class RegistrationsController < ApplicationController
     else 
       render json: { status: 500 }
     end
+  end
+  def update
+    user = User.find_by(id: session[:user_id])
+    def reg_params
+      params.require(:registration).permit(:name, :email, :password, :password_confirmation).select { |k, v| !v.empty? }
+    end
+    user.update_attributes(reg_params)
+    render json: {success:true}
   end
 end
