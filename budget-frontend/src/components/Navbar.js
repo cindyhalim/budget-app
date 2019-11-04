@@ -5,6 +5,7 @@ import PieChartIcon from "@material-ui/icons/PieChart";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
+import StoreMallDirectoryIcon from "@material-ui/icons/StoreMallDirectory";
 import HomeIcon from "@material-ui/icons/Home";
 import AddTransactionOption from "./addTransaction/AddTransactionOption";
 
@@ -39,7 +40,7 @@ export default function Navbar() {
       <BottomNavigationAction
         label="Store"
         value="store"
-        icon={<FormatListNumberedIcon />}
+        icon={<StoreMallDirectoryIcon />}
         containerElement={<Link to="/store" />}
       />
 
