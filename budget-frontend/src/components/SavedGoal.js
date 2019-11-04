@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Card, CardContent, CardActions, Button } from "@material-ui/core";
+import { Card, CardContent, CardActions } from "@material-ui/core";
+import Edit from "@material-ui/icons/Edit";
+import Delete from "@material-ui/icons/Delete";
 import GoalForm from "./GoalForm";
 
 export default function SavedGoal(props) {
@@ -30,7 +32,7 @@ export default function SavedGoal(props) {
   };
 
   return (
-    <Card className="goal-card">
+    <Card className="goal-card" style={{ backgroundColor: props.bgColor }}>
       {goalClicked.status !== "edit" && (
         <CardContent>
           <div
@@ -39,7 +41,7 @@ export default function SavedGoal(props) {
           >
             <h2>{props.name}</h2>
             <p className="goal-target">
-              {props.completed ? "Completed" : `$${props.dailyTarget}/day`}
+              {props.completed ? "COMPLETED" : `$${props.dailyTarget}/day`}
             </p>
           </div>
           <div
@@ -61,20 +63,8 @@ export default function SavedGoal(props) {
               <p>Total: ${parseInt(props.amount)}</p>
             </p>
             <CardActions className="card-buttons">
-              <Button
-                size="small"
-                color="#ef5350"
-                onClick={() => setGoalClicked({ status: "edit" })}
-              >
-                Edit
-              </Button>
-              <Button
-                size="small"
-                color="primary"
-                onClick={() => props.onDelete(goalEdit)}
-              >
-                Delete
-              </Button>
+              <Edit onClick={() => setGoalClicked({ status: "edit" })} />
+              <Delete onClick={() => props.onDelete(goalEdit)} />
             </CardActions>
           </div>
         </CardContent>
@@ -84,6 +74,7 @@ export default function SavedGoal(props) {
         <CardContent>
           <div>
             <GoalForm
+              className="saved-goal-form"
               key={props.id}
               id={props.id}
               active={goalClicked}

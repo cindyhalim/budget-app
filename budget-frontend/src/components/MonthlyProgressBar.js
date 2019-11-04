@@ -22,16 +22,29 @@ const MonthlyProgressBar = () => {
       });
   }, []);
 
+  const percentMonthlySpending = (total / budget) * 100;
+  const checkMonthlySpending = spending => {
+    if (spending >= 0 && spending < 50) {
+      return "success";
+    } else if (spending >= 50 && spending < 80) {
+      return "warning";
+    } else {
+      return "danger";
+    }
+  };
+
   return (
     <Card className="progress-card">
       <h3>Monthly Progress:</h3>
-      <Progress
-        className="monthly-progress"
-        bar
-        color="success"
-        value={(total / budget) * 100}
-      >
-        {(total / budget) * 100}%
+      <Progress className="monthly-progress" value={100}>
+        <Progress
+          className="monthly-progress"
+          bar
+          color={checkMonthlySpending(percentMonthlySpending)}
+          value={percentMonthlySpending}
+        >
+          {percentMonthlySpending}%
+        </Progress>
       </Progress>
     </Card>
   );

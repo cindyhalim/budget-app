@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Card, CardContent } from "@material-ui/core";
+import Add from "@material-ui/icons/Add";
 import GoalForm from "./GoalForm";
 
 export default function CreateGoal(props) {
@@ -30,12 +31,16 @@ export default function CreateGoal(props) {
     <Card className="new-goal-card">
       <CardContent>
         {!active && (
-          <div onClick={() => setActive(!active)}>
+          <div
+            className="new-goal-card-title"
+            onClick={() => setActive(!active)}
+          >
             <h2>Create Goal</h2>
+            <Add />
           </div>
         )}
         {active && (
-          <div>
+          <div className="new-goal-form">
             <GoalForm
               active={active}
               setActive={setActive}

@@ -4,6 +4,9 @@ import Highcharts from "highcharts";
 import MonthOptions from "./MonthOptions";
 import CategoryTransaction from "./CategoryTransaction";
 import { useFormControl } from "@material-ui/core/FormControl";
+
+import "../styles/Piechart.sass";
+
 export default function Piechart() {
   const [transactions, setTransactions] = useState([]);
   const [monthTotal, setMonthTotal] = useState(0);
@@ -78,11 +81,13 @@ export default function Piechart() {
           labelFormatter: function() {
             // Includes cat & price in legend
             return (
-              '<span style="display:block; margin-top:-10px; position:relative; width:210px;border-bottom:1px solid #DCDCDC;">&nbsp<span style="font-weight:normal; vertical-align:super;">' +
+              '<div style="display:flex; justify-content:space-around; margin-top:-10px; position:relative; width:300px;border-bottom:1px solid #DCDCDC;"><span style="font-weight:normal; vertical-align:super; width:100px">' +
               this.name +
-              ' </span><span style="font-weight:normal; vertical-align:super; position:absolute; right:0px;">' +
+              ' </span> <div style="display:flex; justify-content:space-around; width:200px"><span style="font-weight:normal; vertical-align:super; ">' +
               this.y.toFixed(2) +
-              "%<br/></span></span>"
+              '%</span><span style="font-weight:normal; vertical-align:super; right:0px;">$' +
+              this.amount.toFixed(2) +
+              "</span></div></div>"
             );
           }
         },
@@ -98,9 +103,13 @@ export default function Piechart() {
   }, [transactions]);
   return (
     <div>
-      <MonthOptions month={pieMonth} setMonth={setPieMonth} />
+      <div className="piechart-month-options">
+        <MonthOptions month={pieMonth} setMonth={setPieMonth} />
+      </div>
       {transactions.length === 0 && (
-        <div> You don't have Transactions for this month</div>
+        <div className="no-transactions-error">
+          You don't have Transactions for this month
+        </div>
       )}
       {transactions.length > 0 && (
         <div>

@@ -5,8 +5,6 @@ import TablePagination from "@material-ui/core/TablePagination";
 
 import "../styles/CategoryTransaction.sass";
 
-import "../styles/CategoryTransaction.sass";
-
 const CategoryTransaction = ({ category, pieMonth }) => {
   const [allTransactions, setAllTransactions] = useState([]);
   const [page, setPage] = useState(0);
@@ -47,9 +45,9 @@ const CategoryTransaction = ({ category, pieMonth }) => {
 
   return (
     <div>
-      {filteredTransaction.length > 0 && (
+      {/* {filteredTransaction.length > 0 && (
         <p> Please Click on pie slice to get transactions for that category</p>
-      )}
+      )} */}
       <h3 className="category-title-selected">
         {category ? category : "All Transactions"}
       </h3>
@@ -67,7 +65,8 @@ const CategoryTransaction = ({ category, pieMonth }) => {
         }}
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeTransactionsPerPage}
-        labelRowsPerPage="Transactions per page:"
+        labelRowsPerPage="Rows/page:"
+        className="transaction-list-header"
       />
       {filteredTransaction
         .slice(

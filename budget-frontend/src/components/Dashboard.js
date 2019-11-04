@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SwipeableViews from "react-swipeable-views";
 import MobileStepper from "@material-ui/core/MobileStepper";
-import { Card, CardContent } from "@material-ui/core";
 
 import moment from "moment";
 import axios from "axios";
@@ -28,6 +27,19 @@ export default function Dashboard(props) {
     },
     goals: []
   });
+  const [progressActiveStep, setProgressActiveStep] = useState(1);
+
+  const handleNextSwipe = () => {
+    if (progressActiveStep <= 2) {
+      setProgressActiveStep(prevActiveStep => prevActiveStep + 1);
+    }
+  };
+
+  const handleBackSwipe = () => {
+    if (progressActiveStep >= 0) {
+      setProgressActiveStep(prevActiveStep => prevActiveStep - 1);
+    }
+  };
 
   const findGoalIndexById = (id, arr) => {
     for (let i = 0; i < arr.length; i++) {
@@ -79,12 +91,6 @@ export default function Dashboard(props) {
 
   return (
     <div className="Dashboard">
-      {/* <Grid
-        container
-        direction="column"
-        justify="space-between"
-        alignItems="center"
-      > */}
       <DashboardProfile
         user={props.logInStatus.user}
         hp={props.logInStatus.user.hp}
@@ -95,19 +101,23 @@ export default function Dashboard(props) {
       />
 
       <h1 class="date-now">{moment().format("MMMM Do, YYYY")}</h1>
-      <SwipeableViews index="1">
+      <SwipeableViews
+        index="1"
+        onChangeIndex={(index, indexLatest) => {
+          index > indexLatest ? handleNextSwipe() : handleBackSwipe();
+        }}
+      >
         <TopSpending />
         <ProgressBar />
         <MonthlyProgressBar />
       </SwipeableViews>
       <MobileStepper
-        className="register-stepper"
+        className="progress-stepper"
         variant="dots"
         steps={3}
         position="static"
-        // activeStep={activeStep}
+        activeStep={progressActiveStep}
       />
-
       <section className="goals">
         <h3>Saving Goals:</h3>
         <CreateGoal
@@ -135,12 +145,18 @@ export default function Dashboard(props) {
                 findGoalIndexById={findGoalIndexById}
                 dailyTarget={goal.target_per_day}
                 completed={goal.completed}
+                bgColor={
+                  goal.completed
+                    ? "#66bb6a"
+                    : new Date(goal.start_date) > new Date(Date.now())
+                    ? "#d95c52"
+                    : "#4db6ac"
+                }
               />
             ))}
         </div>
       </section>
       <Navbar />
-      {/* </Grid> */}
     </div>
   );
 }
