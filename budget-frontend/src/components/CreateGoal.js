@@ -48,10 +48,10 @@ export default function CreateGoal(props) {
               setActive={setActive}
               refreshGoals={props.refreshGoals}
               setRefreshGoals={props.setRefreshGoals}
-              name={props.newGoal.createGoal.name}
-              amount={props.newGoal.createGoal.amount}
-              start_date={props.newGoal.createGoal.start_date}
-              end_date={props.newGoal.createGoal.end_date}
+              name={""}
+              amount={""}
+              start_date={new Date(Date.now())}
+              end_date={new Date(new Date(Date.now()).getTime() + 86400000)}
               onSave={onSave}
             />
           </div>

@@ -19,6 +19,7 @@ export default function SavedGoal(props) {
       ...goalEdit,
       ...newState
     }));
+    props.setRefreshGoals(false);
 
     // const index = props.findGoalIndexById(props.id, props.newGoal.goals);
     // const updatedGoals = [...props.newGoal.goals];

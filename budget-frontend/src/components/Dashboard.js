@@ -17,16 +17,7 @@ import "../styles/Dashboard.sass";
 
 export default function Dashboard(props) {
   props.checkLogInStatus();
-  const [newGoal, setNewGoal] = useState({
-    createGoal: {
-      name: "",
-      amount: "",
-      start_date: new Date(Date.now()),
-      end_date: new Date(new Date(Date.now()).getTime() + 86400000),
-      error: ""
-    },
-    goals: []
-  });
+  const [goals, setGoals] = useState([]);
   const [progressActiveStep, setProgressActiveStep] = useState(1);
 
   const handleNextSwipe = () => {
@@ -53,7 +44,7 @@ export default function Dashboard(props) {
     axios
       .get("http://localhost:3000/goals", { withCredentials: true })
       .then(res => {
-        setNewGoal({ ...newGoal, goals: res.data.goals });
+        setGoals(res.data.goals);
       });
   }, [props.refreshGoals]);
 
@@ -63,10 +54,10 @@ export default function Dashboard(props) {
         withCredentials: true
       })
       .then(() => {
-        const index = findGoalIndexById(newGoal.goals.id, newGoal.goals);
-        const updatedGoals = [...newGoal.goals];
+        const index = findGoalIndexById(goals.id, goals);
+        const updatedGoals = [...goals];
         updatedGoals.splice(index, 1);
-        setNewGoal({ ...newGoal, goals: updatedGoals });
+        setGoals(updatedGoals);
       });
   };
 
@@ -121,17 +112,17 @@ export default function Dashboard(props) {
       <section className="goals">
         <h3>Saving Goals:</h3>
         <CreateGoal
-          newGoal={newGoal}
-          setNewGoal={setNewGoal}
+          newGoal={goals}
+          setNewGoal={setGoals}
           refreshGoals={props.refreshGoals}
           setRefreshGoals={props.setRefreshGoals}
         />
         <div className="goal-card" style={{ WebkitOverflowScrolling: "touch" }}>
-          {newGoal.goals.length > 0 &&
-            newGoal.goals.map(goal => (
+          {goals.length > 0 &&
+            goals.map(goal => (
               <SavedGoal
-                newGoal={newGoal}
-                setNewGoal={setNewGoal}
+                newGoal={goals}
+                setNewGoal={setGoals}
                 refreshGoals={props.refreshGoals}
                 setRefreshGoals={props.setRefreshGoals}
                 key={goal.id}
