@@ -61,25 +61,6 @@ export default function Dashboard(props) {
       });
   };
 
-  const editGoal = data => {
-    axios
-      .put(
-        `http://localhost:3000/goals/${data.id}`,
-        {
-          goal: {
-            start_date: new Date(data.start_date),
-            end_date: new Date(data.end_date),
-            amount: parseInt(data.amount),
-            name: data.name
-          }
-        },
-        { withCredentials: true }
-      )
-      .then(() => {
-        props.setRefreshGoals(!props.refreshGoals);
-      });
-  };
-
   return (
     <div className="Dashboard">
       <DashboardProfile
@@ -121,10 +102,6 @@ export default function Dashboard(props) {
           {goals.length > 0 &&
             goals.map(goal => (
               <SavedGoal
-                newGoal={goals}
-                setNewGoal={setGoals}
-                refreshGoals={props.refreshGoals}
-                setRefreshGoals={props.setRefreshGoals}
                 key={goal.id}
                 id={goal.id}
                 name={goal.name}
@@ -132,7 +109,11 @@ export default function Dashboard(props) {
                 startDate={goal.start_date}
                 endDate={goal.end_date}
                 onDelete={data => deleteGoal(data)}
-                editRequest={data => editGoal(data)}
+                // editRequest={data => editGoal(data)}
+                newGoal={goals}
+                setNewGoal={setGoals}
+                refreshGoals={props.refreshGoals}
+                setRefreshGoals={props.setRefreshGoals}
                 findGoalIndexById={findGoalIndexById}
                 dailyTarget={goal.target_per_day}
                 completed={goal.completed}
