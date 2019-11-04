@@ -109,7 +109,7 @@ export default function App() {
           render={() => <Register handleLogin={handleLogin} />}
         />
         <Route
-          path="/dashboard"
+          path="/home"
           render={() => (
             <Dashboard
               refreshGoals={refreshGoals}

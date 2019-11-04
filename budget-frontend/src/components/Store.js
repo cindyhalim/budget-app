@@ -1,12 +1,15 @@
 import React from "react";
 import Navbar from "./Navbar";
 import Badges from "./Badges";
+import { useHistory } from "react-router-dom";
 
 import StoreMallDirectoryIcon from "@material-ui/icons/StoreMallDirectory";
 
 import "../styles/Store.sass";
 
 export default function Store(props) {
+  const history = useHistory();
+  console.log(history.location.pathname);
   props.checkLogInStatus();
   return (
     <div>
@@ -67,7 +70,7 @@ export default function Store(props) {
             })}
         </div>
       </div>
-      <Navbar />
+      <Navbar location={history.location.pathname.slice(1)} />
     </div>
   );
 }

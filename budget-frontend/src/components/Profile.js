@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import { useHistory } from "react-router-dom";
 import Navbar from "./Navbar";
 import { datePickerDefaultProps } from "@material-ui/pickers/constants/prop-types";
 import EditProfile from "./EditProfile";
@@ -9,6 +9,7 @@ import "../styles/ProfilePage.sass";
 
 export default function Profile(props) {
   const history = useHistory();
+  console.log(history.location.pathname);
   const [openEdit, setOpenEdit] = useState(false);
   const [openBudget, setOpenBudget] = useState(false);
   console.log(props);
@@ -59,7 +60,7 @@ export default function Profile(props) {
           ) : null}
         </div>
       </div>
-      <Navbar />
+      <Navbar location={history.location.pathname.slice(1)} />
     </div>
   );
 }

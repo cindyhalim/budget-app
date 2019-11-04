@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 import PieChartIcon from "@material-ui/icons/PieChart";
@@ -8,9 +8,16 @@ import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import HomeIcon from "@material-ui/icons/Home";
 import AddTransactionOption from "./addTransaction/AddTransactionOption";
 
-export default function Navbar() {
+export default function Navbar(props) {
+  console.log(props.location);
   const [openAddTransaction, setOpenAddTransaction] = useState(false);
-  const [value, setValue] = useState("home");
+  const [value, setValue] = useState(props.location);
+
+  useEffect(() => {
+    setValue(props.location);
+  }, [props.location]);
+
+  console.log(value);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -35,8 +42,7 @@ export default function Navbar() {
         value="home"
         icon={<HomeIcon />}
         onClick={() => {
-          setValue("home");
-          history.push("/dashboard");
+          history.push("/home");
         }}
       />
 
@@ -45,13 +51,13 @@ export default function Navbar() {
         value="store"
         icon={<FormatListNumberedIcon />}
         onClick={() => {
-          setValue("store");
           history.push("/store");
         }}
       />
 
       <BottomNavigationAction
-        label="Add Paymnet"
+        label="Payment"
+        value="payment"
         onClick={() => setOpenAddTransaction(true)}
         icon={<AddCircleOutlineIcon />}
       />
@@ -59,12 +65,20 @@ export default function Navbar() {
         openAddTransaction={openAddTransaction}
         changeOpenStatus={data => setOpenAddTransaction(data)}
       />
-      <Link to="/analytics">
-        <BottomNavigationAction label="Analytics" icon={<PieChartIcon />} />
-      </Link>
-      <Link to="/profile">
-        <BottomNavigationAction label="Profile" icon={<AccountCircleIcon />} />
-      </Link>
+      <BottomNavigationAction
+        value="analytics"
+        label="Analytics"
+        icon={<PieChartIcon />}
+        onClick={() => {
+          history.push("/analytics");
+        }}
+      />
+      <BottomNavigationAction
+        value="profile"
+        label="Profile"
+        icon={<AccountCircleIcon />}
+        onClick={() => history.push("/profile")}
+      />
     </BottomNavigation>
   );
 }

@@ -53,7 +53,7 @@ export default function Analytics() {
         </div>
       </div>
       {chartDropdown[chart]}
-      <Navbar />
+      <Navbar location={history.location.pathname.slice(1)} />
     </div>
   );
 }

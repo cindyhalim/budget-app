@@ -131,7 +131,7 @@ export default function Dashboard(props) {
             ))}
         </div>
       </section>
-      <Navbar />
+      <Navbar location={history.location.pathname.slice(1)} />
     </div>
   );
 }
