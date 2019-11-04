@@ -22,6 +22,7 @@ export default function Analytics() {
     "Monthly Comparison": <Barchart />,
     "Budget Comparison": <Budgetchart />
   };
+
   return (
     <div>
       <div className="analytics-title">
@@ -43,9 +44,7 @@ export default function Analytics() {
                 setChart(e.target.value);
               }}
             >
-              <MenuItem value="Current Breakdown" selected={true}>
-                Current Breakdown
-              </MenuItem>
+              <MenuItem value="Current Breakdown">Current Breakdown</MenuItem>
               <MenuItem value="Monthly Comparison">Monthly Comparison</MenuItem>
               <MenuItem value="Budget Comparison">Budget Comparison</MenuItem>
             </Select>
