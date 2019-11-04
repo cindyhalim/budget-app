@@ -7,6 +7,7 @@ import {
   MuiPickersUtilsProvider
 } from "@material-ui/pickers";
 import Close from "@material-ui/icons/Close";
+import moment from "moment";
 
 export default function GoalForm(props) {
   const [formFields, setFormFields] = useState({
@@ -16,6 +17,7 @@ export default function GoalForm(props) {
     start_date: props.start_date,
     end_date: props.end_date
   });
+  const [error, setError] = useState("");
 
   const handleFormFieldChange = name => event => {
     setFormFields({ ...formFields, [name]: event.target.value });
@@ -29,9 +31,28 @@ export default function GoalForm(props) {
     <form
       onSubmit={event => {
         event.preventDefault();
-        props.onSave(formFields);
-        props.setRefreshGoals(!props.refreshGoals);
-        props.setActive(!props.active);
+        if (
+          moment(formFields.end_date).format("YYYY-M-DD") !==
+          moment(formFields.start_date).format("YYYY-M-DD")
+        ) {
+          props.onSave(formFields);
+          props.setRefreshGoals(!props.refreshGoals);
+          props.setActive(!props.active);
+        } else {
+          setError({
+            ...error,
+            date: "***Saving goal must take place over one day***"
+          });
+        }
+
+        //error handling
+        if (formFields.name === "") {
+          setError({ ...error, name: "This field cannot be left blank" });
+        }
+
+        if (formFields.amount === "") {
+          setError({ ...error, amount: "This field cannot be left blank" });
+        }
       }}
       className="goal-form"
     >
@@ -51,9 +72,7 @@ export default function GoalForm(props) {
         type="text"
         margin="normal"
         value={formFields.name}
-        helperText={
-          formFields.name === "" ? "This field cannot be left blank" : " "
-        }
+        helperText={error.name ? error.name : ""}
         onChange={handleFormFieldChange("name")}
         required
       />
@@ -64,9 +83,7 @@ export default function GoalForm(props) {
         type="number"
         margin="normal"
         value={formFields.amount}
-        helperText={
-          formFields.amount === "" ? "This field cannot be left blank" : " "
-        }
+        helperText={error.amount ? error.amount : ""}
         onChange={handleFormFieldChange("amount")}
         required
       />
@@ -85,11 +102,6 @@ export default function GoalForm(props) {
             "aria-label": "change date"
           }}
           onChange={date => handleDateChange("start_date", date)}
-          helperText={
-            formFields.start_date === ""
-              ? "This field cannot be left blank"
-              : " "
-          }
           required
         />
         <KeyboardDatePicker
@@ -107,12 +119,10 @@ export default function GoalForm(props) {
             "aria-label": "change date"
           }}
           error={formFields.end_date === ""}
-          helperText={
-            formFields.end_date === "" ? "This field cannot be left blank" : " "
-          }
           required
         />
       </MuiPickersUtilsProvider>
+      {error.date ? <p>{error.date}</p> : ""}
       <Button className="save-button" type="submit" size="small">
         Save
       </Button>
