@@ -21,7 +21,6 @@ export default function SavedGoal(props) {
       ...goalEdit,
       ...newState
     }));
-    props.setRefreshGoals(false);
   };
 
   useEffect(() => {
@@ -39,7 +38,7 @@ export default function SavedGoal(props) {
         { withCredentials: true }
       )
       .then(() => {
-        props.setRefreshGoals(!props.refreshGoals);
+        // props.setRefreshGoals(!props.refreshGoals);
       });
   }, [goalEdit]);
 
