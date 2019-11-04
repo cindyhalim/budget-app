@@ -20,6 +20,11 @@ export default function Store(props) {
 
       <div>
         <div className="entire-store">
+          <div className="status-card">
+            You have met your budget <strong>{props.budgetAchieved}</strong>{" "}
+            times this year
+          </div>
+
           <div className="inventory-card">
             <div className="inventory-title">Inventory</div>
             <div className="coins-inventory">
@@ -71,12 +76,9 @@ export default function Store(props) {
               </div>
             </div>
           </div>
-          <p>
-            You have met your budget <strong>{props.budgetAchieved}</strong>{" "}
-            times this year
-          </p>
+
+          <div className="market-title">My Badges</div>
           <div className="badge-collection-card">
-            <div className="market-title">My Badges</div>
             {Array.from(props.images).length > 0 &&
               Array.from(props.images).map(image => {
                 return <Badges image={image} />;
