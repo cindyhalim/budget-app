@@ -12,8 +12,6 @@ class GoalsController < ApplicationController
         @budget_for_checking = @budget.last
       end
 
-      pp "BUDGET"
-      pp @budget_for_checking
       if @transactions_amount_for_last_month > @budget_for_checking.amount
         user.update(hp: user.hp - 20)
         user.update(date_last_checked: Date.today)

@@ -21,7 +21,7 @@ export default function Dashboard(props) {
     createGoal: {
       name: "",
       amount: "",
-      start_date: Date.now(),
+      start_date: new Date(Date.now()),
       end_date: new Date(new Date(Date.now()).getTime() + 86400000),
       error: ""
     },
@@ -102,7 +102,7 @@ export default function Dashboard(props) {
 
       <h1 class="date-now">{moment().format("MMMM Do, YYYY")}</h1>
       <SwipeableViews
-        index="1"
+        index={1}
         onChangeIndex={(index, indexLatest) => {
           index > indexLatest ? handleNextSwipe() : handleBackSwipe();
         }}
