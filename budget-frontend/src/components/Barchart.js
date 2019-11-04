@@ -4,6 +4,7 @@ import MonthOptions from "./MonthOptions";
 import axios from "axios";
 
 import "../styles/Barchart.sass";
+
 export default function Barchart() {
   const [bar1Month, setBar1Month] = useState(
     new Date().toLocaleString("default", { month: "long" })
@@ -69,24 +70,12 @@ export default function Barchart() {
   }, [transactions1, transactions2, bar1Month, bar2Month]);
 
   function getChartdata() {
-    return [
-      {
-        name: "Food and Drink",
-        data: ifTwoCharts(0)
-      },
-      {
-        name: "Recreation",
-        data: ifTwoCharts(1)
-      },
-      {
-        name: "Rideshare",
-        data: ifTwoCharts(2)
-      },
-      {
-        name: "Shopping",
-        data: ifTwoCharts(3)
-      }
-    ];
+    let dataSet = [];
+    transactions1.forEach((transaction, index) => {
+      dataSet.push({ name: transaction.category, data: ifTwoCharts(index) });
+    });
+
+    return dataSet;
   }
 
   function ifTwoCharts(index) {
