@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Progress } from "reactstrap";
-import { Card, CardContent } from "@material-ui/core";
+import { Card } from "@material-ui/core";
 import axios from "axios";
 
 const ProgressBar = () => {
@@ -23,6 +23,7 @@ const ProgressBar = () => {
         setSavingGoal(Number(res.data.toSave));
       });
   }, []);
+  //should depend on new transactions, new goal
 
   const totalSpending = (total / budget) * 100;
   const totalSaving = (savingGoal / budget) * 100;
@@ -32,18 +33,12 @@ const ProgressBar = () => {
       <h3>Daily Progress:</h3>
       <Progress className="daily-progress" multi>
         <Progress bar color="success" value={totalSpending}>
-          {total}
+          {total ? total : ""}
         </Progress>
         <Progress bar color="warning" value={totalSaving}>
-          {savingGoal}
+          {savingGoal ? savingGoal : ""}
         </Progress>
-        <Progress
-          bar
-          color="danger"
-          value={100 - (totalSpending + totalSaving)}
-        >
-          UH...OH BRUH
-        </Progress>
+        <Progress bar value={100 - (totalSpending + totalSaving)}></Progress>
       </Progress>
     </Card>
   );

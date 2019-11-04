@@ -21,7 +21,7 @@ export default function Dashboard(props) {
     createGoal: {
       name: "",
       amount: "",
-      start_date: new Date(Date.now()),
+      start_date: Date.now(),
       end_date: new Date(new Date(Date.now()).getTime() + 86400000),
       error: ""
     },
