@@ -19,11 +19,11 @@ ActiveRecord::Schema.define(version: 2019_11_04_142925) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "categories_users", id: false, force: :cascade do |t|
-    t.integer "category_id", null: false
+  create_table "badges_users", id: false, force: :cascade do |t|
+    t.integer "badge_id", null: false
     t.integer "user_id", null: false
-    t.index ["category_id"], name: "index_categories_users_on_category_id"
-    t.index ["user_id"], name: "index_categories_users_on_user_id"
+    t.index ["badge_id"], name: "index_badges_users_on_badge_id"
+    t.index ["user_id"], name: "index_badges_users_on_user_id"
   end
 
   create_table "goals", force: :cascade do |t|
@@ -59,11 +59,8 @@ ActiveRecord::Schema.define(version: 2019_11_04_142925) do
     t.integer "coins", default: 20
     t.date "date_last_checked", default: "2000-01-01"
     t.integer "num_times_bud_met", default: 0
-    t.integer "badge_id"
-    t.index ["badge_id"], name: "index_users_on_badge_id"
   end
 
   add_foreign_key "goals", "users"
   add_foreign_key "transactions", "users"
-  add_foreign_key "users", "badges"
 end

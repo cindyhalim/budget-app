@@ -231,3 +231,9 @@ Badge.create({name: "badge1", path_name: "storage/badge_1.png"})
 Badge.create({name: "badge2", path_name: "storage/badge.png"})
 Badge.create({name: "badge3", path_name: "storage/medal.png"})
 Badge.create({name: "badge4", path_name: "storage/ribbon-badge-award.png"})
+
+#badges-users table
+badge = Badge.first
+badge2 = Badge.second
+user1.badges << badge
+user1.badges << badge2
