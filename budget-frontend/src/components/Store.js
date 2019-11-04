@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "./Navbar";
+import Badges from "./Badges";
 
 export default function Store(props) {
   console.log(props);
@@ -38,6 +39,10 @@ export default function Store(props) {
           this year
         </p>
         <p>See your badges below:</p>
+        {Array.from(props.images).length > 0 &&
+          Array.from(props.images).map(image => {
+            return <Badges image={image} />;
+          })}
       </div>
       <Navbar />
     </div>
