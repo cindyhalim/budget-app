@@ -20,6 +20,10 @@ class RegistrationsController < ApplicationController
       pp user.badges.where(name: "badge1")[0].path_name
       send_file user.badges.where(name: "badge#{params[:badge]}")[0].path_name
     end
+    if params[:badge] == "locked"
+      pp user.badges.where(name: "badge1")[0].path_name
+      send_file "storage/locked.png"
+    end
   end
 
   def create

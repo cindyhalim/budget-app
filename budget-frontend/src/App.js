@@ -16,15 +16,25 @@ export default function App() {
     status: "not_logged_in",
     user: ""
   });
+  let lock = "http://localhost:3000/check_badges/?badge=locked";
   const [refreshGoals, setRefreshGoals] = useState(false);
-  const [image, setImage] = useState(new Set());
+  const [image, setImage] = useState([lock, lock, lock, lock]);
   const handleLogin = data => {
     setLogInStatus({
       status: "logged_in",
       user: data
     });
   };
-
+  let imageArray = [
+    "http://localhost:3000/check_badges/?badge=locked",
+    "http://localhost:3000/check_badges/?badge=locked",
+    "http://localhost:3000/check_badges/?badge=locked",
+    "http://localhost:3000/check_badges/?badge=locked"
+  ];
+  let countArray = [1, 3, 5, 10];
+  const clearState = () => {
+    setImage(new Set());
+  };
   const handleLogout = data => {
     if (!data.logged_in) {
       setLogInStatus({
@@ -34,16 +44,12 @@ export default function App() {
     }
   };
 
-  useEffect(() => {
-    for (let img of [1, 3, 5, 10]) {
-      if (
-        logInStatus.user.num_times_bud_met !== 0 &&
-        img <= logInStatus.user.num_times_bud_met
-      ) {
-        setImage(image.add(`http://localhost:3000/check_badges/?badge=${img}`));
-      }
+  for (let count of countArray) {
+    if (count > 0 && count <= logInStatus.user.num_times_bud_met) {
+      let index = countArray.indexOf(count);
+      imageArray[index] = `http://localhost:3000/check_badges/?badge=${count}`;
     }
-  }, [logInStatus]);
+  }
 
   function updateHealthAndCoins(coins, hp) {
     axios.get(`http://localhost:3000/game/?coins=${coins}&hp=${hp}`, {
@@ -172,7 +178,7 @@ export default function App() {
                 updateHealthAndCoins(hp, coins)
               }
               budgetAchieved={logInStatus.user.num_times_bud_met}
-              images={image}
+              images={imageArray}
             />
           )}
         />

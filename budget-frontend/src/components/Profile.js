@@ -17,12 +17,9 @@ export default function Profile(props) {
     <div>
       <div className="profile-page">
         <div className="header">
-          <img src="pig.png" className="avatar"></img>
-          <div className="header-profile">
-            {/* <p className="username">Hi {props.logInStatus.user.name}</p> */}
-            <p className="profile-text">{props.logInStatus.user.name}</p>
-            <p className="profile-text">{props.logInStatus.user.email}</p>
-            <Button
+          <div className="header-left">
+            <img src="pig.png" className="avatar"></img>
+            <p
               className="logout"
               onClick={() => {
                 props.logOutClick();
@@ -30,7 +27,12 @@ export default function Profile(props) {
               }}
             >
               Logout
-            </Button>
+            </p>
+          </div>
+          <div className="header-profile">
+            {/* <p className="username">Hi {props.logInStatus.user.name}</p> */}
+            <p className="profile-username">{props.logInStatus.user.name}</p>
+            <p className="profile-email">{props.logInStatus.user.email}</p>
           </div>
         </div>
         <div className="description">
