@@ -99,7 +99,7 @@ export default function Dashboard(props) {
         }}
       >
         <TopSpending />
-        <ProgressBar />
+        <ProgressBar goals={goals} />
         <MonthlyProgressBar />
       </SwipeableViews>
       <MobileStepper

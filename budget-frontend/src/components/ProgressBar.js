@@ -3,7 +3,7 @@ import { Progress } from "reactstrap";
 import { Card } from "@material-ui/core";
 import axios from "axios";
 
-const ProgressBar = () => {
+const ProgressBar = props => {
   const [total, setTotal] = useState([]);
   const [budget, setBudget] = useState(0);
   const [savingGoal, setSavingGoal] = useState(0);
@@ -22,7 +22,7 @@ const ProgressBar = () => {
         setBudget(Number(res.data.budget));
         setSavingGoal(Number(res.data.toSave));
       });
-  }, []);
+  }, [props.goals]);
   //should depend on new transactions, new goal
 
   const totalSpending = (total / budget) * 100;
