@@ -33,16 +33,13 @@ export default function App() {
       });
     }
   };
-  console.log(logInStatus.user);
 
   useEffect(() => {
     for (let img of [1, 3, 5, 10]) {
-      console.log("IMG", img, logInStatus.user.num_times_bud_met);
       if (
         logInStatus.user.num_times_bud_met !== 0 &&
         img <= logInStatus.user.num_times_bud_met
       ) {
-        console.log("IMGGGGGGGGGGGG", img, image);
         setImage(image.add(`http://localhost:3000/check_badges/?badge=${img}`));
       }
     }
@@ -98,7 +95,6 @@ export default function App() {
       })
       .catch(err => console.log("check log in error", err));
   };
-  console.log(image);
   return (
     <Router>
       <Switch>
