@@ -35,36 +35,50 @@ export default function Store(props) {
           <div className="market-card">
             <div className="market-title">Market</div>
             <div className="potion-market">
-              <div>Potion</div>
-              <img src="potion.png" style={{ height: "30px", width: "30px" }} />
-              <div>Heals 20 HP</div>
-              20
-              <img src="coins.jpg" style={{ height: "30px", width: "30px" }} />
-              <button
-                onClick={() => {
-                  if (props.hp !== 100 && props.coins >= 20) {
-                    props.subtractCoinsAddHP(-20, 20);
-                  } else if (props.coins < 20) {
-                    alert("You don't have enough money");
-                  } else {
-                    alert("Your health is already full");
-                  }
-                }}
-                className="buy-button"
-              >
-                Buy
-              </button>
+              <div className="potion-details">
+                <div>Potion</div>
+                <img
+                  src="potion.png"
+                  style={{ height: "30px", width: "30px" }}
+                />
+                <div>Heals 20 HP</div>
+              </div>
+              <div>
+                <div>
+                  20
+                  <img
+                    src="coins.jpg"
+                    style={{ height: "30px", width: "30px" }}
+                  />
+                </div>
+                <button
+                  onClick={() => {
+                    if (props.hp !== 100 && props.coins >= 20) {
+                      props.subtractCoinsAddHP(-20, 20);
+                    } else if (props.coins < 20) {
+                      alert("You don't have enough money");
+                    } else {
+                      alert("Your health is already full");
+                    }
+                  }}
+                  className="buy-button"
+                >
+                  Buy
+                </button>
+              </div>
             </div>
           </div>
           <p>
             You have met your budget <strong>{props.budgetAchieved}</strong>{" "}
             times this year
           </p>
-          <p>My Badges</p>
-          {Array.from(props.images).length > 0 &&
-            Array.from(props.images).map(image => {
-              return <Badges image={image} />;
-            })}
+          <div className="badge-collection-card">
+            <div className="market-title">My Badges</div>
+            {Array.from(props.images).length > 0 &&
+              Array.from(props.images).map(image => {
+                return <Badges image={image} />;
+              })}
+          </div>
         </div>
       </div>
       <Navbar />
