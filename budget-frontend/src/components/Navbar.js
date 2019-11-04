@@ -5,36 +5,43 @@ import PieChartIcon from "@material-ui/icons/PieChart";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
+import StoreMallDirectoryIcon from "@material-ui/icons/StoreMallDirectory";
 import HomeIcon from "@material-ui/icons/Home";
 import AddTransactionOption from "./addTransaction/AddTransactionOption";
 
+import { makeStyles } from "@material-ui/core/styles";
+const useStyles = makeStyles({
+  root: {
+    width: 500
+  }
+});
+
 export default function Navbar(props) {
-  console.log(props.location);
   const [openAddTransaction, setOpenAddTransaction] = useState(false);
   const [value, setValue] = useState(props.location);
+
+  const classes = useStyles();
 
   useEffect(() => {
     setValue(props.location);
   }, [props.location]);
 
-  console.log(value);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  console.log("state", value);
   const history = useHistory();
 
   return (
     <BottomNavigation
+      className={classes.root}
       value={value}
       onClick={handleChange}
       style={{
         position: "fixed",
         bottom: "0",
         width: "100%",
-        backgroundColor: "lightblue"
+        backgroundColor: "#f7f7f7"
       }}
     >
       <BottomNavigationAction
@@ -49,7 +56,7 @@ export default function Navbar(props) {
       <BottomNavigationAction
         label="Store"
         value="store"
-        icon={<FormatListNumberedIcon />}
+        icon={<StoreMallDirectoryIcon />}
         onClick={() => {
           history.push("/store");
         }}

@@ -7,8 +7,11 @@ export default function CoinCount(props) {
   }, [props.coins]);
   return (
     <div>
-      <img src="coins.jpg" style={{ height: "30px", width: "30px" }} />
-      {coins}
+      <p className="coins">
+        {coins}
+        {"   "}
+        <img src="coins.jpg" style={{ height: "30px", width: "30px" }} />
+      </p>
       {/* <button
         onClick={() => {
           props.updateCoins(40);

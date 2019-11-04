@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2019_11_04_142925) do
     t.integer "hp", default: 100
     t.integer "coins", default: 20
     t.date "date_last_checked", default: "2000-01-01"
-    t.integer "num_times_bud_met", default: 9
+    t.integer "num_times_bud_met", default: 0
   end
 
   add_foreign_key "goals", "users"

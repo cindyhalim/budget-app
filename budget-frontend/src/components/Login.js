@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { BrowserRouter as Redirect, useHistory } from "react-router-dom";
+import { BrowserRouter as Link, useHistory } from "react-router-dom";
 import "../styles/Login.sass";
 import { TextField, Button } from "@material-ui/core";
 
@@ -60,8 +60,21 @@ export default function Login(props) {
           onChange={event => handleChange(event)}
           required
         />
-        <Button type="submit" variant="contained" color="" className="button">
+        <Button
+          type="submit"
+          variant="contained"
+          color=""
+          className="login button"
+        >
           Login
+        </Button>
+        <Button
+          variant="contained"
+          color=""
+          className="button"
+          onClick={() => history.push("/register")}
+        >
+          Register
         </Button>
       </form>
     </div>
