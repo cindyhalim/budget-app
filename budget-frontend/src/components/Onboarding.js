@@ -5,8 +5,7 @@ export default function Onboarding() {
   const history = useHistory();
   return (
     <div>
-      Onboarding{" "}
-      <button onClick={() => history.push("/dashboard")}>done</button>
+      Onboarding <button onClick={() => history.push("/home")}>done</button>
     </div>
   );
 }

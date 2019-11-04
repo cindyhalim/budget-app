@@ -1,15 +1,14 @@
 class TransactionsController < ApplicationController
 
   def index
-    user = User.find_by(id: session[:user_id])
-    @total_for_month = user.transactions.select("sum(amount) as total").where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day)
+    user = User.find_by(id: session[:user_id]) 
     
-    @transactions = user.transactions.select("category,sum(amount) as amount").where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day).group("category")
+    # @transactions = user.transactions.select("category,sum(amount) as amount").where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day).group("category")
   
 
-    if @transactions.length == 0
-      render json: {transactions: []}
-    else
+    # if @transactions.length == 0
+    #   render json: {transactions: []}
+    # else
 
       if params[:type] === "progress" 
         @budget = user.goals.where('goal_type = "budget"')
@@ -45,8 +44,9 @@ class TransactionsController < ApplicationController
           end_of_month = start_of_month.end_of_month
 
           monthly_transactions_sum = user.transactions.where(transaction_date: start_of_month..end_of_month).pluck(:amount).sum.to_f.round(2)
-
-          monthly_transactions[Date::MONTHNAMES[month][0,3]] = monthly_transactions_sum
+          if(monthly_transactions_sum > 0)
+            monthly_transactions[Date::MONTHNAMES[month][0,3]] = monthly_transactions_sum
+          end
         end
 
         render json: {transactions: monthly_transactions, budget: @budget.last.amount.to_f }
@@ -57,6 +57,7 @@ class TransactionsController < ApplicationController
 
       elsif params[:type] === "monthlyprogress"
         @budget = user.goals.where('goal_type = "budget"')
+        @transactions = user.transactions.select("category,sum(amount) as amount").where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day).group("category")
         @total = (@transactions.map do |transaction| 
           ((transaction.amount).to_i).ceil end).reduce(0, :+)
         render json: {
@@ -64,7 +65,9 @@ class TransactionsController < ApplicationController
           total: @total
         }
 
-      elsif params[:type] === "pie"        
+      elsif params[:type] === "pie" 
+        @total_for_month = user.transactions.select("sum(amount) as total").where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day)
+        @transactions = user.transactions.select("category,sum(amount) as amount").where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day).group("category")    
         @percent = @transactions.map do |transaction| 
      
           {
@@ -76,6 +79,7 @@ class TransactionsController < ApplicationController
         render json: {transactions: @percent, total: @total_for_month}
     
       elsif params[:type] === "bar"
+        @transactions = user.transactions.select("category,sum(amount) as amount").where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day).group("category")
         @bar1 = @transactions.map do |transaction| 
           { month: params[:month],
             category: transaction.category,
@@ -89,9 +93,8 @@ class TransactionsController < ApplicationController
         render json: {category_transactions: @category_transactions}
       end
     end
-  end
+  # end
   
-
 def create
   pp params
   user = User.find_by(id: session[:user_id])
