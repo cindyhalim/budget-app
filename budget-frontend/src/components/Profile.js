@@ -21,7 +21,8 @@ export default function Profile(props) {
           <img src="pig.png" className="avatar"></img>
           <div className="header-profile">
             {/* <p className="username">Hi {props.logInStatus.user.name}</p> */}
-            <p className="profile-text">Profile Page</p>
+            <p className="profile-text">{props.logInStatus.user.name}</p>
+            <p className="profile-text">{props.logInStatus.user.email}</p>
             <Button
               className="logout"
               onClick={() => {

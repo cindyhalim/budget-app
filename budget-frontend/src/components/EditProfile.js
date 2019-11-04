@@ -2,13 +2,28 @@ import React, { useState } from "react";
 import "../styles/EditProfile.sass";
 import Button from "@material-ui/core/Button";
 import { TextField, CardContent, Card } from "@material-ui/core";
+import Axios from "axios";
 
 export default function EditProfile(props) {
-  const [updatedParams, setUpdatedParams] = useState({
+  const [updatedFields, setUpdatedFields] = useState({
     name: "",
-    username: "",
-    email: ""
+    email: "",
+    password: "",
+    password_confirmation: ""
   });
+
+  const handleSubmit = () => {
+    if (Object.values(updatedFields).filter(field => field).length > 0) {
+      Axios.put("http:localhost:3000/registrations", {
+        name: updatedFields.name,
+        email: updatedFields.email,
+        password: updatedFields.password,
+        password_confirmation: updatedFields.password_confirmation
+      });
+    } else {
+      alert("All Fields Empty");
+    }
+  };
   return (
     <div className="edit-profile" style={{ width: "100%" }}>
       <Card>
@@ -23,10 +38,10 @@ export default function EditProfile(props) {
                 style={{ margin: "5px", width: "80%" }}
                 type="text"
                 placeholder="Name"
-                //   value={updatedParams.name}
-                //   onChange={e =>
-                //     setUpdatedParams({ ...updatedParams, name: e.target.value })
-                //   }
+                value={updatedFields.name}
+                onChange={e =>
+                  setUpdatedFields({ ...updatedFields, name: e.target.value })
+                }
               ></TextField>
               <br />
               <TextField
@@ -34,10 +49,10 @@ export default function EditProfile(props) {
                 style={{ margin: "5px", width: "80%" }}
                 type="text"
                 placeholder="Email"
-                //   value={updatedParams.email}
-                //   onChange={e =>
-                //     setUpdatedParams({ ...updatedParams, email: e.target.value })
-                //   }
+                value={updatedFields.email}
+                onChange={e =>
+                  setUpdatedFields({ ...updatedFields, email: e.target.value })
+                }
               ></TextField>
               <br />
               <TextField
@@ -45,6 +60,13 @@ export default function EditProfile(props) {
                 style={{ margin: "5px", width: "80%" }}
                 type="text"
                 placeholder="Password"
+                value={updatedFields.password}
+                onChange={e =>
+                  setUpdatedFields({
+                    ...updatedFields,
+                    password: e.target.value
+                  })
+                }
               ></TextField>
               <br />
               <TextField
@@ -52,10 +74,17 @@ export default function EditProfile(props) {
                 style={{ margin: "5px", width: "80%" }}
                 type="text"
                 placeholder="Re-Enter Password"
+                value={updatedFields.password_confirmation}
+                onChange={e =>
+                  setUpdatedFields({
+                    ...updatedFields,
+                    password_confirmation: e.target.value
+                  })
+                }
               ></TextField>
             </div>
             <div className="submit-button">
-              <Button type="submit">Save</Button>
+              <Button onClick={() => handleSubmit()}>Save</Button>
             </div>
           </form>
         </CardContent>
