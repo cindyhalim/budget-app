@@ -57,6 +57,11 @@ const Budgetchart = () => {
           }
         }
       ],
+      yAxis: {
+        title: {
+          text: "Amount"
+        }
+      },
 
       plotOptions: {
         series: {
