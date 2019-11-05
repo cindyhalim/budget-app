@@ -15,7 +15,8 @@ export default function Login(props) {
     setUser(prev => ({ ...prev, [event.target.name]: event.target.value }));
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = () => {
+    console.log("password", user.password);
     axios
       .post(
         "http://localhost:3000/sessions",
@@ -33,14 +34,17 @@ export default function Login(props) {
       .catch(err => {
         console.log("login error", err);
       });
-
-    event.preventDefault();
   };
 
   return (
     <div className="Login">
       <h1 className="title">Login</h1>
-      <form onSubmit={event => handleSubmit(event)}>
+      <form
+        onSubmit={event => {
+          event.preventDefault();
+          handleSubmit();
+        }}
+      >
         <TextField
           label="Email"
           maxLength="20"
@@ -68,15 +72,15 @@ export default function Login(props) {
         >
           Login
         </Button>
-        <Button
-          variant="contained"
-          color=""
-          className="button"
-          onClick={() => history.push("/register")}
-        >
-          Register
-        </Button>
       </form>
+      <Button
+        variant="contained"
+        color=""
+        className="button"
+        onClick={() => history.push("/register")}
+      >
+        Register
+      </Button>
     </div>
   );
 }
