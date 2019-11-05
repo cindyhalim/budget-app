@@ -6,7 +6,7 @@ import "../styles/Home.sass";
 export default function Home(props) {
   return (
     <div className="Home">
-      <h1 className="title">Budgie</h1>
+      <h1 className="title">Budgey</h1>
       <img src="pig.png" className="logo"></img>
       <Link to="/login">
         <Button variant="contained" color="primary" className="button">
