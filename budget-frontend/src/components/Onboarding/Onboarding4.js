@@ -8,8 +8,18 @@ const Onboarding4 = () => {
   return (
     <div>
       <div>
-        wohooo
-        <button onClick={() => history.push("/home")}>done</button>
+        <div className="title">Find Badges, Get Coin</div>
+        <img src="badges.png" className="badges-final"></img>
+        <div className="onboarding4-content">
+          Unlock badges by hitting your saving goals
+        </div>
+
+        <button
+          className="onboarding-button"
+          onClick={() => history.push("/home")}
+        >
+          Happy Savings!
+        </button>
       </div>
     </div>
   );
