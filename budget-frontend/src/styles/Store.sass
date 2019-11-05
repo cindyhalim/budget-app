@@ -12,9 +12,54 @@
   margin-top: 3%
   margin-bottom: 3%
 
-.entire-store
-  margin-left: 3%
-  margin-right: 3%
+.budget-status
+  text-align: center
+.store-content.inventory
+  background-color: #3949ab
+.store-content.market
+  background-color: #ef6c00
+  button
+    color: white
+    text-decoration: uppercase
+    font-size: 18px
+
+.store-headings
+  font-size: 1.5rem
+  margin: 2vh 5vw
+  font-family: $title-font
+
+.store-content
+  margin: 1em
+  padding: 0
+
+.store-items
+  margin: 0
+  color: white
+  display: flex
+  justify-content: space-between
+  align-items: center
+  font-size: 25px
+  section
+    display: flex
+    flex-direction: column
+    margin: 0
+  div
+    display: flex
+    align-items: center
+
+  .item-img
+    margin-right: 10px
+
+  .item-title
+    font-size: 30px
+    margin: 0
+  .item-description
+    margin: 0
+    font-size: 18px
+    font-weight: 300
+
+.amount
+  margin: 0
 
 .inventory-card
   box-shadow: 0 0 15px rgba(0,0,0,0.25)
@@ -53,16 +98,33 @@
   justify-content: space-around
   align-items: center
 
-.badge-collection-card
-  box-shadow: 0 0 15px rgba(0,0,0,0.25)
-  background-color: #fff3e0
-  color: white
-  border-radius: 10px
-
-.status-card
-  font-family: 'Lato', sans-serif
-  color: #4e342e
-  margin-bottom: 5%
+.badge-cards
   display: flex
-  font-size: 20px
-  justify-content: space-around
+  flex-direction: column
+  // justify-content: center
+  // flex-flow: row wrap
+
+.badge-card
+  margin: 1em
+  // width: 40%
+  .MuiCardContent-root
+    display: flex
+    align-items: center
+
+  .badge-info
+    margin: 0 20px
+    background-color: transparent
+    color: black
+    display: flex
+    flex-direction: column
+    .badge-title
+      font-size: 30px
+
+  .stick
+    background-color: #2196f3
+  .brick
+    background-color: #7e57c2
+.badge-card.wolf
+
+.badge-card:last-child
+  margin-bottom: 10vh

@@ -21,7 +21,7 @@ const months = [
   "December"
 ];
 
-const MonthOptions = ({ month, setMonth }) => {
+const MonthOptions = ({ month, setMonth, setCategory }) => {
   const isCurrentMonth = new Date().toLocaleString("default", {
     month: "long"
   });
@@ -36,6 +36,7 @@ const MonthOptions = ({ month, setMonth }) => {
           value={month}
           onChange={e => {
             setMonth(e.target.value);
+            setCategory("All Transactions");
           }}
         >
           {months.map((month, index) => (

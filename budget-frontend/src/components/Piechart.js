@@ -7,13 +7,13 @@ import { useFormControl } from "@material-ui/core/FormControl";
 
 import "../styles/Piechart.sass";
 
-export default function Piechart() {
+export default function Piechart({ category, setCategory }) {
   const [transactions, setTransactions] = useState([]);
   const [monthTotal, setMonthTotal] = useState(0);
   const [pieMonth, setPieMonth] = useState(
     new Date().toLocaleString("default", { month: "long" })
   );
-  const [category, setCategory] = useState("All Transactions");
+
   useEffect(() => {
     axios
       .get(`http://localhost:3000/transactions/?month=${pieMonth}&type=pie`, {
@@ -106,7 +106,11 @@ export default function Piechart() {
   return (
     <div>
       <div className="piechart-month-options">
-        <MonthOptions month={pieMonth} setMonth={setPieMonth} />
+        <MonthOptions
+          month={pieMonth}
+          setMonth={setPieMonth}
+          setCategory={setCategory}
+        />
       </div>
       {transactions.length === 0 && (
         <div className="no-transactions-error">
