@@ -1,30 +1,26 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import PlaidLink from "react-plaid-link";
 
-class App extends Component {
-  handleOnSuccess(token, metadata) {
-    // axios.post("/auth/public_token", {
-    //   public_token: "f5d36ce3fa8cfc7f7ea122094b9505"
-    // });
-  }
-  handleOnExit() {
-    // handle the case when your user exits Link
-  }
-  render() {
-    return (
+export default function Plaid() {
+  const [status, getStatus] = useState("");
+  const handleOnSuccess = (token, metadata) => {
+    getStatus("success");
+  };
+
+  return (
+    <div>
       <PlaidLink
         className="link-bank"
-        style={{}}
+        style={{ margin: "30vh 0" }}
         clientName="Your app name"
         env="sandbox"
         product={["auth", "transactions"]}
         publicKey="f5d36ce3fa8cfc7f7ea122094b9505"
-        onExit={this.handleOnExit}
-        onSuccess={this.handleOnSuccess}
+        onSuccess={handleOnSuccess}
       >
         Connect to your bank
       </PlaidLink>
-    );
-  }
+      {status ? <p>Success!</p> : ""}
+    </div>
+  );
 }
-export default App;
