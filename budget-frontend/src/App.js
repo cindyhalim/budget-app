@@ -78,7 +78,7 @@ export default function App() {
     axios
       .get("http://localhost:3000/logged_in", { withCredentials: true })
       .then(res => {
-        if (res.data.logged_in) {
+        if (res.data.logged_in && logInStatus.user === "not_logged_in") {
           handleLogin(res.data.user);
           axios
             .get("http://localhost:3000/check_budget_met", {
@@ -110,7 +110,8 @@ export default function App() {
                     });
                   });
               }
-            });
+            })
+            .catch(e => {});
         }
 
         if (!res.data.logged_in && logInStatus === "logged_in") {

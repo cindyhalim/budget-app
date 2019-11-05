@@ -17,10 +17,6 @@ export default function TopSpending(props) {
     });
   }, []);
 
-  function createData(name, total) {
-    return { name, total };
-  }
-
   console.log(topThree);
   return (
     <Card
