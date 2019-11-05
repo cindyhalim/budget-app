@@ -1,9 +1,10 @@
 import React from "react";
+import Plaid from "../Plaid";
 
 export default function PlaidRegister(props) {
   return (
-    <div>
-      <h1 className="title">Connect to Your Bank</h1>
+    <div className="PlaidRegister">
+      <Plaid />
     </div>
   );
 }

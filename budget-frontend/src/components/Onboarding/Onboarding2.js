@@ -15,7 +15,7 @@ const Onboarding2 = () => {
       <div className="onboarding1-content">You can see your daily targets.</div>
       <img src="analytics-pie.png" className="avatar-pie"></img>
       <div className="onboarding1-content">
-        You can compare your montlhy spending with other months.
+        You can compare your spending with other months.
       </div>
       <div className="icons-category">
         <ShoppingBasketIcon className="specific-icon" />
@@ -24,7 +24,7 @@ const Onboarding2 = () => {
         <FitnessCenterIcon className="specific-icon" />
       </div>
       <div className="onboarding1-content">
-        You can see where you spend the money on most.
+        You can see where most of your spending goes.
       </div>
     </div>
   );

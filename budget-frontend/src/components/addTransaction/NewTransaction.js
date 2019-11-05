@@ -77,7 +77,9 @@ export default function NewTransaction(props) {
             onChange={props.onInputCategory}
           >
             <MenuItem value="Shopping">Shopping</MenuItem>
-            <MenuItem value="Food">Food</MenuItem>
+            <MenuItem value="Food and Drink">Food and Drink</MenuItem>
+            <MenuItem value="Recreation">Recreation</MenuItem>
+            <MenuItem value="Rideshare">Rideshare</MenuItem>
           </Select>
         </DialogContent>
         <DialogActions>
