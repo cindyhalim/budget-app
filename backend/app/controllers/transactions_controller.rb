@@ -101,4 +101,9 @@ def create
   user.transactions.create(amount: params["amount"], category: params["category"], location: params["location"], transaction_date: params["transaction_date"])
   pp Transaction.all
 end
+def check_top_three
+  user = User.find_by(id: session[:user_id])
+  @transactions_top_three = user.transactions.select("sum(amount) as total, location").where("transaction_date BETWEEN ? AND ?", Date.today.at_beginning_of_month, Date.today.at_end_of_month).group(:location).order("total DESC").limit(3)
+  render json: @transactions_top_three
+end
 end
