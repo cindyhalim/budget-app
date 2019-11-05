@@ -38,6 +38,7 @@ class RegistrationsController < ApplicationController
       render json: { status: 500 }
     end
   end
+
   def update
     user = User.find_by(id: session[:user_id])
     def reg_params
