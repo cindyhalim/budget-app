@@ -19,7 +19,6 @@ import "../styles/Dashboard.sass";
 export default function Dashboard(props) {
   props.checkLogInStatus();
   const history = useHistory();
-  console.log(history.location.pathname);
   const [goals, setGoals] = useState([]);
   const [progressActiveStep, setProgressActiveStep] = useState(1);
 
