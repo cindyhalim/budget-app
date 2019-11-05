@@ -1,6 +1,8 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
+import "../../styles/Onboarding.sass";
+
 const Onboarding4 = () => {
   const history = useHistory();
   return (
