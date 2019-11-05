@@ -23,7 +23,6 @@ const ProgressBar = props => {
         setSavingGoal(Number(res.data.toSave));
       });
   }, [props.goals]);
-  //should depend on new transactions, new goal
 
   const totalSpending = (total / budget) * 100;
   const totalSaving = (savingGoal / budget) * 100;
