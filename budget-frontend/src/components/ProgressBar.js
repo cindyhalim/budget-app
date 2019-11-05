@@ -12,7 +12,7 @@ const ProgressBar = props => {
     let currentMonth = new Date().toLocaleString("default", { month: "long" });
     axios
       .get(
-        `http://localhost:3000/transactions/?month=${currentMonth}&type=progress`,
+        `https://blooming-everglades-51994.herokuapp.com/transactions/?month=${currentMonth}&type=progress`,
         {
           withCredentials: true
         }

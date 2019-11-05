@@ -14,7 +14,6 @@ class TransactionsController < ApplicationController
         @budget = user.goals.where('goal_type = "budget"')
         @total_for_day = user.transactions.select("sum(amount) as total").where("transaction_date >= ? AND transaction_date <= ?", Date.today.beginning_of_day, Date.today.end_of_day)
 
-
         @current_saving_goals= user.goals.where('end_date >= ? AND goal_type = "saving" AND start_date <= ?', Date.today.beginning_of_day, Date.today.end_of_day)
 
 

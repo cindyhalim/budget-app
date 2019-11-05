@@ -9,9 +9,12 @@ import TableRow from "@material-ui/core/TableRow";
 export default function TopSpending(props) {
   const [topThree, setTopThree] = useState([]);
   useEffect(() => {
-    Axios.get("http://localhost:3000/check_top_three", {
-      withCredentials: true
-    }).then(res => {
+    Axios.get(
+      "https://blooming-everglades-51994.herokuapp.com/check_top_three",
+      {
+        withCredentials: true
+      }
+    ).then(res => {
       setTopThree([...res.data]);
     });
   }, []);
@@ -41,7 +44,7 @@ export default function TopSpending(props) {
                   className="top-amount"
                   style={{ padding: 0, margin: 0 }}
                 >
-                  ${row.total.toFixed(2)}
+                  ${row.total}
                 </TableCell>
               </TableRow>
             ))}
