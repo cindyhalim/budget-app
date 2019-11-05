@@ -30,15 +30,21 @@ const ProgressBar = props => {
   return (
     <Card className="progress-card">
       <h3>Daily Progress:</h3>
-      <Progress className="daily-progress" multi>
+      <Progress className="daily-progress" multi value={100}>
         <Progress bar color="success" value={totalSpending}>
-          {total ? total : ""}
+          {total ? `$${total}` : ""}
         </Progress>
         <Progress bar color="warning" value={totalSaving}>
-          {savingGoal ? savingGoal : ""}
+          {savingGoal ? `$${savingGoal}` : ""}
         </Progress>
-        <Progress bar value={100 - (totalSpending + totalSaving)}></Progress>
+        {/* <Progress bar value={100 - (totalSpending + totalSaving)}></Progress> */}
       </Progress>
+      <p className="daily-tracker">{`Your daily budget is $${budget}`}</p>
+      {total + savingGoal > budget ? (
+        <p className="daily-tracker">You are currently over your budget</p>
+      ) : (
+        <p className="daily-tracker">You are on track!</p>
+      )}
     </Card>
   );
 };

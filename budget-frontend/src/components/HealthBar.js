@@ -16,7 +16,10 @@ export default function HealthBar(props) {
           variant="determinate"
           color="secondary"
         />
-        <p className="hp">HP</p>
+        <p className="hp">
+          {props.hp}
+          {""}HP
+        </p>
       </section>
       {/* <button
         onClick={() => {

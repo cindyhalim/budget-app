@@ -56,7 +56,7 @@ export default function Dashboard(props) {
         withCredentials: true
       })
       .then(() => {
-        const index = findGoalIndexById(goals.id, goals);
+        const index = findGoalIndexById(data.id, goals);
         const updatedGoals = [...goals];
         updatedGoals.splice(index, 1);
         setGoals(updatedGoals);
