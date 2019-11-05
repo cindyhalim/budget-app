@@ -8,8 +8,7 @@ const Onboarding1 = () => {
       <img src="pig.png" className="avatar-pig"></img>
       <div className="onboarding1-content">
         <div>
-          Monthly budgeting app designed to help you save and track your
-          spending.
+          Budgeting app designed to help you save and visualize your spending.
         </div>
         <div>Gain important insight and take control of your money</div>
       </div>
