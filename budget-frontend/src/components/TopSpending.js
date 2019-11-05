@@ -15,7 +15,6 @@ export default function TopSpending(props) {
       setTopThree([...res.data]);
     });
   }, []);
-
   return (
     <Card
       className="progress-card"

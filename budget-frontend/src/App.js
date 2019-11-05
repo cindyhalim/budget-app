@@ -9,7 +9,6 @@ import Onboarding from "./components/Onboarding";
 import Analytics from "./components/Analytics";
 import Profile from "./components/Profile";
 import Store from "./components/Store";
-import Navbar from "./components/Navbar";
 
 export default function App() {
   const [logInStatus, setLogInStatus] = useState({
@@ -78,7 +77,7 @@ export default function App() {
     axios
       .get("http://localhost:3000/logged_in", { withCredentials: true })
       .then(res => {
-        if (res.data.logged_in && logInStatus.user === "not_logged_in") {
+        if (res.data.logged_in) {
           handleLogin(res.data.user);
           axios
             .get("http://localhost:3000/check_budget_met", {
@@ -89,7 +88,6 @@ export default function App() {
                 status: "logged_in",
                 user: result.data.user
               });
-              // console.log(result.data.user.hp);
               if (result.data.user.hp === 0) {
                 alert("You have died");
                 axios
@@ -103,7 +101,6 @@ export default function App() {
                     { withCredentials: true }
                   )
                   .then(data => {
-                    console.log(data);
                     setLogInStatus({
                       status: "logged_in",
                       user: data.data.user
@@ -201,6 +198,7 @@ export default function App() {
               }
               budgetAchieved={logInStatus.user.num_times_bud_met}
               images={imageArray}
+              logInStatus={logInStatus}
             />
           )}
         />
