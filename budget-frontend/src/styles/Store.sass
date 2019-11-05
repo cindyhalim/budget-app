@@ -12,9 +12,6 @@
   margin-top: 3%
   margin-bottom: 3%
 
-// .entire-store
-//   margin-left: 3%
-//   margin-right: 3%
 .budget-status
   text-align: center
 .store-content.inventory
@@ -101,27 +98,33 @@
   justify-content: space-around
   align-items: center
 
-.badge-collection-card
-  box-shadow: 0 0 15px rgba(0,0,0,0.25)
-  background-color: #fff3e0
-  color: white
-  border-radius: 10px
-
-.status-card
-  font-family: 'Lato', sans-serif
-  color: #4e342e
-  margin-bottom: 5%
-  display: flex
-  font-size: 20px
-  justify-content: space-around
-
 .badge-cards
-
   display: flex
   flex-direction: column
   // justify-content: center
   // flex-flow: row wrap
 
 .badge-card
-  margin: 0.5em
+  margin: 1em
   // width: 40%
+  .MuiCardContent-root
+    display: flex
+    align-items: center
+
+  .badge-info
+    margin: 0 20px
+    background-color: transparent
+    color: black
+    display: flex
+    flex-direction: column
+    .badge-title
+      font-size: 30px
+
+  .stick
+    background-color: #2196f3
+  .brick
+    background-color: #7e57c2
+.badge-card.wolf
+
+.badge-card:last-child
+  margin-bottom: 10vh

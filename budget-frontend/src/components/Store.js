@@ -72,41 +72,66 @@ export default function Store(props) {
       <h3 className="store-headings">My Badges</h3>
       <div className="badge-cards">
         <Card className="badge-card">
-          <CardContent>
+          <CardContent className="straw">
             <img
               src={props.images[0]}
-              style={{ height: "65px", width: "65px" }}
+              style={{ height: "100px", width: "100px" }}
             />
-            <p>Straw Badge</p>
-            <p>Acquired when you meet your budget 1 time in a year</p>
+            <div className="badge-info">
+              <p className="badge-title">Straw Badge</p>
+              <p className="badge-description">
+                Meet your budget 1 time in a year
+              </p>
+            </div>
           </CardContent>
         </Card>
-        <Card className="badge-card">
-          <CardContent>
+        <Card
+          className="badge-card"
+          style={{ boxShadow: "0px 0px 20px 0px rgba(0,250,250,0.59)" }}
+        >
+          <CardContent className="stick">
             <img
               src={props.images[1]}
-              style={{ height: "65px", width: "65px" }}
+              style={{ height: "100px", width: "100px" }}
             />
-            <p>Stick Badge</p>
-            <p>Acquired when you meet your budget 3 times in a year</p>
+
+            <div className="badge-info">
+              <p className="badge-title">Stick Badge</p>
+              <p className="badge-description">
+                Meet your budget 3 times in a year
+              </p>
+            </div>
           </CardContent>
         </Card>
-        <Card className="badge-card">
-          <CardContent>
+        <Card
+          className="badge-card"
+          style={{ boxShadow: "0px 0px 20px 0px rgba(129,0,250,0.59)" }}
+        >
+          <CardContent className="brick">
             <img
               src={props.images[2]}
-              style={{ height: "65px", width: "65px" }}
+              style={{ height: "100px", width: "100px" }}
             />
-            <p>{props.description}</p>
+            <div className="badge-info">
+              <p className="badge-title">Brick Badge</p>
+              <p className="badge-description">
+                Meet your budget 5 times in a year
+              </p>
+            </div>
           </CardContent>
         </Card>
         <Card className="badge-card">
-          <CardContent>
+          <CardContent className="wolf">
             <img
               src={props.images[3]}
-              style={{ height: "65px", width: "65px" }}
+              style={{ height: "100px", width: "100px" }}
             />
-            <p>{props.description}</p>
+            <div className="badge-info">
+              <p className="badge-title">Wolf Badge</p>
+              <p className="badge-description">
+                Meet your budget 10 times in a year
+              </p>
+            </div>
           </CardContent>
         </Card>
       </div>
