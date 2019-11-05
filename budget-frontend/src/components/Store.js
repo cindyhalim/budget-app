@@ -11,7 +11,7 @@ import "../styles/Store.sass";
 export default function Store(props) {
   const history = useHistory();
 
-  props.checkLogInStatus();
+  if (!props.logInStatus.user) props.checkLogInStatus();
   return (
     <div className="store-page">
       <h1 className="store-title">

@@ -11,11 +11,11 @@ export default function DashboardProfile(props) {
         <section className="user-health">
           <h5 className="user-name"> Hello, {props.user.name}</h5>
           <HealthBar
-            hp={props.hp}
+            hp={props.user.hp}
             minusHP={props.minusHP}
             resetHP={props.resetHP}
           />
-          <CoinCount coins={props.coins} updateCoins={props.updateCoins} />
+          <CoinCount coins={props.user.coins} updateCoins={props.updateCoins} />
         </section>
       </section>
     </div>

@@ -52,7 +52,7 @@ export default function Register(props) {
         { withCredentials: true }
       )
       .then(res => {
-        props.handleLogin(res);
+        props.handleLogin(res.data.user[0]);
         axios
           .post(
             "http://localhost:3000/goals",

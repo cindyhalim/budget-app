@@ -7,12 +7,12 @@ import EditBudget from "./EditBudget";
 import "../styles/ProfilePage.sass";
 
 export default function Profile(props) {
+  if (!props.logInStatus.user) props.checkLogInStatus();
   const history = useHistory();
   console.log(history.location.pathname);
   const [openEdit, setOpenEdit] = useState(false);
   const [openBudget, setOpenBudget] = useState(false);
-  console.log(props);
-  props.checkLogInStatus();
+
   return (
     <div>
       <div className="profile-page">

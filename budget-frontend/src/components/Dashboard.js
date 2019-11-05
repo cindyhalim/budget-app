@@ -17,7 +17,9 @@ import MonthlyProgressBar from "./MonthlyProgressBar";
 import "../styles/Dashboard.sass";
 
 export default function Dashboard(props) {
-  props.checkLogInStatus();
+  if (!props.logInStatus.user) {
+    props.checkLogInStatus();
+  }
   const history = useHistory();
   const [goals, setGoals] = useState([]);
   const [progressActiveStep, setProgressActiveStep] = useState(1);
@@ -67,10 +69,8 @@ export default function Dashboard(props) {
     <div className="Dashboard">
       <DashboardProfile
         user={props.logInStatus.user}
-        hp={props.logInStatus.user.hp}
         minusHP={props.minusHP}
         resetHP={props.resetHP}
-        coins={props.logInStatus.user.coins}
         updateCoins={props.updateCoins}
       />
 
