@@ -17,9 +17,7 @@ import MonthlyProgressBar from "./MonthlyProgressBar";
 import "../styles/Dashboard.sass";
 
 export default function Dashboard(props) {
-  console.log("ABOVE");
   props.checkLogInStatus();
-  console.log("BELOW");
   const history = useHistory();
   const [goals, setGoals] = useState([]);
   const [progressActiveStep, setProgressActiveStep] = useState(1);
