@@ -23,3 +23,23 @@
   .button
     margin: 5vh 0
     @include button
+
+#error
+  color: $title-color
+  -webkit-animation: cssAnimation 2s  ease-in-out 7s forwards
+    /* Safari and Chrome */
+  animation: cssAnimation 2s ease-in-out 7s forwards
+  -webkit-animation-fill-mode: forwards
+  animation-fill-mode: forwards
+
+@keyframes cssAnimation
+  to
+    width: 0
+    height: 0
+    overflow: hidden
+
+@-webkit-keyframes cssAnimation
+  to
+    width: 0
+    height: 0
+    visibility: hidden

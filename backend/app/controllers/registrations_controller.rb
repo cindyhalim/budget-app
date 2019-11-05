@@ -2,7 +2,6 @@ class RegistrationsController < ApplicationController
   def check_badges
     user = User.find_by(id: session[:user_id])
     @badges = user.badges
-    pp params[:badge]
 
     if params[:badge] == "1"
       pp user.badges.where(name: "badge1")[0].path_name

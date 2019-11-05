@@ -9,6 +9,7 @@ export default function Login(props) {
     email: "",
     password: ""
   });
+  const [loginError, setLoginError] = useState("");
   const history = useHistory();
   const handleChange = event => {
     event.persist();
@@ -16,7 +17,7 @@ export default function Login(props) {
   };
 
   const handleSubmit = () => {
-    console.log("password", user.password);
+    setLoginError("");
     axios
       .post(
         "http://localhost:3000/sessions",
@@ -29,6 +30,8 @@ export default function Login(props) {
         if (res.data.logged_in) {
           props.handleLogin(res.data.user[0]);
           history.push("/home");
+        } else if (res.data.status === 401) {
+          setLoginError("Please check your email and password");
         }
       })
       .catch(err => {
@@ -64,6 +67,7 @@ export default function Login(props) {
           onChange={event => handleChange(event)}
           required
         />
+        <p id="error">{loginError}</p>
         <Button
           type="submit"
           variant="contained"
@@ -72,15 +76,15 @@ export default function Login(props) {
         >
           Login
         </Button>
+        <Button
+          variant="contained"
+          color=""
+          className="button"
+          onClick={() => history.push("/register")}
+        >
+          Register
+        </Button>
       </form>
-      <Button
-        variant="contained"
-        color=""
-        className="button"
-        onClick={() => history.push("/register")}
-      >
-        Register
-      </Button>
     </div>
   );
 }

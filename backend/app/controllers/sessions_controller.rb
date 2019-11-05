@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
         user: [user]
       }
     else
+      pp "here in fail"
       render json: {
         status: 401
       }

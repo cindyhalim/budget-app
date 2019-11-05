@@ -72,12 +72,12 @@ export default function Register(props) {
           });
       })
       .catch(err => {
-        if (err) {
-          if (err.response.status === 422) {
-            setError("Please ensure you have filled out all text fields");
-          } else if (err.response.status === 500) {
-            setError("Sorry, there is something wrong with our server");
-          }
+        if (err.response.status === 422) {
+          setError("Please ensure you have filled out all text fields");
+        } else if (err.response.status === 500) {
+          setError(
+            "Sorry, there has been an issue. Please enter a different email and try again"
+          );
         }
       });
   };
