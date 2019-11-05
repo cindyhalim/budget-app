@@ -2,7 +2,6 @@ class RegistrationsController < ApplicationController
   def check_badges
     user = User.find_by(id: session[:user_id])
     @badges = user.badges
-    pp params[:badge]
 
     if params[:badge] == "1"
       pp user.badges.where(name: "badge1")[0].path_name
@@ -29,6 +28,15 @@ class RegistrationsController < ApplicationController
   def create
     user = User.create!(name: params['user']['name'], email: params['user']['email'], password: params['user']['password'], password_confirmation: params['user']['password_confirmation'])
 
+    badge = Badge.first
+    badge2 = Badge.second
+    badge3 = Badge.third
+    badge4 = Badge.fourth
+    user.badges << badge
+    user.badges << badge2
+    user.badges << badge3
+    user.badges << badge4
+
     if user
       session[:user_id] = user.id
       render json: {
@@ -39,6 +47,7 @@ class RegistrationsController < ApplicationController
       render json: { status: 500 }
     end
   end
+
   def update
     user = User.find_by(id: session[:user_id])
     def reg_params

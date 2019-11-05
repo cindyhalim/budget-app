@@ -17,9 +17,6 @@ class TransactionsController < ApplicationController
 
         @current_saving_goals= user.goals.where('end_date >= ? AND goal_type = "saving" AND start_date <= ?', Date.today.beginning_of_day, Date.today.end_of_day)
 
-        pp "current saving"
-        pp Date.today.end_of_day
-        pp user.goals.where('goal_type = "saving"')
 
         @to_save_amount = (@current_saving_goals.map do |saving| 
              ((saving.amount/(saving.end_date.to_date - saving.start_date.to_date).to_i).ceil)

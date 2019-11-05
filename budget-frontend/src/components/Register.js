@@ -76,7 +76,9 @@ export default function Register(props) {
           if (err.response.status === 422) {
             setError("Please ensure you have filled out all text fields");
           } else if (err.response.status === 500) {
-            setError("Sorry, there is something wrong with our server");
+            setError(
+              "Sorry, there has been an issue. Please enter a different email and try again"
+            );
           }
         }
       });
