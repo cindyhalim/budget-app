@@ -227,10 +227,10 @@ user1.goals.create({start_date:"2019-11-21T10:35:17.552Z" , end_date: "2019-12-0
 
 #badges
 
-Badge.create({name: "badge1", path_name: "storage/badge_1.png"})
-Badge.create({name: "badge3", path_name: "storage/badge.png"})
-Badge.create({name: "badge5", path_name: "storage/medal.png"})
-Badge.create({name: "badge10", path_name: "storage/ribbon-badge-award.png"})
+Badge.create({name: "badge1", path_name: "storage/straw.png"})
+Badge.create({name: "badge3", path_name: "storage/stick.png"})
+Badge.create({name: "badge5", path_name: "storage/brick.png"})
+Badge.create({name: "badge10", path_name: "storage/wolf.png"})
 
 #badges-users table
 badge = Badge.first
