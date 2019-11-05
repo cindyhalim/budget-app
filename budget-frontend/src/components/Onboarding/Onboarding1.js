@@ -9,8 +9,9 @@ const Onboarding1 = () => {
       <div className="onboarding1-content">
         <div>
           Monthly budgeting app designed to help you save and track your
-          spending. Gain important insight and take control of your money
+          spending.
         </div>
+        <div>Gain important insight and take control of your money</div>
       </div>
     </div>
   );
