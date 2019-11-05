@@ -4,7 +4,6 @@ import Axios from "axios";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 
 export default function TopSpending(props) {
@@ -23,15 +22,26 @@ export default function TopSpending(props) {
     >
       <h3 style={{ marginBottom: "0" }}>Your Top Spending:</h3>
       <Table aria-label="simple table" style={{ height: "100%" }}>
-        <TableBody>
+        <TableBody className="spending-body">
           {topThree.length > 0 &&
             topThree.map(row => (
-              <TableRow key={row.location}>
-                <TableCell component="th" scope="row" style={{ padding: "0" }}>
+              <TableRow
+                className="top-location"
+                key={row.location}
+                style={{ padding: 0 }}
+              >
+                <TableCell
+                  component="th"
+                  scope="row"
+                  style={{ padding: 0, margin: 0 }}
+                >
                   {row.location}
                 </TableCell>
-                <TableCell style={{ padding: "0" }}>
-                  {row.total.toFixed(2)}
+                <TableCell
+                  className="top-amount"
+                  style={{ padding: 0, margin: 0 }}
+                >
+                  ${row.total.toFixed(2)}
                 </TableCell>
               </TableRow>
             ))}
