@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   get :logged_in, to: "sessions#logged_in"
   get :check_budget_met, to: "goals#check_budget_met"
   get :check_badges, to: "registrations#check_badges"
+  get :check_top_three, to: "transactions#check_top_three"
 end
