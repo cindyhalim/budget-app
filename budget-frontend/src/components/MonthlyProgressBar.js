@@ -44,9 +44,9 @@ const MonthlyProgressBar = () => {
           className="monthly-progress"
           bar
           color={checkMonthlySpending(percentMonthlySpending)}
-          value={percentMonthlySpending}
+          value={percentMonthlySpending > 100 ? 100 : percentMonthlySpending}
         >
-          {total ? `${percentMonthlySpending}%` : ""}
+          {total ? `${percentMonthlySpending.toFixed(2)}%` : ""}
         </Progress>
       </Progress>
     </Card>
