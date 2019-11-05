@@ -28,6 +28,15 @@ class RegistrationsController < ApplicationController
   def create
     user = User.create!(name: params['user']['name'], email: params['user']['email'], password: params['user']['password'], password_confirmation: params['user']['password_confirmation'])
 
+    badge = Badge.first
+    badge2 = Badge.second
+    badge3 = Badge.third
+    badge4 = Badge.fourth
+    user.badges << badge
+    user.badges << badge2
+    user.badges << badge3
+    user.badges << badge4
+
     if user
       session[:user_id] = user.id
       render json: {
