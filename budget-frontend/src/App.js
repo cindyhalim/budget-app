@@ -89,6 +89,27 @@ export default function App() {
                 status: "logged_in",
                 user: result.data.user
               });
+              // console.log(result.data.user.hp);
+              if (result.data.user.hp === 0) {
+                alert("You have died");
+                axios
+                  .put(
+                    `http://localhost:3000/game/${result.data.user.id}`,
+                    {
+                      hp: 100,
+                      coins: 0,
+                      num_times_bud_met: 0
+                    },
+                    { withCredentials: true }
+                  )
+                  .then(data => {
+                    console.log(data);
+                    setLogInStatus({
+                      status: "logged_in",
+                      user: data.data.user
+                    });
+                  });
+              }
             });
         }
 
