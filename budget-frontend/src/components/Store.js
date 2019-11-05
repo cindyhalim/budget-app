@@ -85,10 +85,7 @@ export default function Store(props) {
             </div>
           </CardContent>
         </Card>
-        <Card
-          className="badge-card"
-          style={{ boxShadow: "0px 0px 20px 0px rgba(0,250,250,0.59)" }}
-        >
+        <Card className="badge-card">
           <CardContent className="stick">
             <img
               src={props.images[1]}
@@ -103,10 +100,7 @@ export default function Store(props) {
             </div>
           </CardContent>
         </Card>
-        <Card
-          className="badge-card"
-          style={{ boxShadow: "0px 0px 20px 0px rgba(129,0,250,0.59)" }}
-        >
+        <Card className="badge-card">
           <CardContent className="brick">
             <img
               src={props.images[2]}
