@@ -12,6 +12,8 @@ const Onboarding2 = () => {
     <div>
       {" "}
       <img src="budget.png" className="avatar-budget"></img>
+      <div className="onboarding1-content">You can see your daily targets.</div>
+      <img src="analytics-pie.png" className="avatar-pie"></img>
       <div className="onboarding1-content">
         You can compare your montlhy spending with other months.
       </div>
