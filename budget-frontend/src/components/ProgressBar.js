@@ -42,9 +42,9 @@ const ProgressBar = props => {
       <section className="daily-tracker">
         <p>{`Your daily budget is $${budget}`}</p>
         {total + savingGoal > budget ? (
-          <p>You are currently over your budget</p>
+          <p style={{ color: "#e34040" }}>You are currently over your budget</p>
         ) : (
-          <p>You are on track!</p>
+          <p style={{ color: "#6dbd55" }}>You are currently on track!</p>
         )}
       </section>
     </Card>

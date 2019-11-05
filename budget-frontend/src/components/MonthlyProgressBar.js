@@ -49,6 +49,14 @@ const MonthlyProgressBar = () => {
           {total ? `${percentMonthlySpending.toFixed(2)}%` : ""}
         </Progress>
       </Progress>
+      <section className="daily-tracker">
+        <p>{`Your monthly budget is $${budget}`}</p>
+        {total > budget ? (
+          <p style={{ color: "#e34040" }}>You are currently over your budget</p>
+        ) : (
+          <p style={{ color: "#6dbd55" }}>You are currently on track!</p>
+        )}
+      </section>
     </Card>
   );
 };
