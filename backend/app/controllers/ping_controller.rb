@@ -1,7 +1,7 @@
 class PingController < ApplicationController
   
   def index
-    render json: { hello: hello}
+    render json: { hello: "hello"}
   end
 
 
