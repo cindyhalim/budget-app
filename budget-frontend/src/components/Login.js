@@ -76,14 +76,10 @@ export default function Login(props) {
         >
           Login
         </Button>
-        <Button
-          variant="contained"
-          color=""
-          className="button"
-          onClick={() => history.push("/register")}
-        >
-          Register
-        </Button>
+        <p className="register">New to Budgey?</p>
+        <p className="link-register" onClick={() => history.push("/register")}>
+          Click here to register
+        </p>
       </form>
     </div>
   );

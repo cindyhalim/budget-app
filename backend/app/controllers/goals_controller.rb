@@ -36,7 +36,7 @@ class GoalsController < ApplicationController
         @expected_spending = (DateTime.now.to_date - goal.start_date.to_date).to_i * @budget_per_day
         @transactions_for_goal = user.transactions.where("transaction_date > ? AND transaction_date < ?", goal.start_date.to_date, DateTime.yesterday.to_date).sum(:amount)
         @diff_in_spending = @expected_spending - @transactions_for_goal
-        @active_goals_total = user.goals.where('goal_type = "saving" AND end_date >= ? AND start_date <= ?', (DateTime.now.end_of_day.to_date ), DateTime.now.end_of_day.to_date + 1.day).sum(:amount)
+        @active_goals_total = user.goals.where('goal_type = "saving" AND end_date >= ? AND start_date < ?', (DateTime.now.end_of_day.to_date ), DateTime.now.end_of_day.to_date).sum(:amount)
         @proportion = goal.amount / @active_goals_total
         @target_for_day = ((goal.amount - (@diff_in_spending * @proportion))/(goal.end_date.to_date - DateTime.now.to_date).to_i).round(0).to_i
         if @target_for_day < 0

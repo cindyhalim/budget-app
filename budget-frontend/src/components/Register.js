@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+import Header from "./Header";
+
 import { useHistory } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
 import MobileStepper from "@material-ui/core/MobileStepper";
@@ -86,6 +88,7 @@ export default function Register(props) {
 
   return (
     <div className="Register">
+      <Header />
       <div className="swipe-card">
         <SwipeableViews
           onChangeIndex={(index, indexLatest) => {

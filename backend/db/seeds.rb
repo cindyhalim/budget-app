@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
-user1 = User.create({name: "Ahana", email: "test@test.com", password: "password"})
+user1 = User.create({name: "Ahana", email: "test@test.com", password: "password", hp: 60, coins: 180})
 
 #Recreation November
 (1..20).each do 

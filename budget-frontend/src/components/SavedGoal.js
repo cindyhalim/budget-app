@@ -52,7 +52,11 @@ export default function SavedGoal(props) {
           >
             <h2>{props.name}</h2>
             <p className="goal-target">
-              {props.completed ? "COMPLETED" : `$${props.dailyTarget}/day`}
+              {props.completed
+                ? "COMPLETED"
+                : new Date(props.startDate) > new Date(Date.now())
+                ? "UPCOMING"
+                : `$${props.dailyTarget}/day`}
             </p>
           </div>
           <div

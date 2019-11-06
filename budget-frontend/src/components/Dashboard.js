@@ -99,6 +99,7 @@ export default function Dashboard(props) {
       />
       <section className="goals">
         <h3>Saving Goals:</h3>
+
         <CreateGoal
           newGoal={goals}
           setNewGoal={setGoals}
