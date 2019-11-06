@@ -22,13 +22,7 @@ const ProgressBar = props => {
       .then(res => {
         setTotal(res.data.total);
         setBudget(Number(res.data.budget));
-<<<<<<< HEAD
-        setSavingGoal(Number(res.data.toSave));
-      })
-      .catch(e => console.log(e));
-=======
       });
->>>>>>> master
   }, [props.goals]);
 
   const totalSpending = (total / budget) * 100;
