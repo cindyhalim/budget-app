@@ -31,12 +31,17 @@ class TransactionsController < ApplicationController
           end_of_month = start_of_month.end_of_month
 
           monthly_transactions_sum = user.transactions.where(transaction_date: start_of_month..end_of_month).pluck(:amount).sum.to_f.round(2)
-          if(monthly_transactions_sum > 0)
-            monthly_transactions[Date::MONTHNAMES[month][0,3]] = monthly_transactions_sum
+          budget_for_month = user.goals.where('goal_type = "budget" AND start_date >= ? AND start_date <= ?', start_of_month, end_of_month).pluck(:amount)[0].to_f.round(2)
+          if(monthly_transactions_sum > 0)           
+            monthly_transactions[Date::MONTHNAMES[month][0,3]] = {
+              amount: monthly_transactions_sum,
+              budget: budget_for_month
+            }                
           end
         end
 
-        render json: {transactions: monthly_transactions, budget: @budget.last.amount.to_f }
+
+        render json: {transactions: monthly_transactions}
 
       elsif params[:type] === "alltransactions"
         @alltransactions = user.transactions.where('transaction_date BETWEEN ? AND ?', Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day)
