@@ -11,8 +11,8 @@ class TransactionsController < ApplicationController
     # else
 
       if params[:type] === "progress" 
-        @budget = user.goals.where('goal_type = "budget"')
-        @total_for_day = user.transactions.select("sum(amount) as total").where("transaction_date >= ? AND transaction_date <= ?", Date.today.beginning_of_day, Date.today.end_of_day)
+        @budget = user.goals.where('goal_type = budget')
+        @total_for_day = user.transactions.select('sum(amount) as total').where('transaction_date >= ? AND transaction_date <= ?', Date.today.beginning_of_day, Date.today.end_of_day)
 
         render json: {
           total: @total_for_day[0].total.to_f.round(2), 
@@ -20,7 +20,7 @@ class TransactionsController < ApplicationController
         }
 
       elsif params[:type] ==="budgetchart"
-        @budget = user.goals.where('goal_type = "budget"')
+        @budget = user.goals.where('goal_type = budget')
         current_year = DateTime.now.year
         current_month = DateTime.now.mon
 
@@ -43,8 +43,8 @@ class TransactionsController < ApplicationController
         render json: {allTransactions: @alltransactions} 
 
       elsif params[:type] === "monthlyprogress"
-        @budget = user.goals.where('goal_type = "budget"')
-        @transactions = user.transactions.select("category,sum(amount) as amount").where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day).group("category")
+        @budget = user.goals.where('goal_type = budget')
+        @transactions = user.transactions.select('category,sum(amount) as amount').where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day).group('category')
         @total = (@transactions.map do |transaction| 
           ((transaction.amount).to_i).ceil end).reduce(0, :+)
         render json: {
@@ -53,8 +53,8 @@ class TransactionsController < ApplicationController
         }
 
       elsif params[:type] === "pie" 
-        @total_for_month = user.transactions.select("sum(amount) as total").where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day)
-        @transactions = user.transactions.select("category,sum(amount) as amount").where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day).group("category")    
+        @total_for_month = user.transactions.select('sum(amount) as total').where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day)
+        @transactions = user.transactions.select('category,sum(amount) as amount').where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day).group('category')    
         @percent = @transactions.map do |transaction| 
      
           {
@@ -66,7 +66,7 @@ class TransactionsController < ApplicationController
         render json: {transactions: @percent, total: @total_for_month}
     
       elsif params[:type] === "bar"
-        @transactions = user.transactions.select("category,sum(amount) as amount").where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day).group("category")
+        @transactions = user.transactions.select('category,sum(amount) as amount').where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day).group('category')
         @bar1 = @transactions.map do |transaction| 
           { month: params[:month],
             category: transaction.category,
@@ -85,12 +85,12 @@ class TransactionsController < ApplicationController
 def create
   pp params
   user = User.find_by(id: session[:user_id])
-  user.transactions.create(amount: params["amount"], category: params["category"], location: params["location"], transaction_date: params["transaction_date"])
+  user.transactions.create(amount: params['amount'], category: params['category'], location: params['location'], transaction_date: params['transaction_date'])
   pp Transaction.all
 end
 def check_top_three
   user = User.find_by(id: session[:user_id])
-  @transactions_top_three = user.transactions.select("sum(amount) as total, location").where("transaction_date BETWEEN ? AND ?", Date.today.at_beginning_of_month, Date.today.at_end_of_month).group(:location).order("total DESC").limit(3)
+  @transactions_top_three = user.transactions.select('sum(amount) as total, location').where('transaction_date BETWEEN ? AND ?', Date.today.at_beginning_of_month, Date.today.at_end_of_month).group(:location).order('total DESC').limit(3)
   render json: @transactions_top_three
 end
 end
