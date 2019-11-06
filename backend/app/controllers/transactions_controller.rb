@@ -11,7 +11,7 @@ class TransactionsController < ApplicationController
     # else
 
       if params[:type] === "progress" 
-        @budget = user.goals.where('goal_type = budget')
+        @budget = user.goals.where(goal_type: 'budget')
         @total_for_day = user.transactions.select('sum(amount) as total').where('transaction_date >= ? AND transaction_date <= ?', Date.today.beginning_of_day, Date.today.end_of_day)
 
         render json: {
@@ -20,7 +20,7 @@ class TransactionsController < ApplicationController
         }
 
       elsif params[:type] ==="budgetchart"
-        @budget = user.goals.where('goal_type = budget')
+        @budget = user.goals.where(goal_type: 'budget')
         current_year = DateTime.now.year
         current_month = DateTime.now.mon
 
