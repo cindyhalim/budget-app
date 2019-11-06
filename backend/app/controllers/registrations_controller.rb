@@ -5,19 +5,19 @@ class RegistrationsController < ApplicationController
 
     if params[:badge] == "1"
       pp user.badges.where(name: 'badge1')[0].path_name
-      send_file user.badges.where(name: 'badge#{params[:badge]}')[0].path_name
+      send_file user.badges.where(name: "badge#{params[:badge]}")[0].path_name
     end
     if params[:badge] == "3"
       pp user.badges.where(name: 'badge1')[0].path_name
-      send_file user.badges.where(name: 'badge#{params[:badge]}')[0].path_name
+      send_file user.badges.where(name: "badge#{params[:badge]}")[0].path_name
     end
     if params[:badge] == "5"
       pp user.badges.where(name: 'badge1')[0].path_name
-      send_file user.badges.where(name: 'badge#{params[:badge]}')[0].path_name
+      send_file user.badges.where(name: "badge#{params[:badge]}")[0].path_name
     end
     if params[:badge] == "10"
       pp user.badges.where(name: 'badge1')[0].path_name
-      send_file user.badges.where(name: 'badge#{params[:badge]}')[0].path_name
+      send_file user.badges.where(name: "badge#{params[:badge]}")[0].path_name
     end
     if params[:badge] == "locked"
       pp user.badges.where(name: 'badge1')[0].path_name
