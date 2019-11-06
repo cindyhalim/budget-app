@@ -13,8 +13,11 @@ class GoalsController < ApplicationController
       end
 
       if @transactions_amount_for_last_month > @budget_for_checking.amount
+        pp "UPDATE BUDGET!!!!!!!!!!!"
+        pp user
         user.update(hp: user.hp - 20)
         user.update(date_last_checked: Date.today)
+        pp user
 
       else
         user.update(coins: user.coins + 20)

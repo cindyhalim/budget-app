@@ -3,12 +3,7 @@ class TransactionsController < ApplicationController
   def index
     user = User.find_by(id: session[:user_id]) 
     
-    # @transactions = user.transactions.select("category,sum(amount) as amount").where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day).group("category")
-  
 
-    # if @transactions.length == 0
-    #   render json: {transactions: []}
-    # else
 
       if params[:type] === "progress" 
         @budget = user.goals.where(goal_type: 'budget')
@@ -43,7 +38,7 @@ class TransactionsController < ApplicationController
         render json: {allTransactions: @alltransactions} 
 
       elsif params[:type] === "monthlyprogress"
-        @budget = user.goals.where('goal_type = budget')
+        @budget = user.goals.where(goal_type: 'budget')
         @transactions = user.transactions.select('category,sum(amount) as amount').where('transaction_date BETWEEN ? AND ?',Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1),Date.new(Time.now.year,Date::MONTHNAMES.index(params[:month]),1).next_month.prev_day).group('category')
         @total = (@transactions.map do |transaction| 
           ((transaction.amount).to_i).ceil end).reduce(0, :+)
