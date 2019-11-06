@@ -64,8 +64,8 @@ class TransactionsController < ApplicationController
      
           {
             name: transaction.category, 
-            y: (transaction.amount/@total_for_month[0].total * 100).to_f, 
-            amount: transaction.amount.to_f
+            y: (transaction.amount/@total_for_month[0].total * 100).to_f.round(2), 
+            amount: transaction.amount.to_f.round(2)
           } 
         end
         render json: {transactions: @percent, total: @total_for_month}
