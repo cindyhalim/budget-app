@@ -14,19 +14,9 @@ class TransactionsController < ApplicationController
         @budget = user.goals.where('goal_type = "budget"')
         @total_for_day = user.transactions.select("sum(amount) as total").where("transaction_date >= ? AND transaction_date <= ?", Date.today.beginning_of_day, Date.today.end_of_day)
 
-
-        @current_saving_goals= user.goals.where('end_date >= ? AND goal_type = "saving" AND start_date <= ?', Date.today.beginning_of_day, Date.today.end_of_day)
-
-
-        @to_save_amount = (@current_saving_goals.map do |saving| 
-             ((saving.amount/(saving.end_date.to_date - saving.start_date.to_date).to_i).ceil)
-        end).reduce(0, :+)
-
-
         render json: {
           total: @total_for_day[0].total.to_f.round(2), 
-          budget: (@budget.last.amount/Time.days_in_month(Date::MONTHNAMES.index(params[:month]))).round(2).to_i,
-          toSave: @to_save_amount
+          budget: (@budget.last.amount/Time.days_in_month(Date::MONTHNAMES.index(params[:month]))).round(2).to_i
         }
 
       elsif params[:type] ==="budgetchart"

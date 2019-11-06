@@ -6,7 +6,6 @@ import axios from "axios";
 const ProgressBar = props => {
   const [total, setTotal] = useState([]);
   const [budget, setBudget] = useState(0);
-  const [savingGoal, setSavingGoal] = useState(0);
 
   useEffect(() => {
     let currentMonth = new Date().toLocaleString("default", { month: "long" });
@@ -20,12 +19,20 @@ const ProgressBar = props => {
       .then(res => {
         setTotal(res.data.total);
         setBudget(Number(res.data.budget));
-        setSavingGoal(Number(res.data.toSave));
       });
   }, [props.goals]);
 
   const totalSpending = (total / budget) * 100;
-  const totalSaving = (savingGoal / budget) * 100;
+
+  const totalSaving = props.goals.reduce((total, goal) => {
+    if (new Date(Date.now()) >= new Date(goal.start_date)) {
+      return Number(goal.target_per_day) + total;
+    } else {
+      return 0 + total;
+    }
+  }, 0);
+
+  console.log("props goals", props.goals);
 
   return (
     <Card className="progress-card">
@@ -34,14 +41,14 @@ const ProgressBar = props => {
         <Progress bar color="success" value={totalSpending}>
           {total ? `$${total}` : ""}
         </Progress>
-        <Progress bar color="warning" value={totalSaving}>
-          {savingGoal ? `$${savingGoal}` : ""}
+        <Progress bar color="warning" value={(totalSaving / budget) * 100}>
+          ${totalSaving ? totalSaving : ""}
         </Progress>
         {/* <Progress bar value={100 - (totalSpending + totalSaving)}></Progress> */}
       </Progress>
       <section className="daily-tracker">
         <p>{`Your daily budget is $${budget}`}</p>
-        {total + savingGoal > budget ? (
+        {total + totalSaving > budget ? (
           <p style={{ color: "#e34040" }}>You are currently over your budget</p>
         ) : (
           <p style={{ color: "#6dbd55" }}>You are currently on track!</p>
