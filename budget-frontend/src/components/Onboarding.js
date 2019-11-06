@@ -3,6 +3,7 @@ import React from "react";
 import SwipeableViews from "react-swipeable-views";
 import MobileStepper from "@material-ui/core/MobileStepper";
 
+import Header from "./Header";
 import Onboarding1 from "./Onboarding/Onboarding1";
 import Onboarding2 from "./Onboarding/Onboarding2";
 import Onboarding3 from "./Onboarding/Onboarding3";
@@ -22,6 +23,7 @@ export default function Onboarding() {
   };
   return (
     <div className="onboarding">
+      <Header />
       <div className="swipe-card">
         <SwipeableViews
           onChangeIndex={(index, indexLatest) => {
