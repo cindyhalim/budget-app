@@ -8,7 +8,7 @@ const Onboarding4 = () => {
   return (
     <div>
       <div>
-        <div className="title">Find Badges, Get Coin</div>
+        <div className="title">Find Badges, Get Coins</div>
         <img src="badges.png" className="badges-final"></img>
         <div className="onboarding4-content">
           Unlock badges by hitting your saving goals

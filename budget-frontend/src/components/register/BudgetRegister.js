@@ -9,7 +9,7 @@ export default function BudgetRegister(props) {
       <TextField
         className="textinput"
         lable="Amount"
-        type="text"
+        type="number"
         name="amount"
         onChange={props.onChange}
         required

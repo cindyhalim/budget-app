@@ -9,7 +9,7 @@ export default function EditProfile(props) {
     amount: "",
     goal_type: "budget",
     name: "budget",
-    start_date: null,
+    start_date: new Date(Date.now()),
     end_date: null
   });
   function updateBudget() {

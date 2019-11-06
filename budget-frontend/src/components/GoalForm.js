@@ -50,7 +50,6 @@ export default function GoalForm(props) {
           });
         }
 
-        //error handling
         if (formFields.name === "") {
           setError({ ...error, name: "This field cannot be left blank" });
         }
@@ -76,6 +75,7 @@ export default function GoalForm(props) {
         style={{ color: "#FFFFFF" }}
         type="text"
         margin="normal"
+        placeholder="Ex: Save for a new phone"
         value={formFields.name}
         helperText={error.name ? error.name : ""}
         onChange={handleFormFieldChange("name")}
