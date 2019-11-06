@@ -7,7 +7,6 @@ import Axios from "axios";
 export default function EditProfile(props) {
   const [updatedFields, setUpdatedFields] = useState({
     name: "",
-    email: "",
     password: "",
     password_confirmation: ""
   });
@@ -18,7 +17,6 @@ export default function EditProfile(props) {
         `http://localhost:3000/registrations/${props.id}`,
         {
           name: updatedFields.name,
-          email: updatedFields.email,
           password: updatedFields.password,
           password_confirmation: updatedFields.password_confirmation
         },
@@ -32,16 +30,12 @@ export default function EditProfile(props) {
                 ...props.logInStatus.user,
                 name: updatedFields.name
                   ? updatedFields.name
-                  : props.logInStatus.user.name,
-                email: updatedFields.email
-                  ? updatedFields.email
-                  : props.logInStatus.user.email
+                  : props.logInStatus.user.name
               }
             });
             setUpdatedFields({
               ...updatedFields,
               name: "",
-              email: "",
               password: "",
               password_confirmation: ""
             });
@@ -67,7 +61,7 @@ export default function EditProfile(props) {
               <TextField
                 required
                 style={{ margin: "5px", width: "80%" }}
-                type="text"
+                type="name"
                 placeholder="Name"
                 value={updatedFields.name}
                 onChange={e =>
@@ -78,18 +72,7 @@ export default function EditProfile(props) {
               <TextField
                 required
                 style={{ margin: "5px", width: "80%" }}
-                type="text"
-                placeholder="Email"
-                value={updatedFields.email}
-                onChange={e =>
-                  setUpdatedFields({ ...updatedFields, email: e.target.value })
-                }
-              ></TextField>
-              <br />
-              <TextField
-                required
-                style={{ margin: "5px", width: "80%" }}
-                type="text"
+                type="password"
                 placeholder="Password"
                 value={updatedFields.password}
                 onChange={e =>
@@ -103,7 +86,7 @@ export default function EditProfile(props) {
               <TextField
                 required
                 style={{ margin: "5px", width: "80%" }}
-                type="text"
+                type="password"
                 placeholder="Re-Enter Password"
                 value={updatedFields.password_confirmation}
                 onChange={e =>

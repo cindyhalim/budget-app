@@ -25,14 +25,12 @@ const ProgressBar = props => {
   const totalSpending = (total / budget) * 100;
 
   const totalSaving = props.goals.reduce((total, goal) => {
-    if (new Date(Date.now()) >= new Date(goal.start_date)) {
+    if (new Date(Date.now()) >= new Date(goal.start_date) && !goal.completed) {
       return Number(goal.target_per_day) + total;
     } else {
       return 0 + total;
     }
   }, 0);
-
-  console.log("props goals", props.goals);
 
   return (
     <Card className="progress-card">
@@ -42,9 +40,8 @@ const ProgressBar = props => {
           {total ? `$${total}` : ""}
         </Progress>
         <Progress bar color="warning" value={(totalSaving / budget) * 100}>
-          ${totalSaving ? totalSaving : ""}
+          {totalSaving ? `$${totalSaving}` : ""}
         </Progress>
-        {/* <Progress bar value={100 - (totalSpending + totalSaving)}></Progress> */}
       </Progress>
       <section className="daily-tracker">
         <p>{`Your daily budget is $${budget}`}</p>
