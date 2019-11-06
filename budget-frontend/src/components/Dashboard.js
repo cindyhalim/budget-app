@@ -13,6 +13,7 @@ import SavedGoal from "./SavedGoal";
 import ProgressBar from "./ProgressBar";
 import TopSpending from "./TopSpending";
 import MonthlyProgressBar from "./MonthlyProgressBar";
+import SavingLegend from "./SavingLegend";
 
 import "../styles/Dashboard.sass";
 
@@ -94,6 +95,7 @@ export default function Dashboard(props) {
       />
       <section className="goals">
         <h3>Saving Goals:</h3>
+        <SavingLegend />
         <CreateGoal
           newGoal={goals}
           setNewGoal={setGoals}
