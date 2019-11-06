@@ -32,6 +32,8 @@ const ProgressBar = props => {
     }
   }, 0);
 
+  console.log("props goals", props.goals);
+
   return (
     <Card className="progress-card">
       <h3>Daily Progress:</h3>
