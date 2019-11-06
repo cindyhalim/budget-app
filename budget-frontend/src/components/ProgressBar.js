@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 import { Progress } from "reactstrap";
 import { Card } from "@material-ui/core";
-import axios from "axios";
+
+import SavingLegend from "./SavingLegend";
 
 const ProgressBar = props => {
   const [total, setTotal] = useState([]);
@@ -35,6 +38,7 @@ const ProgressBar = props => {
   return (
     <Card className="progress-card">
       <h3>Daily Progress:</h3>
+      <SavingLegend />
       <Progress className="daily-progress" multi value={100}>
         <Progress bar color="success" value={totalSpending}>
           {total ? `$${total}` : ""}
