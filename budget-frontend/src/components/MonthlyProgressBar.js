@@ -38,7 +38,7 @@ const MonthlyProgressBar = () => {
 
   return (
     <Card className="progress-card">
-      <h3>Monthly Progress:</h3>
+      <h3 className="monthly-progress-title">Monthly Progress:</h3>
       <Progress className="monthly-progress" value={100}>
         <Progress
           className="monthly-progress"
