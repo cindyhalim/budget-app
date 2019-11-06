@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Route } from "react-router-dom";
 import axios from "axios";
 import Home from "./components/Home";
 import Login from "./components/Login";
@@ -121,7 +121,7 @@ export default function App() {
       .catch(err => console.log("check log in error", err));
   };
   return (
-    <Router>
+    <HashRouter>
       <Switch>
         <Route
           path="/login"
@@ -204,6 +204,6 @@ export default function App() {
         />
         <Route path="/" render={() => <Home />} />
       </Switch>
-    </Router>
+    </HashRouter>
   );
 }
