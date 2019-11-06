@@ -23,7 +23,7 @@ export default function Onboarding() {
   };
   return (
     <div className="onboarding">
-      <Header />
+      {/* <Header /> */}
       <div className="swipe-card">
         <SwipeableViews
           onChangeIndex={(index, indexLatest) => {
