@@ -2,6 +2,10 @@ class TransactionsController < ApplicationController
 
   def index
     user = User.find_by(id: session[:user_id]) 
+    pp user
+    pp session
+    pp request.headers.inspect
+    pp session[:user_id]
     
 
 
