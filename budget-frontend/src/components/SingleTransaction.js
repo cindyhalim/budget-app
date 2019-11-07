@@ -8,9 +8,9 @@ function categoryColorChecker(specificCategory) {
   if (specificCategory === "Shopping") {
     return "#ef6c00";
   } else if (specificCategory === "Recreation") {
-    return "#64b5f6";
-  } else if (specificCategory === "Rideshare") {
     return "#b39ddb";
+  } else if (specificCategory === "Rideshare") {
+    return "#64b5f6";
   } else return "#FAD331";
 }
 
