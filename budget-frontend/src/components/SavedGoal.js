@@ -62,7 +62,7 @@ export default function SavedGoal(props) {
                   UPCOMING
                 </p>
               ) : props.dailyTarget > props.budget ? (
-                <p className="goal-target" style={{ color: "" }}>
+                <p className="goal-target" style={{ color: "#dc3545" }}>
                   ATTENTION
                 </p>
               ) : props.amountAddedToGoal >= props.dailyTarget ? (
@@ -92,6 +92,13 @@ export default function SavedGoal(props) {
             className="goal-extra-info"
             style={{ display: goalClicked.status ? "block" : "none" }}
           >
+            {props.dailyTarget > props.budget ? (
+              <section style={{ color: "#dc3545", fontSize: "12px" }}>
+                Your current saving goal is not feasible with your budget.
+              </section>
+            ) : (
+              ""
+            )}
             <p>
               {new Date(props.startDate).toLocaleString("default", {
                 month: "short",

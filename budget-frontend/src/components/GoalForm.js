@@ -32,10 +32,6 @@ export default function GoalForm(props) {
       onSubmit={event => {
         event.preventDefault();
 
-        console.log(
-          moment(event.target.start_date.value).format("YYYY-M-DD") >=
-            moment(event.target.end_date.value).format("YYYY-M-DD")
-        );
         if (
           moment(event.target.start_date.value).format("YYYY-M-DD") <=
           moment(event.target.end_date.value).format("YYYY-M-DD")
