@@ -14,14 +14,16 @@ const ProgressBar = props => {
     <Card className="progress-card">
       <h3>Daily Progress:</h3>
       {props.totalTransactions <= props.budget - props.totalSaving ? (
-        <p style={{ color: "#6dbd55" }}>You are currently on track!</p>
+        <p style={{ color: "#6dbd55", fontSize: "16px", textAlign: "center" }}>
+          You are currently on track!
+        </p>
       ) : props.totalTransactions > props.budget - props.totalSaving &&
         props.totalTransactions < props.budget ? (
-        <p style={{ color: "#f8d053", fontSize: "15px", textAlign: "center" }}>
+        <p style={{ color: "#f8d053", fontSize: "16px", textAlign: "center" }}>
           You are not meeting saving goals!
         </p>
       ) : (
-        <p style={{ color: "#f55753", fontSize: "15px", textAlign: "center" }}>
+        <p style={{ color: "#f55753", fontSize: "16px", textAlign: "center" }}>
           You are currently over your budget!
         </p>
       )}
