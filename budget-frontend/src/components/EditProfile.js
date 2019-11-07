@@ -60,7 +60,7 @@ export default function EditProfile(props) {
             <div className="text-fields">
               <TextField
                 required
-                style={{ margin: "5px", width: "80%" }}
+                style={{ margin: "5px", width: "90%" }}
                 type="name"
                 placeholder="Name"
                 value={updatedFields.name}
@@ -71,7 +71,7 @@ export default function EditProfile(props) {
               <br />
               <TextField
                 required
-                style={{ margin: "5px", width: "80%" }}
+                style={{ margin: "5px", width: "90%" }}
                 type="password"
                 placeholder="Password"
                 value={updatedFields.password}
@@ -85,7 +85,7 @@ export default function EditProfile(props) {
               <br />
               <TextField
                 required
-                style={{ margin: "5px", width: "80%" }}
+                style={{ margin: "5px", width: "90%" }}
                 type="password"
                 placeholder="Re-Enter Password"
                 value={updatedFields.password_confirmation}

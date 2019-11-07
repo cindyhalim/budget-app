@@ -27,7 +27,7 @@ export default function EditProfile(props) {
         <CardContent>
           <div>
             <TextField
-              style={{ margin: "5px", width: "80%" }}
+              style={{ margin: "5px", width: "90%" }}
               placeholder="Enter a new Budget"
               value={updateBudgetInfo.amount}
               onChange={e =>
