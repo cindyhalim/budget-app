@@ -39,7 +39,7 @@ module Budget
     
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-         origins 'http://localhost:8080', 'http://172.46.3.213:8080'
+         origins 'http://localhost:8080', 'http://172.46.3.213:8080', 'http://172.46.0.195:8080', 'http://172.46.0.189:8080'
          resource '*', :headers => :any, :methods => :any,
          credentials: true,
          :expose  => ['access-token', 'expiry', 'token-type', 'uid', 'client']
