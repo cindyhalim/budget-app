@@ -13,7 +13,21 @@ const ProgressBar = props => {
   return (
     <Card className="progress-card">
       <h3>Daily Progress:</h3>
-      <SavingLegend />
+      {props.totalTransactions <= props.budget - props.totalSaving ? (
+        <p style={{ color: "#6dbd55", fontSize: "16px", textAlign: "center" }}>
+          You are currently on track!
+        </p>
+      ) : props.totalTransactions > props.budget - props.totalSaving &&
+        props.totalTransactions < props.budget ? (
+        <p style={{ color: "#f8d053", fontSize: "16px", textAlign: "center" }}>
+          You are not meeting saving goals!
+        </p>
+      ) : (
+        <p style={{ color: "#f55753", fontSize: "16px", textAlign: "center" }}>
+          You are currently over your budget!
+        </p>
+      )}
+      {/* <SavingLegend /> */}
       <Progress className="daily-progress" multi value={100}>
         <Progress
           bar
@@ -32,11 +46,6 @@ const ProgressBar = props => {
       </Progress>
       <section className="daily-tracker">
         <p>{`Your daily budget is $${props.budget}`}</p>
-        {props.totalTransactions + props.totalSaving > props.budget ? (
-          <p style={{ color: "#e34040" }}>You are currently over your budget</p>
-        ) : (
-          <p style={{ color: "#6dbd55" }}>You are currently on track!</p>
-        )}
       </section>
     </Card>
   );

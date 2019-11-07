@@ -159,7 +159,9 @@ export default function Dashboard(props) {
                 budget={budget}
                 amountAddedToGoal={
                   (goal.target_per_day / totalSaving) *
-                  (budget - totalTransactions)
+                  (budget - totalTransactions >= 0
+                    ? budget - totalTransactions
+                    : 0)
                 }
                 completed={goal.completed}
               />
