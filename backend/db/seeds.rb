@@ -10,9 +10,21 @@ require 'faker'
 user1 = User.create({name: "Ahana", email: "test@test.com", password: "password", hp: 60, coins: 180})
 
 #Recreation November
-(1..20).each do 
-  user1.transactions.create({amount: Faker::Number.between(from: 1.00, to: 20.99), category: "Recreation", location: Faker::Artist.name, transaction_date: "2019-11-01T10:35:17.552Z"})
+(1..5).each do 
+  user1.transactions.create({amount: Faker::Number.between(from: 1.00, to: 20.99), category: "Recreation", location: Faker::Artist.name, transaction_date: "2019-11-04T10:35:17.552Z"})
 end
+# #Recreation November
+# (1..20).each do 
+#   user1.transactions.create({amount: Faker::Number.between(from: 1.00, to: 20.99), category: "Recreation", location: Faker::Artist.name, transaction_date: "2019-11-01T10:35:17.552Z"})
+# end
+# #Recreation November
+# (1..20).each do 
+#   user1.transactions.create({amount: Faker::Number.between(from: 1.00, to: 20.99), category: "Recreation", location: Faker::Artist.name, transaction_date: "2019-11-01T10:35:17.552Z"})
+# end
+# #Recreation November
+# (1..20).each do 
+#   user1.transactions.create({amount: Faker::Number.between(from: 1.00, to: 20.99), category: "Recreation", location: Faker::Artist.name, transaction_date: "2019-11-01T10:35:17.552Z"})
+# end
 
 #Recreation October
 (1..20).each do 
@@ -58,9 +70,21 @@ end
 
 
 #RideShare November
-(1..20).each do 
+(1..5).each do 
   user1.transactions.create({amount: Faker::Number.between(from: 5.00, to: 15.99), category: "Rideshare", location: "Uber", transaction_date: "2019-11-01T10:35:17.552Z"})
 end
+# #RideShare November
+# (1..5).each do 
+#   user1.transactions.create({amount: Faker::Number.between(from: 5.00, to: 15.99), category: "Rideshare", location: "Uber", transaction_date: "2019-11-01T10:35:17.552Z"})
+# end
+# #RideShare November
+# (1..5).each do 
+#   user1.transactions.create({amount: Faker::Number.between(from: 5.00, to: 15.99), category: "Rideshare", location: "Uber", transaction_date: "2019-11-01T10:35:17.552Z"})
+# end
+# #RideShare November
+# (1..5).each do 
+#   user1.transactions.create({amount: Faker::Number.between(from: 5.00, to: 15.99), category: "Rideshare", location: "Uber", transaction_date: "2019-11-01T10:35:17.552Z"})
+# end
 
 #RideShare October
 (1..20).each do 
@@ -113,9 +137,21 @@ end
 end
 
 #Food and Drink November
-(1..20).each do 
+(1..5).each do 
   user1.transactions.create({amount: Faker::Number.between(from: 3.00, to: 20.99), category: "Food and Drink", location: Faker::Restaurant.name, transaction_date: "2019-11-01T10:35:17.552Z"})
 end
+# #Food and Drink November
+# (1..5).each do 
+#   user1.transactions.create({amount: Faker::Number.between(from: 3.00, to: 20.99), category: "Food and Drink", location: Faker::Restaurant.name, transaction_date: "2019-11-10T10:35:17.552Z"})
+# end
+# #Food and Drink November
+# (1..5).each do 
+#   user1.transactions.create({amount: Faker::Number.between(from: 3.00, to: 20.99), category: "Food and Drink", location: Faker::Restaurant.name, transaction_date: "2019-11-16T10:35:17.552Z"})
+# end
+# #Food and Drink November
+# (1..5).each do 
+#   user1.transactions.create({amount: Faker::Number.between(from: 3.00, to: 20.99), category: "Food and Drink", location: Faker::Restaurant.name, transaction_date: "2019-11-26T10:35:17.552Z"})
+# end
 
 #Food and Drink October
 (1..20).each do 
@@ -169,9 +205,21 @@ end
 
 
 #Shopping November
-(1..20).each do 
-  user1.transactions.create({amount: Faker::Number.between(from: 10.00, to: 30.99), category: "Shopping", location: "The Bay", transaction_date: "2019-11-26T22:05:55.552Z"})
+(1..5).each do 
+  user1.transactions.create({amount: Faker::Number.between(from: 10.00, to: 30.99), category: "Shopping", location: "The Bay", transaction_date: "2019-11-02T22:05:55.552Z"})
 end
+# #Shopping November
+# (1..5).each do 
+#   user1.transactions.create({amount: Faker::Number.between(from: 10.00, to: 30.99), category: "Shopping", location: "The Bay", transaction_date: "2019-11-15T22:05:55.552Z"})
+# end
+# #Shopping November
+# (1..5).each do 
+#   user1.transactions.create({amount: Faker::Number.between(from: 10.00, to: 30.99), category: "Shopping", location: "The Bay", transaction_date: "2019-11-20T22:05:55.552Z"})
+# end
+# #Shopping November
+# (1..5).each do 
+#   user1.transactions.create({amount: Faker::Number.between(from: 10.00, to: 30.99), category: "Shopping", location: "The Bay", transaction_date: "2019-11-29T22:05:55.552Z"})
+# end
 
 
 #Shopping October
