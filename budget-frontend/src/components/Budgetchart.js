@@ -5,7 +5,6 @@ import Highcharts from "highcharts";
 import YearOptions from "./YearOptions";
 
 const Budgetchart = () => {
-  const [budgetData, setbudgetData] = useState([]);
   const [compareMonthlyTransactions, setCompareMonthlyTransactions] = useState(
     {}
   );
@@ -20,22 +19,22 @@ const Budgetchart = () => {
       )
       .then(res => {
         setCompareMonthlyTransactions(res.data.transactions);
-        setbudgetData(res.data.budget);
       });
   }, []);
 
   useEffect(() => {
     const categories = Object.keys(compareMonthlyTransactions);
     const monthData = Object.values(compareMonthlyTransactions);
+    console.log(monthData);
     let negativeData = [];
     let positiveData = [];
     monthData.forEach(data => {
-      if (budgetData - data < 0) {
-        negativeData.push(budgetData - data);
+      if (data.budget - data.amount < 0) {
+        negativeData.push(data.budget - data.amount);
         positiveData.push(0);
       } else {
         negativeData.push(0);
-        positiveData.push(budgetData - data);
+        positiveData.push(data.budget - data.amount);
       }
     });
 
@@ -82,7 +81,7 @@ const Budgetchart = () => {
         }
       ]
     });
-  }, [compareMonthlyTransactions, budgetData]);
+  }, [compareMonthlyTransactions]);
   return (
     <div>
       <div className="piechart-month-options">
