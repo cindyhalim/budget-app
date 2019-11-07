@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import Piechart from "./Piechart";
 import Barchart from "./Barchart";
 import Budgetchart from "./Budgetchart.js";
+import BudgetComparison from "./BudgetComparison";
 import Navbar from "./Navbar";
 
 import AssessmentIcon from "@material-ui/icons/Assessment";
@@ -26,7 +27,8 @@ export default function Analytics() {
     "Monthly Comparison": (
       <Barchart category={category} setCategory={setCategory} />
     ),
-    "Budget Comparison": <Budgetchart />
+    "Savings Comparison": <Budgetchart />,
+    "Budget Trends": <BudgetComparison />
   };
 
   return (
@@ -51,7 +53,8 @@ export default function Analytics() {
             >
               <MenuItem value="Current Breakdown">Current Breakdown</MenuItem>
               <MenuItem value="Monthly Comparison">Monthly Comparison</MenuItem>
-              <MenuItem value="Budget Comparison">Budget Comparison</MenuItem>
+              <MenuItem value="Savings Comparison">Savings Comparison</MenuItem>
+              <MenuItem value="Budget Trends">Budget Trends</MenuItem>
             </Select>
           </FormControl>
         </div>

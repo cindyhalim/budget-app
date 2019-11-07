@@ -18,6 +18,8 @@
         font-family: $title-font
         color: $title-color
       .coins
+        font-size: 18px
+        margin-top: 8px
 
     .user-health
       margin-left: 20px
@@ -60,6 +62,7 @@
       border-radius: 20px
     .progress-bar
       background-color: transparent
+      font-size: 18px
     .monthly-progress
       height: 40px
       border-radius: 20px
@@ -76,46 +79,38 @@
     padding: 4vh 5vw
     h2
       margin: 0
-    h3
-      font-size: 20px
-    .save-button
-      float: right
-      color: white
-      font-size: 18px
-      font-weight: bold
-      margin: 10vh 0 4vh 0
-    .close-button
-      position: relative
-      float: right
+    .saving-goals-title
+      display: flex
+      justify-content: space-between
+      align-items: center
+      h2
+        font-size: 16px
+      h3
+        margin: 0
+        font-family: $title-font
+        color: $title-color
+        font-weight: 300
+        font-size: 25px
+
     .new-goal-card
       margin: 2vh 0
       background-color: #3949ab
       color: white
+      outline: none
       .new-goal-card-title
         display: flex
         justify-content: space-between
         align-items: center
+    .new-goal-form
+      animation-name: slideDown
+      -webkit-animation-name: slideDown
 
-    .goal-card
-      margin: 2vh 0
-      color: white
-      .goal-main-info
-        padding: 2vh 0
-        display: flex
-        justify-content: space-between
-        align-items: center
-        .goal-target
-          margin: 0
-          font-size: 18px
-      .goal-extra-info
-        margin-top: 1em
-        .card-buttons
-          display: block
-          padding: 0
-          text-align: right
-          color: white
-    .goal-form
-      margin: 2vh
+      animation-duration: 1s
+      -webkit-animation-duration: 1s
+
+      animation-timing-function: ease
+      -webkit-animation-timing-function: ease
+
       .MuiFormControl-root.MuiTextField-root
         width: 70%
       .MuiFormControl-root.MuiTextField-root.name-field
@@ -132,5 +127,127 @@
         color: white
       .MuiIconButton-root
         color: white
+      .save-button
+        float: right
+        font-size: 18px
+        font-weight: bold
+        margin: 10vh 0 4vh 0
+        color: white
+      .close-button
+        position: relative
+        float: right
+        color: #3949ab
+
+    .goal-card
+      margin: 2vh 0
+      .save-button
+        float: right
+        font-size: 18px
+        font-weight: bold
+        margin: 2vh 0 4vh 0
+        padding: 0.5em 1em
+        background-color: #3949ab
+        color: white
+      .close-button
+        position: relative
+        float: right
+      .MuiCardContent-root
+        padding-top: 0
+        padding-bottom: 0
+      .goal-main-info
+        padding-top: 2vh
+        display: flex
+        justify-content: center
+        flex-direction: column
+        .goal-row-one
+          display: flex
+          justify-content: space-between
+          align-items: flex-end
+        h2
+          font-size: 25px
+        p
+          font-size: 15px
+        .goal-target
+          margin: 0
+          font-size: 15px
+          font-weight: bold
+        .goal-amount
+          margin: 0
+          font-weight: bold
+          font-size: 20px
+      .goal-extra-info
+        margin-top: 1em
+        p
+          margin-bottom: 0
+        .card-buttons
+          display: block
+          padding: 0
+          text-align: right
+    .MuiCardActions-root.card-buttons.MuiCardActions-spacing
+      padding-bottom: 20px
+    .goal-form
+      margin: 2vh
+      .MuiFormControl-root.MuiTextField-root
+        width: 70%
+      .MuiFormControl-root.MuiTextField-root.name-field
+        width: 80%
+
   .goal-card:last-child
     margin-bottom: 10vh
+
+@keyframes slideUp
+  0%
+    transform: translateY(0%)
+
+  50%
+    transform: translateY(2%)
+
+  65%
+    transform: translateY(4%)
+
+  80%
+    transform: translateY(6%)
+
+  95%
+    transform: translateY(8%)
+
+  100%
+    transform: translateY(30%)
+
+@keyframes slideDown
+  0%
+    transform: translateY(-30%)
+
+  50%
+    transform: translateY(8%)
+
+  65%
+    transform: translateY(6%)
+
+  80%
+    transform: translateY(4%)
+
+  95%
+    transform: translateY(2%)
+
+  100%
+    transform: translateY(0%)
+
+@-webkit-keyframes slideDown
+  0%
+    transform: translateY(-30%)
+
+  50%
+    transform: translateY(8%)
+
+  65%
+    transform: translateY(6%)
+
+  80%
+    transform: translateY(4%)
+
+  95%
+    transform: translateY(2%)
+
+  100%
+    transform: translateY(0%)

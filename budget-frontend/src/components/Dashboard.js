@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SwipeableViews from "react-swipeable-views";
 import MobileStepper from "@material-ui/core/MobileStepper";
+import { Card } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
 import moment from "moment";
@@ -13,6 +14,7 @@ import SavedGoal from "./SavedGoal";
 import ProgressBar from "./ProgressBar";
 import TopSpending from "./TopSpending";
 import MonthlyProgressBar from "./MonthlyProgressBar";
+import GoalForm from "./GoalForm";
 
 import "../styles/Dashboard.sass";
 
@@ -25,6 +27,7 @@ export default function Dashboard(props) {
   const history = useHistory();
   const [goals, setGoals] = useState([]);
   const [progressActiveStep, setProgressActiveStep] = useState(1);
+  const [active, setActive] = useState(false);
 
   const totalSaving = goals.reduce((total, goal) => {
     if (
@@ -97,6 +100,27 @@ export default function Dashboard(props) {
         setGoals(updatedGoals);
       });
   };
+  const onSave = newState => {
+    axios
+      .post(
+        "https://blooming-everglades-51994.herokuapp.com/goals",
+        {
+          goal: {
+            goal_type: "saving",
+            amount: parseInt(newState.amount),
+            name: newState.name,
+            start_date: newState.start_date,
+            end_date: newState.end_date
+          }
+        },
+        { withCredentials: true }
+      )
+      .then(() => {
+        props.setRefreshGoals(!props.refreshGoals);
+        setActive(!active);
+      })
+      .catch(err => console.log("error posting", err));
+  };
 
   return (
     <div className="Dashboard">
@@ -131,14 +155,37 @@ export default function Dashboard(props) {
         activeStep={progressActiveStep}
       />
       <section className="goals">
-        <h3>Saving Goals:</h3>
+        <div className="saving-goals-title">
+          <h3>Saving Goals:</h3>
+          <CreateGoal
+            active={active}
+            setActive={setActive}
+            newGoal={goals}
+            setNewGoal={setGoals}
+            refreshGoals={props.refreshGoals}
+            setRefreshGoals={props.setRefreshGoals}
+          />
+        </div>
 
-        <CreateGoal
-          newGoal={goals}
-          setNewGoal={setGoals}
-          refreshGoals={props.refreshGoals}
-          setRefreshGoals={props.setRefreshGoals}
-        />
+        {active && (
+          <div className="new-goal-form">
+            <Card style={{ backgroundColor: "#3949ab" }}>
+              <GoalForm
+                style={{ color: "white" }}
+                active={active}
+                setActive={setActive}
+                refreshGoals={props.refreshGoals}
+                setRefreshGoals={props.setRefreshGoals}
+                name={""}
+                amount={""}
+                start_date={new Date(Date.now())}
+                end_date={new Date(new Date(Date.now()).getTime() + 86400000)}
+                onSave={onSave}
+                button={"CREATE"}
+              />
+            </Card>
+          </div>
+        )}
         <div className="goal-card" style={{ WebkitOverflowScrolling: "touch" }}>
           {goals.length > 0 &&
             goals.map(goal => (
@@ -164,13 +211,6 @@ export default function Dashboard(props) {
                     : 0)
                 }
                 completed={goal.completed}
-                bgColor={
-                  goal.completed
-                    ? "#66bb6a"
-                    : new Date(goal.start_date) > new Date(Date.now())
-                    ? "#d95c52"
-                    : "#4db6ac"
-                }
               />
             ))}
         </div>
