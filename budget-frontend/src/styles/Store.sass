@@ -2,9 +2,9 @@
 @import "./variables/mixins.sass"
 
 .store-title
-  font-size: 3.5rem
-  font-family: 'Lato', sans-serif
-  color: #ef5350
+  font-size: 2.5em
+  font-family: $title-font
+  color: $title-color
   display: flex
   justify-content: flex-start
   align-items: center
@@ -42,6 +42,7 @@
   justify-content: space-between
   align-items: center
   font-size: 25px
+  height: 13vh
   section
     display: flex
     flex-direction: column
@@ -101,11 +102,16 @@
   justify-content: space-around
   align-items: center
 
+  .button
+    font-weight: bold
+
+  .buy-item
+    display: flex
+    flex-direction: column
+
 .badge-cards
   display: flex
   flex-direction: column
-  // justify-content: center
-  // flex-flow: row wrap
 
 .badge-card
   margin: 1em
@@ -121,7 +127,7 @@
     display: flex
     flex-direction: column
     .badge-title
-      font-size: 30px
+      font-size: 20px
 
 .badge-card:last-child
   margin-bottom: 10vh

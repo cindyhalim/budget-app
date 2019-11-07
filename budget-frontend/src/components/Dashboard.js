@@ -17,6 +17,7 @@ import MonthlyProgressBar from "./MonthlyProgressBar";
 import GoalForm from "./GoalForm";
 
 import "../styles/Dashboard.sass";
+import "../styles/DashboardProfile.sass";
 
 export default function Dashboard(props) {
   if (!props.logInStatus.user) {
