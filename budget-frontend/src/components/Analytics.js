@@ -1,8 +1,10 @@
-import React, { useState, Suspense, lazy } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-
+import Piechart from "./Piechart";
+import Barchart from "./Barchart";
+import Budgetchart from "./Budgetchart.js";
+import BudgetComparison from "./BudgetComparison";
 import Navbar from "./Navbar";
-import Loading from "./Loading";
 
 import AssessmentIcon from "@material-ui/icons/Assessment";
 import Select from "@material-ui/core/Select";
@@ -12,11 +14,6 @@ import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 
 import "../styles/Analytics.sass";
-
-const Piechart = lazy(() => import("./Piechart"));
-const Barchart = lazy(() => import("./Barchart"));
-const Budgetchart = lazy(() => import("./Budgetchart.js"));
-const BudgetComparison = lazy(() => import("./BudgetComparison"));
 
 export default function Analytics() {
   const [chart, setChart] = useState("Current Breakdown");
@@ -62,7 +59,7 @@ export default function Analytics() {
           </FormControl>
         </div>
       </div>
-      <Suspense fallback={<Loading />}>{chartDropdown[chart]}</Suspense>
+      {chartDropdown[chart]}
       <Navbar location={history.location.pathname.slice(1)} />
     </div>
   );
