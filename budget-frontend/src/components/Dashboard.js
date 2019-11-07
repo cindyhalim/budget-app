@@ -150,7 +150,6 @@ export default function Dashboard(props) {
                 startDate={goal.start_date}
                 endDate={goal.end_date}
                 onDelete={data => deleteGoal(data)}
-                // editRequest={data => editGoal(data)}
                 newGoal={goals}
                 setNewGoal={setGoals}
                 refreshGoals={props.refreshGoals}
@@ -160,7 +159,9 @@ export default function Dashboard(props) {
                 budget={budget}
                 amountAddedToGoal={
                   (goal.target_per_day / totalSaving) *
-                  (budget - totalTransactions)
+                  (budget - totalTransactions >= 0
+                    ? budget - totalTransactions
+                    : 0)
                 }
                 completed={goal.completed}
                 bgColor={
