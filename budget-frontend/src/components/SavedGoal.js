@@ -56,7 +56,9 @@ export default function SavedGoal(props) {
                 ? "COMPLETED"
                 : new Date(props.startDate) > new Date(Date.now())
                 ? "UPCOMING"
-                : `$${props.dailyTarget}/day`}
+                : props.dailyTarget > props.budget
+                ? "ATTENTION"
+                : `+ $${props.amountAddedToGoal.toFixed(0)}`}
             </p>
           </div>
           <div
@@ -77,6 +79,7 @@ export default function SavedGoal(props) {
               })}
               <p>Total: ${parseInt(props.amount)}</p>
             </p>
+            <p>{props.dailyTarget > `+ $${props.amountAddedToGoal}`}</p>
             <CardActions className="card-buttons">
               <Edit onClick={() => setGoalClicked({ status: "edit" })} />
               <Delete onClick={() => props.onDelete(goalEdit)} />
