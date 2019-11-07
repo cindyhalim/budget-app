@@ -81,7 +81,6 @@ export default function SavedGoal(props) {
             </div>
             <div className="goal-row-two">
               <p>
-                Started{" "}
                 {moment(goalEdit.start_date)
                   .startOf("second")
                   .fromNow()}
