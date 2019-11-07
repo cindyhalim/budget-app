@@ -22,7 +22,7 @@ const CategoryTransaction = ({ category, pieMonth }) => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:3000/transactions/?month=${pieMonth}&type=alltransactions`,
+        `https://blooming-everglades-51994.herokuapp.com/transactions/?month=${pieMonth}&type=alltransactions`,
         { withCredentials: true }
       )
       .then(res => {

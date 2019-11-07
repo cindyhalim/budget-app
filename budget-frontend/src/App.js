@@ -19,7 +19,8 @@ export default function App() {
     status: "not_logged_in",
     user: ""
   });
-  let lock = "http://localhost:3000/check_badges/?badge=locked";
+  let lock =
+    "https://blooming-everglades-51994.herokuapp.com/check_badges/?badge=locked";
   const [refreshGoals, setRefreshGoals] = useState(false);
   const [image, setImage] = useState([lock, lock, lock, lock]);
   const handleLogin = data => {
@@ -29,10 +30,10 @@ export default function App() {
     });
   };
   let imageArray = [
-    "http://localhost:3000/check_badges/?badge=locked",
-    "http://localhost:3000/check_badges/?badge=locked",
-    "http://localhost:3000/check_badges/?badge=locked",
-    "http://localhost:3000/check_badges/?badge=locked"
+    "https://blooming-everglades-51994.herokuapp.com/check_badges/?badge=locked",
+    "https://blooming-everglades-51994.herokuapp.com/check_badges/?badge=locked",
+    "https://blooming-everglades-51994.herokuapp.com/check_badges/?badge=locked",
+    "https://blooming-everglades-51994.herokuapp.com/check_badges/?badge=locked"
   ];
   let countArray = [1, 3, 5, 10];
   const clearState = () => {
@@ -50,14 +51,19 @@ export default function App() {
   for (let count of countArray) {
     if (count > 0 && count <= logInStatus.user.num_times_bud_met) {
       let index = countArray.indexOf(count);
-      imageArray[index] = `http://localhost:3000/check_badges/?badge=${count}`;
+      imageArray[
+        index
+      ] = `https://blooming-everglades-51994.herokuapp.com/check_badges/?badge=${count}`;
     }
   }
 
   function updateHealthAndCoins(coins, hp) {
-    axios.get(`http://localhost:3000/game/?coins=${coins}&hp=${hp}`, {
-      withCredentials: true
-    });
+    axios.get(
+      `https://blooming-everglades-51994.herokuapp.com/game/?coins=${coins}&hp=${hp}`,
+      {
+        withCredentials: true
+      }
+    );
     setLogInStatus({
       ...logInStatus,
       user: {
@@ -70,7 +76,9 @@ export default function App() {
 
   const logOutClick = () => {
     axios
-      .delete("http://localhost:3000/logout", { withCredentials: true })
+      .delete("https://blooming-everglades-51994.herokuapp.com/logout", {
+        withCredentials: true
+      })
       .then(res => {
         handleLogout(res);
       })
@@ -79,14 +87,19 @@ export default function App() {
 
   const checkLogInStatus = () => {
     axios
-      .get("http://localhost:3000/logged_in", { withCredentials: true })
+      .get("https://blooming-everglades-51994.herokuapp.com/logged_in", {
+        withCredentials: true
+      })
       .then(res => {
         if (res.data.logged_in) {
           handleLogin(res.data.user);
           axios
-            .get("http://localhost:3000/check_budget_met", {
-              withCredentials: true
-            })
+            .get(
+              "https://blooming-everglades-51994.herokuapp.com/check_budget_met",
+              {
+                withCredentials: true
+              }
+            )
             .then(result => {
               setLogInStatus({
                 status: "logged_in",
@@ -96,7 +109,7 @@ export default function App() {
                 alert("You have died");
                 axios
                   .put(
-                    `http://localhost:3000/game/${result.data.user.id}`,
+                    `https://blooming-everglades-51994.herokuapp.com/game/${result.data.user.id}`,
                     {
                       hp: 100,
                       coins: 0,

@@ -14,7 +14,7 @@ export default function EditProfile(props) {
   const handleSubmit = () => {
     if (Object.values(updatedFields).filter(field => field).length > 0) {
       Axios.put(
-        `http://localhost:3000/registrations/${props.id}`,
+        `https://blooming-everglades-51994.herokuapp.com/registrations/${props.id}`,
         {
           name: updatedFields.name,
           password: updatedFields.password,

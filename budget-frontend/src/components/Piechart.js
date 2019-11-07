@@ -16,9 +16,12 @@ export default function Piechart({ category, setCategory }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/transactions/?month=${pieMonth}&type=pie`, {
-        withCredentials: true
-      })
+      .get(
+        `https://blooming-everglades-51994.herokuapp.com/transactions/?month=${pieMonth}&type=pie`,
+        {
+          withCredentials: true
+        }
+      )
       .then(res => {
         if (res.data.transactions.length > 0) {
           setTransactions(res.data.transactions);

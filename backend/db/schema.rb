@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2019_11_04_142925) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "badges", force: :cascade do |t|
     t.string "name"
     t.string "path_name"
@@ -20,8 +23,8 @@ ActiveRecord::Schema.define(version: 2019_11_04_142925) do
   end
 
   create_table "badges_users", id: false, force: :cascade do |t|
-    t.integer "badge_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "badge_id", null: false
+    t.bigint "user_id", null: false
     t.index ["badge_id"], name: "index_badges_users_on_badge_id"
     t.index ["user_id"], name: "index_badges_users_on_user_id"
   end
@@ -32,14 +35,14 @@ ActiveRecord::Schema.define(version: 2019_11_04_142925) do
     t.string "goal_type"
     t.decimal "amount"
     t.string "name"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.decimal "amount"
     t.string "category"
     t.string "location"

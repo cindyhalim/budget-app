@@ -29,28 +29,29 @@ export default function AddTransactionOption(props) {
     setOpenStatus({ ...openStatus, list: false });
     let formData = new FormData();
     formData.append("image", selectedFile);
-    Axios.post("http://localhost:3000/image_recognition", formData).then(
-      res => {
-        let textRes = res.data.responses[0].fullTextAnnotation.text;
-        let amount = 0;
-        if (textRes.includes("McDonald's")) {
-          amount = Number(
-            textRes
-              .split(/(\r\n|\n|\r)/gm)
-              .filter(item => item.includes("$") && item.includes("."))[0]
-              .slice(2)
-          );
-        }
-        setTransactionData({
-          ...transactionData,
-          amount: amount,
-          location: "McDonald's",
-          category: "Food",
-          transaction_date: new Date(Date.now())
-        });
-        setOpenStatus({ ...openStatus, list: false, transaction: true });
+    Axios.post(
+      "https://blooming-everglades-51994.herokuapp.com/image_recognition",
+      formData
+    ).then(res => {
+      let textRes = res.data.responses[0].fullTextAnnotation.text;
+      let amount = 0;
+      if (textRes.includes("McDonald's")) {
+        amount = Number(
+          textRes
+            .split(/(\r\n|\n|\r)/gm)
+            .filter(item => item.includes("$") && item.includes("."))[0]
+            .slice(2)
+        );
       }
-    );
+      setTransactionData({
+        ...transactionData,
+        amount: amount,
+        location: "McDonald's",
+        category: "Food",
+        transaction_date: new Date(Date.now())
+      });
+      setOpenStatus({ ...openStatus, list: false, transaction: true });
+    });
   }, [selectedFile]);
 
   return (

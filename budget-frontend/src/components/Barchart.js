@@ -16,17 +16,23 @@ export default function Barchart({ category, setCategory }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/transactions/?month=${bar1Month}&type=bar`, {
-        withCredentials: true
-      })
+      .get(
+        `https://blooming-everglades-51994.herokuapp.com/transactions/?month=${bar1Month}&type=bar`,
+        {
+          withCredentials: true
+        }
+      )
       .then(res => setTransactions1(res.data.transactions));
   }, [bar1Month]);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/transactions/?month=${bar2Month}&type=bar`, {
-        withCredentials: true
-      })
+      .get(
+        `https://blooming-everglades-51994.herokuapp.com/transactions/?month=${bar2Month}&type=bar`,
+        {
+          withCredentials: true
+        }
+      )
       .then(res => setTransactions2(res.data.transactions));
   }, [bar2Month]);
 
