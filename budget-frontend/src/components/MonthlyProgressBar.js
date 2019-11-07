@@ -52,7 +52,9 @@ const MonthlyProgressBar = () => {
       <section className="daily-tracker">
         <p>{`Your monthly budget is $${budget}`}</p>
         {total > budget ? (
-          <p style={{ color: "#e34040" }}>You are currently over your budget</p>
+          <p style={{ color: "#e34040" }}>
+            You are currently over your monthly budget
+          </p>
         ) : (
           <p style={{ color: "#6dbd55" }}>You are currently on track!</p>
         )}
