@@ -36,7 +36,8 @@ export default function BudgetComparison() {
     Highcharts.chart({
       chart: {
         type: "bar",
-        renderTo: "budget-trend"
+        renderTo: "budget-trend",
+        backgroundColor: "white"
       },
       title: {
         text: ""
@@ -59,7 +60,8 @@ export default function BudgetComparison() {
         {
           type: "bar",
           name: "Monthly Spending",
-          data: amount
+          data: amount,
+          color: "#ce93d8"
         },
         {
           type: "spline",
@@ -67,8 +69,9 @@ export default function BudgetComparison() {
           data: budget,
           marker: {
             lineWidth: 2,
-            fillColor: "black"
-          }
+            fillColor: "gray"
+          },
+          color: "black"
         }
       ]
     });

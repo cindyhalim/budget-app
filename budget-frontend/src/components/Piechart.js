@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy } from "react";
 import axios from "axios";
 import Highcharts from "highcharts";
 import MonthOptions from "./MonthOptions";
 import CategoryTransaction from "./CategoryTransaction";
+import Loading from "./Loading";
 import { useFormControl } from "@material-ui/core/FormControl";
 
 import "../styles/Piechart.sass";
