@@ -39,6 +39,15 @@ const MonthlyProgressBar = () => {
   return (
     <Card className="progress-card">
       <h3 className="monthly-progress-title">Monthly Progress:</h3>
+      {total > budget ? (
+        <p style={{ color: "#e34040", textAlign: "center" }}>
+          You are currently over your budget
+        </p>
+      ) : (
+        <p style={{ color: "#6dbd55", textAlign: "center" }}>
+          You are currently on track!
+        </p>
+      )}
       <Progress className="monthly-progress" value={100}>
         <Progress
           className="monthly-progress"
@@ -46,16 +55,11 @@ const MonthlyProgressBar = () => {
           color={checkMonthlySpending(percentMonthlySpending)}
           value={percentMonthlySpending > 100 ? 100 : percentMonthlySpending}
         >
-          {total ? `${percentMonthlySpending.toFixed(2)}%` : ""}
+          {total ? `${percentMonthlySpending.toFixed(0)}%` : ""}
         </Progress>
       </Progress>
       <section className="daily-tracker">
         <p>{`Your monthly budget is $${budget}`}</p>
-        {total > budget ? (
-          <p style={{ color: "#e34040" }}>You are currently over your budget</p>
-        ) : (
-          <p style={{ color: "#6dbd55" }}>You are currently on track!</p>
-        )}
       </section>
     </Card>
   );
