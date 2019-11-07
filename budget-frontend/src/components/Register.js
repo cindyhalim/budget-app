@@ -40,7 +40,7 @@ export default function Register(props) {
   const handleSubmit = event => {
     axios
       .post(
-        "http://localhost:3000/registrations",
+        "https://blooming-everglades-51994.herokuapp.com/registrations",
         {
           user: {
             name: newUser.userName,
@@ -55,7 +55,7 @@ export default function Register(props) {
         props.handleLogin(res.data.user[0]);
         axios
           .post(
-            "http://localhost:3000/goals",
+            "https://blooming-everglades-51994.herokuapp.com/goals",
             {
               goal: {
                 goal_type: "budget",

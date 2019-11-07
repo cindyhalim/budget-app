@@ -12,7 +12,7 @@ const Budgetchart = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:3000/transactions/?month=January&type=budgetchart`,
+        `https://blooming-everglades-51994.herokuapp.com/transactions/?month=January&type=budgetchart`,
         {
           withCredentials: true
         }

@@ -20,7 +20,7 @@ import {
 export default function NewTransaction(props) {
   function triggerNewTransactionPost() {
     Axios.post(
-      "http://localhost:3000/transactions",
+      "https://blooming-everglades-51994.herokuapp.com/transactions",
       {
         amount: props.transactionData.amount,
         location: props.transactionData.location,

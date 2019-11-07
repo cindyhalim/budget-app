@@ -39,7 +39,7 @@ export default function Analytics() {
         <div>
           <FormControl className="analytics-category">
             <InputLabel id="demo-simple-select-autowidth-label">
-              Analytics Category
+              Type
             </InputLabel>
             <Select
               labelId="demo-simple-select-autowidth-label"

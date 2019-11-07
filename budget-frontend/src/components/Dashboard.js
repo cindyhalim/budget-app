@@ -20,10 +20,23 @@ export default function Dashboard(props) {
   if (!props.logInStatus.user) {
     props.checkLogInStatus();
   }
+  const [totalTransactions, setTotalTransactions] = useState([]);
+  const [budget, setBudget] = useState(0);
   const history = useHistory();
   const [goals, setGoals] = useState([]);
   const [progressActiveStep, setProgressActiveStep] = useState(1);
 
+  const totalSaving = goals.reduce((total, goal) => {
+    if (
+      new Date(Date.now()) >= new Date(goal.start_date) &&
+      !goal.completed &&
+      goal.target_per_day < budget
+    ) {
+      return Number(goal.target_per_day) + total;
+    } else {
+      return 0 + total;
+    }
+  }, 0);
   const handleNextSwipe = () => {
     if (progressActiveStep <= 2) {
       setProgressActiveStep(prevActiveStep => prevActiveStep + 1);
@@ -45,8 +58,25 @@ export default function Dashboard(props) {
   };
 
   useEffect(() => {
+    let currentMonth = new Date().toLocaleString("default", { month: "long" });
     axios
-      .get("http://localhost:3000/goals", { withCredentials: true })
+      .get(
+        `https://blooming-everglades-51994.herokuapp.com/transactions/?month=${currentMonth}&type=progress`,
+        {
+          withCredentials: true
+        }
+      )
+      .then(res => {
+        setTotalTransactions(res.data.total);
+        setBudget(Number(res.data.budget));
+      });
+  }, [props.goals]);
+
+  useEffect(() => {
+    axios
+      .get("https://blooming-everglades-51994.herokuapp.com/goals", {
+        withCredentials: true
+      })
       .then(res => {
         setGoals(res.data.goals);
       });
@@ -54,9 +84,12 @@ export default function Dashboard(props) {
 
   const deleteGoal = data => {
     axios
-      .delete(`http://localhost:3000/goals/${data.id}`, {
-        withCredentials: true
-      })
+      .delete(
+        `https://blooming-everglades-51994.herokuapp.com/goals/${data.id}`,
+        {
+          withCredentials: true
+        }
+      )
       .then(() => {
         const index = findGoalIndexById(data.id, goals);
         const updatedGoals = [...goals];
@@ -82,7 +115,12 @@ export default function Dashboard(props) {
         }}
       >
         <TopSpending />
-        <ProgressBar goals={goals} />
+        <ProgressBar
+          goals={goals}
+          budget={budget}
+          totalTransactions={totalTransactions}
+          totalSaving={totalSaving}
+        />
         <MonthlyProgressBar />
       </SwipeableViews>
       <MobileStepper
@@ -118,6 +156,11 @@ export default function Dashboard(props) {
                 setRefreshGoals={props.setRefreshGoals}
                 findGoalIndexById={findGoalIndexById}
                 dailyTarget={goal.target_per_day}
+                budget={budget}
+                amountAddedToGoal={
+                  (goal.target_per_day / totalSaving) *
+                  (budget - totalTransactions)
+                }
                 completed={goal.completed}
               />
             ))}

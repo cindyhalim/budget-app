@@ -27,7 +27,7 @@ export default function SavedGoal(props) {
   useEffect(() => {
     axios
       .put(
-        `http://localhost:3000/goals/${goalEdit.id}`,
+        `https://blooming-everglades-51994.herokuapp.com/goals/${goalEdit.id}`,
         {
           goal: {
             start_date: new Date(goalEdit.start_date),
@@ -61,8 +61,22 @@ export default function SavedGoal(props) {
                 <p className="goal-target" style={{ color: "#4db6ac" }}>
                   UPCOMING
                 </p>
+              ) : props.dailyTarget > props.budget ? (
+                <p className="goal-target" style={{ color: "" }}>
+                  ATTENTION
+                </p>
+              ) : props.amountAddedToGoal >= props.dailyTarget ? (
+                <p className="goal-amount" style={{ color: "#28a745" }}>
+                  ${props.amountAddedToGoal.toFixed(0)}
+                </p>
+              ) : props.AmountAddedToGoal < props.dailyTarget ? (
+                <p className="goal-amount" style={{ color: "#dc3545" }}>
+                  ${props.amountAddedToGoal.toFixed(0)}
+                </p>
               ) : (
-                `$${props.dailyTarget}/day`
+                <p className="goal-amount" style={{ color: "#ffc107" }}>
+                  ${props.amountAddedToGoal.toFixed(0)}
+                </p>
               )}
             </div>
             <div className="goal-row-two">
@@ -90,8 +104,9 @@ export default function SavedGoal(props) {
                 day: "numeric",
                 year: "numeric"
               })}
-              <p>Total: ${parseInt(props.amount)}</p>
             </p>
+            <p>Total: ${parseInt(props.amount)}</p>
+            <p>Expected: ${props.dailyTarget}/day</p>
             <CardActions className="card-buttons">
               <Edit onClick={() => setGoalClicked({ status: "edit" })} />
               <Delete onClick={() => props.onDelete(goalEdit)} />

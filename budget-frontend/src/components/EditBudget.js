@@ -13,9 +13,13 @@ export default function EditProfile(props) {
     end_date: null
   });
   function updateBudget() {
-    Axios.post("http://localhost:3000/goals", updateBudgetInfo, {
-      withCredentials: true
-    });
+    Axios.post(
+      "https://blooming-everglades-51994.herokuapp.com/goals",
+      updateBudgetInfo,
+      {
+        withCredentials: true
+      }
+    );
   }
   return (
     <div className="edit-budget">

@@ -1,6 +1,9 @@
 class GameController < ApplicationController
     def index
         user = User.find_by(id: session[:user_id])
+        pp user
+        pp user.hp
+        pp user.coins
         user.update(hp: user.hp + params[:hp].to_i, coins: user.coins + params[:coins].to_i)
         render json: {status: user, params: params}
     end

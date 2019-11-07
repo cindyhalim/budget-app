@@ -10,7 +10,7 @@ export default function CreateGoal(props) {
   const onSave = newState => {
     axios
       .post(
-        "http://localhost:3000/goals",
+        "https://blooming-everglades-51994.herokuapp.com/goals",
         {
           goal: {
             goal_type: "saving",
