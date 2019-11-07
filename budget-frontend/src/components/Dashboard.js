@@ -150,7 +150,6 @@ export default function Dashboard(props) {
                 startDate={goal.start_date}
                 endDate={goal.end_date}
                 onDelete={data => deleteGoal(data)}
-                // editRequest={data => editGoal(data)}
                 newGoal={goals}
                 setNewGoal={setGoals}
                 refreshGoals={props.refreshGoals}
