@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Highcharts from "highcharts";
 
@@ -6,11 +6,12 @@ import YearOptions from "./YearOptions";
 
 import "../styles/Piechart.sass";
 
-const Budgetchart = () => {
+export default function BudgetComparison() {
   const [compareMonthlyTransactions, setCompareMonthlyTransactions] = useState(
     {}
   );
   const [year, setYear] = useState("2019");
+
   useEffect(() => {
     axios
       .get(
@@ -26,29 +27,20 @@ const Budgetchart = () => {
 
   useEffect(() => {
     const categories = Object.keys(compareMonthlyTransactions);
-    const monthData = Object.values(compareMonthlyTransactions);
+    const yearData = Object.values(compareMonthlyTransactions);
 
-    let negativeData = [];
-    let positiveData = [];
-    monthData.forEach(data => {
-      if (data.budget - data.amount < 0) {
-        negativeData.push(data.budget - data.amount);
-        positiveData.push(0);
-      } else {
-        negativeData.push(0);
-        positiveData.push(data.budget - data.amount);
-      }
-    });
+    const amount = yearData.map(data => data.amount);
+
+    const budget = yearData.map(data => data.budget);
 
     Highcharts.chart({
       chart: {
         type: "bar",
-        renderTo: "budget-goal"
+        renderTo: "budget-trend"
       },
       title: {
         text: ""
       },
-
       xAxis: [
         {
           categories: categories,
@@ -63,35 +55,31 @@ const Budgetchart = () => {
           text: "Amount"
         }
       },
-
-      plotOptions: {
-        series: {
-          stacking: "normal"
-        }
-      },
-
       series: [
         {
-          name: "Over Budget",
-          data: negativeData,
-          color: "#f5424e"
+          type: "bar",
+          name: "Monthly Spending",
+          data: amount
         },
         {
-          name: "Under Budget",
-          data: positiveData,
-          color: "#45d624"
+          type: "spline",
+          name: "Monthly Budget",
+          data: budget,
+          marker: {
+            lineWidth: 2,
+            fillColor: "black"
+          }
         }
       ]
     });
   }, [compareMonthlyTransactions]);
+
   return (
     <div>
       <div className="piechart-month-options">
         <YearOptions year={year} setYear={setYear} />
       </div>
-      <div id="budget-goal"></div>
+      <div id="budget-trend"></div>
     </div>
   );
-};
-
-export default Budgetchart;
+}

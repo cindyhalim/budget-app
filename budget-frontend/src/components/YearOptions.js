@@ -14,7 +14,7 @@ const YearOptions = ({ year, setYear }) => {
   return (
     <div>
       <FormControl className="year-options-list">
-        <InputLabel id="demo-simple-select-outlined-label">Month</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label">Year</InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
