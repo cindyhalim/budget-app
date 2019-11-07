@@ -42,27 +42,32 @@ export default function NewTransaction(props) {
         <DialogTitle id="simple-dialog-title">New Transaction</DialogTitle>
         <DialogContent>
           <TextField
+            required
             autoFocus
             label="Amount"
             type="number"
             value={props.transactionData.amount}
             onChange={props.onInputAmount}
+            style={{ width: "70%" }}
           />
           <br />
           <TextField
-            margin="dense"
+            required
             label="Location"
             type="Text"
             value={props.transactionData.location}
             onChange={props.onInputLocation}
+            style={{ width: "70%" }}
           />
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
+              required
+              style={{ width: "70%" }}
               disableToolbar
               inputProps={{ readOnly: true }}
               format="MM/dd/yyyy"
               margin="normal"
-              label="Date picker inline"
+              label="Transaction Date"
               value={props.transactionData.transaction_date}
               onChange={props.onInputDate}
               KeyboardButtonProps={{
@@ -73,6 +78,9 @@ export default function NewTransaction(props) {
           <InputLabel>Category</InputLabel>
 
           <Select
+            required
+            style={{ width: "70%" }}
+            label="Category"
             value={props.transactionData.category}
             onChange={props.onInputCategory}
           >
@@ -85,10 +93,19 @@ export default function NewTransaction(props) {
         <DialogActions>
           <Button
             onClick={() => {
-              props.changeNavbarStatus();
-              props.onChangeOpenStatus({ transaction: false, list: false });
-              triggerNewTransactionPost();
-              props.resetValues();
+              if (
+                props.transactionData.amount &&
+                props.transactionData.location &&
+                props.transactionData.transaction_date &&
+                props.transactionData.category
+              ) {
+                props.changeNavbarStatus();
+                props.onChangeOpenStatus({ transaction: false, list: false });
+                triggerNewTransactionPost();
+                props.resetValues();
+              } else {
+                alert("Please enter data for all fields!");
+              }
             }}
           >
             Add

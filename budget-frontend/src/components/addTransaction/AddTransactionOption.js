@@ -62,9 +62,15 @@ export default function AddTransactionOption(props) {
         aria-labelledby="simple-dialog-title"
         open={openStatus.list}
       >
-        <DialogTitle id="simple-dialog-title">Add Transaction</DialogTitle>
+        <DialogTitle id="simple-dialog-title" style={{ fontSize: "24px" }}>
+          Add Transaction
+        </DialogTitle>
         <List>
           <ListItem onClick={() => fileInputRef.current.click()}>
+            <img
+              src="photo-camera.png"
+              style={{ width: "20px", marginRight: "10px" }}
+            ></img>
             Take Picture
             <input
               type="file"
@@ -80,6 +86,10 @@ export default function AddTransactionOption(props) {
               setOpenStatus({ ...openStatus, transaction: true, list: false })
             }
           >
+            <img
+              src="keyboard.png"
+              style={{ width: "20px", marginRight: "10px" }}
+            ></img>
             Enter Manually
           </ListItem>
         </List>

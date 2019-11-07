@@ -232,8 +232,9 @@ user1.goals.create({start_date: '2019-10-02T10:35:17.552Z', goal_type: "budget",
 user1.goals.create({start_date: '2019-10-03T10:35:17.552Z', goal_type: "budget", amount: 900, name: "budget"})
 user1.goals.create({start_date: '2019-11-25T10:35:17.552Z', goal_type: "budget", amount: 900, name: "budget"})
 
-user1.goals.create({start_date:"2019-10-01T10:35:17.552Z" , end_date: "2019-11-30T10:35:17.552Z", goal_type: "saving", amount: 400, name: "new phone"})
-user1.goals.create({start_date:"2019-11-21T10:35:17.552Z" , end_date: "2019-12-03T10:35:17.552Z", goal_type: "saving", amount: 300, name: "new watch"})
+user1.goals.create({start_date:"2019-10-01T10:35:17.552Z" , end_date: "2019-12-01T10:35:17.552Z", goal_type: "saving", amount: 1500, name: "iPhone11"})
+user1.goals.create({start_date:"2019-11-21T10:35:17.552Z" , end_date: "2019-12-03T10:35:17.552Z", goal_type: "saving", amount: 300, name: "Citizen Watch"})
+user1.goals.create({start_date:"2019-11-01T10:35:17.552Z" , end_date: "2019-11-03T10:35:17.552Z", goal_type: "saving", amount: 300, name: "Fancy Rubber Duck"})
 
 #badges
 
