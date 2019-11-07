@@ -26,7 +26,7 @@ class TransactionsController < ApplicationController
           end_of_month = start_of_month.end_of_month
 
           monthly_transactions_sum = user.transactions.where(transaction_date: start_of_month..end_of_month).pluck(:amount).sum.to_f.round(2)
-          budget_for_month = user.goals.where('goal_type = "budget" AND start_date >= ? AND start_date <= ?', start_of_month, end_of_month).pluck(:amount).last.to_f.round(2)
+          budget_for_month = user.goals.where('goal_type = budget AND start_date >= ? AND start_date <= ?', start_of_month, end_of_month).pluck(:amount).last.to_f.round(2)
           if(monthly_transactions_sum > 0)           
             monthly_transactions[Date::MONTHNAMES[month][0,3]] = {
               amount: monthly_transactions_sum,
