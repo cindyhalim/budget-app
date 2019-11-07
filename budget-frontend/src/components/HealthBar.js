@@ -18,23 +18,9 @@ export default function HealthBar(props) {
         />
         <p className="hp">
           {props.hp}
-          {""}HP
+          {""}/100HP
         </p>
       </section>
-      {/* <button
-        onClick={() => {
-          props.minusHP(20);
-        }}
-      >
-        Subtract Health
-      </button>
-      <button
-        onClick={() => {
-          props.resetHP(100);
-        }}
-      >
-        Reset Health
-      </button> */}
     </div>
   );
 }

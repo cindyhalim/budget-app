@@ -9,7 +9,7 @@ export default function EditProfile(props) {
     amount: "",
     goal_type: "budget",
     name: "budget",
-    start_date: null,
+    start_date: new Date(Date.now()),
     end_date: null
   });
   function updateBudget() {
@@ -27,7 +27,7 @@ export default function EditProfile(props) {
         <CardContent>
           <div>
             <TextField
-              style={{ margin: "5px", width: "80%" }}
+              style={{ margin: "5px", width: "90%" }}
               placeholder="Enter a new Budget"
               value={updateBudgetInfo.amount}
               onChange={e =>

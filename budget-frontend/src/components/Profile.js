@@ -48,24 +48,25 @@ export default function Profile(props) {
           >
             Edit Profile
           </Button>
-          {openEdit ? (
-            <EditProfile
-              id={props.logInStatus.user.id}
-              setLoginStatus={props.setLoginStatus}
-              logInStatus={props.logInStatus}
-              closeEditProfile={() => setOpenEdit(false)}
-            />
-          ) : null}
+
           <Button
             className="edit-budget-fields-button"
             onClick={() => setOpenBudget(!openBudget)}
           >
             Edit Budget
           </Button>
-          {openBudget ? (
-            <EditBudget closeEditBudget={() => setOpenBudget(false)} />
-          ) : null}
         </div>
+        {openEdit ? (
+          <EditProfile
+            id={props.logInStatus.user.id}
+            setLoginStatus={props.setLoginStatus}
+            logInStatus={props.logInStatus}
+            closeEditProfile={() => setOpenEdit(false)}
+          />
+        ) : null}
+        {openBudget ? (
+          <EditBudget closeEditBudget={() => setOpenBudget(false)} />
+        ) : null}
       </div>
       <Navbar location={history.location.pathname.slice(1)} />
     </div>

@@ -32,10 +32,6 @@ export default function GoalForm(props) {
       onSubmit={event => {
         event.preventDefault();
 
-        console.log(
-          moment(event.target.start_date.value).format("YYYY-M-DD") >=
-            moment(event.target.end_date.value).format("YYYY-M-DD")
-        );
         if (
           moment(event.target.start_date.value).format("YYYY-M-DD") <=
           moment(event.target.end_date.value).format("YYYY-M-DD")
@@ -50,7 +46,6 @@ export default function GoalForm(props) {
           });
         }
 
-        //error handling
         if (formFields.name === "") {
           setError({ ...error, name: "This field cannot be left blank" });
         }
@@ -76,6 +71,7 @@ export default function GoalForm(props) {
         style={{ color: "#FFFFFF" }}
         type="text"
         margin="normal"
+        placeholder="Ex: Save for a new phone"
         value={formFields.name}
         helperText={error.name ? error.name : ""}
         onChange={handleFormFieldChange("name")}
@@ -129,7 +125,7 @@ export default function GoalForm(props) {
       </MuiPickersUtilsProvider>
       {error.date ? <p>{error.date}</p> : ""}
       <Button className="save-button" type="submit" size="small">
-        Save
+        {props.button}
       </Button>
     </form>
   );

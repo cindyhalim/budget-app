@@ -3,6 +3,7 @@ import { Card, CardContent, CardActions } from "@material-ui/core";
 import Edit from "@material-ui/icons/Edit";
 import Delete from "@material-ui/icons/Delete";
 import GoalForm from "./GoalForm";
+import moment from "moment";
 
 import axios from "axios";
 
@@ -50,21 +51,54 @@ export default function SavedGoal(props) {
             className="goal-main-info"
             onClick={() => setGoalClicked({ status: !goalClicked.status })}
           >
-            <h2>{props.name}</h2>
-            <p className="goal-target">
-              {props.completed
-                ? "COMPLETED"
-                : new Date(props.startDate) > new Date(Date.now())
-                ? "UPCOMING"
-                : props.dailyTarget > props.budget
-                ? "ATTENTION"
-                : `+ $${props.amountAddedToGoal.toFixed(0)}`}
-            </p>
+            <div className="goal-row-one">
+              <h2>{props.name}</h2>
+              {props.completed ? (
+                <p className="goal-target" style={{ color: "#66bb6a" }}>
+                  COMPLETED
+                </p>
+              ) : new Date(props.startDate) > new Date(Date.now()) ? (
+                <p className="goal-target" style={{ color: "#4db6ac" }}>
+                  UPCOMING
+                </p>
+              ) : props.dailyTarget > props.budget ? (
+                <p className="goal-target" style={{ color: "#dc3545" }}>
+                  ATTENTION
+                </p>
+              ) : props.amountAddedToGoal >= props.dailyTarget ? (
+                <p className="goal-amount" style={{ color: "#28a745" }}>
+                  +${props.amountAddedToGoal.toFixed(0)}
+                </p>
+              ) : props.AmountAddedToGoal < props.dailyTarget ? (
+                <p className="goal-amount" style={{ color: "#ffc107" }}>
+                  +${props.amountAddedToGoal.toFixed(0)}
+                </p>
+              ) : (
+                <p className="goal-amount" style={{ color: "#dc3545" }}>
+                  +${props.amountAddedToGoal.toFixed(0)}
+                </p>
+              )}
+            </div>
+            <div className="goal-row-two">
+              <p>
+                Started{" "}
+                {moment(goalEdit.start_date)
+                  .startOf("second")
+                  .fromNow()}
+              </p>
+            </div>
           </div>
           <div
             className="goal-extra-info"
             style={{ display: goalClicked.status ? "block" : "none" }}
           >
+            {props.dailyTarget > props.budget ? (
+              <section style={{ color: "#dc3545", fontSize: "12px" }}>
+                Your current saving goal is not feasible with your budget.
+              </section>
+            ) : (
+              ""
+            )}
             <p>
               {new Date(props.startDate).toLocaleString("default", {
                 month: "short",
@@ -77,9 +111,9 @@ export default function SavedGoal(props) {
                 day: "numeric",
                 year: "numeric"
               })}
-              <p>Total: ${parseInt(props.amount)}</p>
             </p>
-            <p>{props.dailyTarget > `+ $${props.amountAddedToGoal}`}</p>
+            <p>Total: ${parseInt(props.amount)}</p>
+            <p>Expected: ${props.dailyTarget}/day</p>
             <CardActions className="card-buttons">
               <Edit onClick={() => setGoalClicked({ status: "edit" })} />
               <Delete onClick={() => props.onDelete(goalEdit)} />
@@ -104,6 +138,7 @@ export default function SavedGoal(props) {
               onSave={data => editGoal(data)}
               refreshGoals={props.refreshGoals}
               setRefreshGoals={props.setRefreshGoals}
+              button={"SAVE"}
             />
           </div>
         </CardContent>

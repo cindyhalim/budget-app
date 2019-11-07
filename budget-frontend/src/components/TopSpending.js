@@ -18,6 +18,7 @@ export default function TopSpending(props) {
       setTopThree([...res.data]);
     });
   }, []);
+
   return (
     <Card
       className="progress-card"
@@ -44,7 +45,7 @@ export default function TopSpending(props) {
                   className="top-amount"
                   style={{ padding: 0, margin: 0 }}
                 >
-                  ${row.total}
+                  ${Number(row.total).toFixed(2)}
                 </TableCell>
               </TableRow>
             ))}

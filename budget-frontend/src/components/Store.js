@@ -1,12 +1,13 @@
 import React from "react";
 import Navbar from "./Navbar";
-import Badges from "./Badges";
+import DashboardProfile from "./DashboardProfile";
 import { useHistory } from "react-router-dom";
 
 import { Card, CardContent } from "@material-ui/core";
 import StoreMallDirectoryIcon from "@material-ui/icons/StoreMallDirectory";
 
 import "../styles/Store.sass";
+import "../styles/DashboardProfile.sass";
 
 export default function Store(props) {
   const history = useHistory();
@@ -14,6 +15,7 @@ export default function Store(props) {
   if (!props.logInStatus.user) props.checkLogInStatus();
   return (
     <div className="store-page">
+      <DashboardProfile user={props.logInStatus.user} />
       <h1 className="store-title">
         <StoreMallDirectoryIcon className="store-icon" />
         Store
@@ -53,20 +55,32 @@ export default function Store(props) {
               <p className="item-description">+ 20 HP</p>
             </section>
           </div>
-          <button
-            onClick={() => {
-              if (props.hp !== 100 && props.coins >= 20) {
-                props.subtractCoinsAddHP(-20, 20);
-              } else if (props.coins < 20) {
-                alert("You don't have enough money");
-              } else {
-                alert("Your health is already full");
-              }
-            }}
-            className="buy-button"
-          >
-            Buy
-          </button>
+
+          <section className="buy-item">
+            <button
+              onClick={() => {
+                if (props.hp !== 100 && props.coins >= 20) {
+                  props.subtractCoinsAddHP(-20, 20);
+                } else if (props.coins < 20) {
+                  alert("You don't have enough money");
+                } else {
+                  alert("Your health is already full");
+                }
+              }}
+              className="buy-button"
+            >
+              Buy
+            </button>
+
+            <p className="item-description">
+              20{" "}
+              <img
+                src="coins.jpg"
+                className="item-img"
+                style={{ height: "20px", width: "20px" }}
+              />
+            </p>
+          </section>
         </CardContent>
       </Card>
       <h3 className="store-headings">My Badges</h3>

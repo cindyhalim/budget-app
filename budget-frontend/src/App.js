@@ -209,6 +209,7 @@ export default function App() {
             render={() => (
               <Store
                 checkLogInStatus={checkLogInStatus}
+                logInStatus={logInStatus}
                 coins={logInStatus.user.coins}
                 hp={logInStatus.user.hp}
                 subtractCoinsAddHP={(hp, coins) =>
