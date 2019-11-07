@@ -129,7 +129,7 @@ export default function GoalForm(props) {
       </MuiPickersUtilsProvider>
       {error.date ? <p>{error.date}</p> : ""}
       <Button className="save-button" type="submit" size="small">
-        Save
+        {props.button}
       </Button>
     </form>
   );

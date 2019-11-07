@@ -67,15 +67,15 @@ export default function SavedGoal(props) {
                 </p>
               ) : props.amountAddedToGoal >= props.dailyTarget ? (
                 <p className="goal-amount" style={{ color: "#28a745" }}>
-                  ${props.amountAddedToGoal.toFixed(0)}
+                  +${props.amountAddedToGoal.toFixed(0)}
                 </p>
               ) : props.AmountAddedToGoal < props.dailyTarget ? (
-                <p className="goal-amount" style={{ color: "#dc3545" }}>
-                  ${props.amountAddedToGoal.toFixed(0)}
+                <p className="goal-amount" style={{ color: "#ffc107" }}>
+                  +${props.amountAddedToGoal.toFixed(0)}
                 </p>
               ) : (
-                <p className="goal-amount" style={{ color: "#ffc107" }}>
-                  ${props.amountAddedToGoal.toFixed(0)}
+                <p className="goal-amount" style={{ color: "#dc3545" }}>
+                  +${props.amountAddedToGoal.toFixed(0)}
                 </p>
               )}
             </div>
@@ -131,6 +131,7 @@ export default function SavedGoal(props) {
               onSave={data => editGoal(data)}
               refreshGoals={props.refreshGoals}
               setRefreshGoals={props.setRefreshGoals}
+              button={"SAVE"}
             />
           </div>
         </CardContent>
