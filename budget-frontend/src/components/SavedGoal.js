@@ -3,6 +3,7 @@ import { Card, CardContent, CardActions } from "@material-ui/core";
 import Edit from "@material-ui/icons/Edit";
 import Delete from "@material-ui/icons/Delete";
 import GoalForm from "./GoalForm";
+import moment from "moment";
 
 import axios from "axios";
 
@@ -50,14 +51,28 @@ export default function SavedGoal(props) {
             className="goal-main-info"
             onClick={() => setGoalClicked({ status: !goalClicked.status })}
           >
-            <h2>{props.name}</h2>
-            <p className="goal-target">
-              {props.completed
-                ? "COMPLETED"
-                : new Date(props.startDate) > new Date(Date.now())
-                ? "UPCOMING"
-                : `$${props.dailyTarget}/day`}
-            </p>
+            <div className="goal-row-one">
+              <h2>{props.name}</h2>
+              {props.completed ? (
+                <p className="goal-target" style={{ color: "#66bb6a" }}>
+                  COMPLETED
+                </p>
+              ) : new Date(props.startDate) > new Date(Date.now()) ? (
+                <p className="goal-target" style={{ color: "#4db6ac" }}>
+                  UPCOMING
+                </p>
+              ) : (
+                `$${props.dailyTarget}/day`
+              )}
+            </div>
+            <div className="goal-row-two">
+              <p>
+                Started{" "}
+                {moment(goalEdit.start_date)
+                  .startOf("second")
+                  .fromNow()}
+              </p>
+            </div>
           </div>
           <div
             className="goal-extra-info"

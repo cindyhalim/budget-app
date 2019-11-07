@@ -112,7 +112,6 @@ export default function Dashboard(props) {
                 startDate={goal.start_date}
                 endDate={goal.end_date}
                 onDelete={data => deleteGoal(data)}
-                // editRequest={data => editGoal(data)}
                 newGoal={goals}
                 setNewGoal={setGoals}
                 refreshGoals={props.refreshGoals}
@@ -120,13 +119,6 @@ export default function Dashboard(props) {
                 findGoalIndexById={findGoalIndexById}
                 dailyTarget={goal.target_per_day}
                 completed={goal.completed}
-                bgColor={
-                  goal.completed
-                    ? "#66bb6a"
-                    : new Date(goal.start_date) > new Date(Date.now())
-                    ? "#d95c52"
-                    : "#4db6ac"
-                }
               />
             ))}
         </div>
