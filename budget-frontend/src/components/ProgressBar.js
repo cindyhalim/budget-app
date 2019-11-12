@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 
 import { Progress } from "reactstrap";
 import { Card } from "@material-ui/core";
 
-import SavingLegend from "./SavingLegend";
-
 const ProgressBar = props => {
   const totalSpending = (props.totalTransactions / props.budget) * 100;
 
-  console.log(props.totalTransactions, props.budget, props.totalSaving);
   return (
     <Card className="progress-card">
       <h3>Daily Progress:</h3>
