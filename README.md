@@ -12,14 +12,6 @@ During bootcamp most of our time was spent coding at Lighthouse Labs, and this l
 
 [Ahana Ghosh](https://github.com/ahana15), [Nikita Sheremet](https://github.com/nikitasheremet), Cindy Halim
 
-
-## Preview
-
-![gif showing app features - dashboard - edit a goal](https://github.com/cindyhalim/budget-app/blob/master/assests/video1.gif)
-![gif showing app features - dashboard - transaction added](https://github.com/cindyhalim/budget-app/blob/master/assests/video2.gif)
-![gif showing app features - analytics](https://github.com/cindyhalim/budget-app/blob/master/assests/video3.gif)
-![gif showing app features - store - add hp](https://github.com/cindyhalim/budget-app/blob/master/assests/video4.gif)
-
 ## Tech/Framework
 
 Our Stack:
@@ -37,9 +29,13 @@ Libraries:
 ## Features
 
 - **Clear break down of spending:** Users' monthly budget is further broken down to a daily budget.
+![gif showing app features - dashboard - edit a goal](https://github.com/cindyhalim/budget-app/blob/master/assests/video1.gif)
 - **Side goals:** Saving for a trip? A new phone? Users can add side goals and Budgey will re-analyze their daily progress to cover for those side goals.
+![gif showing app features - dashboard - transaction added](https://github.com/cindyhalim/budget-app/blob/master/assests/video2.gif)
 - **Analytics:** Users can view their monthly breakdown based on categories, compare their current spending with their previous months', as well as compare budget trends throughout the year.
+![gif showing app features - analytics](https://github.com/cindyhalim/budget-app/blob/master/assests/video3.gif)
 - **Gamified:** Users lose health points when they don't meet their monthly budget and earn coins when they do. They can purchase potions to revive their health and earn badges when they've met their budget for more than 1 month.
+![gif showing app features - store - add hp](https://github.com/cindyhalim/budget-app/blob/master/assests/video4.gif)
 
 ## Installations
 
