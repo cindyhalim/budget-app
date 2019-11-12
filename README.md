@@ -45,5 +45,12 @@ Libraries:
 ![gif showing app features - store - add hp](https://github.com/cindyhalim/budget-app/blob/master/assests/video4.gif)
 
 ## Installations
+1. cd to the front-end directory (budget-frontend)
+2. Install dependencies via `npm install`
+3. Run the development server via `npm start`
+4. Head to http://localhost:8080 on the browser
 
+### Notes
+- Our backend is hosted on Heroku, which takes a few seconds to 'warm-up'
+- Test User: email: test@test.com; password: password
 
