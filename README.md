@@ -15,7 +15,10 @@ During bootcamp most of our time was spent coding at Lighthouse Labs, and this l
 
 ## Preview
 
-
+![gif showing app features - dashboard - edit a goal](https://github.com/cindyhalim/budget-app/blob/master/assests/video1.gif)
+![gif showing app features - dashboard - transaction added](https://github.com/cindyhalim/budget-app/blob/master/assests/video2.gif)
+![gif showing app features - analytics](https://github.com/cindyhalim/budget-app/blob/master/assests/video3.gif)
+![gif showing app features - store - add hp](https://github.com/cindyhalim/budget-app/blob/master/assests/video4.gif)
 
 ## Tech/Framework
 
